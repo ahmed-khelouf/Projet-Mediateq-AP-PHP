@@ -1,5 +1,6 @@
 <?php
 
+
 $reservationManager = new ReservationManager(); 
 $reservations = $reservationManager->getList(); 
 
