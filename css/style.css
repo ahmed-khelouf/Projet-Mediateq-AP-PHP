@@ -55,3 +55,30 @@ div.img-square-wrapper>img{
   flex: 1 1 auto;
 }
 
+.card-body {
+  flex: 1 1 auto;
+  padding: 1.25rem;
+}
+
+
+
+h2 {
+  color: rgb(16, 214, 26);
+}
+
+.row h4{
+  margin-top:6px;
+  color: rgb(200, 12, 122);
+  padding-left: 7em;
+}
+
+.row a {
+
+}
+
+.rowR{
+ 
+  padding-left: 45em;
+
+}
+

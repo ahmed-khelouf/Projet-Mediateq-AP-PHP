@@ -36,14 +36,13 @@ function chargerModeles($racine){
     require_once("$racine/modele/RevueManager.php");
     require_once("$racine/modele/TypePublic.php");
     require_once("$racine/modele/TypePublicManager.php");
-
-
     require_once("$racine/modele/reservation.php");
     require_once("$racine/modele/reservationManager.php");
-
     require_once("$racine/modele/abonne.php");
     require_once("$racine/modele/abonneManager.php");
     require_once("$racine/modele/connexionManager.php");
+    require_once("$racine/modele/descripteur.php");
+    require_once("$racine/modele/descripteurManager.php");
 }
 ?>
 

@@ -5,6 +5,7 @@ class Reservation
     private $idR;
     private $idRevue;
     private $idAbonne;
+    private $rang;
 
     /**
      * construteur de la classe Reservation
@@ -13,11 +14,12 @@ class Reservation
      * @param Revue $idRevue
      * @param Abonne $idAbonnee
      */
-    public function __construct(int $idR, Revue $idRevue, Abonne $idAbonne)
+    public function __construct(int $idR, Revue $idRevue, Abonne $idAbonne , int $rang)
     {
         $this->idR = $idR;
         $this->idRevue = $idRevue;
         $this->idAbonne = $idAbonne;
+        $this->rang = $rang;
     }
 
 
@@ -30,6 +32,17 @@ class Reservation
     {
         return $this->idR;
     }
+
+    /**
+     * Accesseur de la propriété Reservation
+     *
+     * @return integer
+     */
+    public function getRang(): int
+    {
+        return $this->rang;
+    }
+
 
     /**
      * Accesseur de la propriété Reservation

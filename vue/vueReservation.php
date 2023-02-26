@@ -23,6 +23,7 @@ if ($connexionManager->isLoggedOn()) { ?>
                             <td><?= $reservation->getRevue()->getTitre() ?></td>
                             <td><?= $reservation->getIdAbonne()->getId() ?></td>
                             <td><?= $reservation->getRevue()->getId() ?></td>
+                            <td><?= $reservation->getRang() ?></td>
                             <td><a href='#delete_<?= $reservation->getId() ?>' class='btn btn-danger btn-sm' data-toggle='modal'><span class='glyphicon glyphicon-trash'></span> Supprimer</a></td>
                         </tr>
                     </tbody>
@@ -44,7 +45,7 @@ if ($connexionManager->isLoggedOn()) { ?>
 
                                         <input type="hidden" class="form-control" name="id" value="<?= $reservation->getRevue()->getId() ?>">
 
-                                        <input type="hidden" class="form-control" name="reservationRang" value="<?= $reservation->getRevue()->getReservationRang() ?> ">
+                                        <input type="hidden" class="form-control" name="rang" value="<?= $reservation->getRang() ?> ">
 
                                         <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Annuler</button>
                                         <button type="submit" name="supr" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Oui</a>
@@ -58,3 +59,36 @@ if ($connexionManager->isLoggedOn()) { ?>
         <?php } else {
         echo ("tu es pas coooo ");
     } ?>
+
+
+
+<h2>Revues : </h2>
+<div class="container-fluid">
+    <?php
+    foreach ($reservations as $reservation) { 
+       if ($unAbonne->getId() === $reservation->getIdAbonne()->getId()) { 
+    ?>
+        <div class="row">
+            <div class="col-12 mt-3">
+                <div class="card">
+                    <div class="card-horizontal">
+                        <div class="img-square-wrapper">
+                            <img class="" src="" alt="<?= $reservation->getRevue()->getTitre() ?>">
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title"><?= $reservation->getRevue()->getTitre() ?></h4>
+                            <a href='#delete_<?= $reservation->getId() ?>' class='btn btn-danger btn-sm' data-toggle='modal'><span class='glyphicon glyphicon-trash'></span> Supprimer</a>
+                            <p class="card-text"><?= $reservation->getRevue()->getDescripteur()->getLibelle() ?></p>
+                            <p><?= $reservation->getRang()?></p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <?php } 
+    } ?>
+    
+</div>

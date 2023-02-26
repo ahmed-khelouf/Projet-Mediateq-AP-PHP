@@ -1,5 +1,7 @@
 <h2>Revues : </h2>
 <div class="container-fluid">
+
+
     <?php
     foreach ($revues as $uneRevue) {
     ?>
@@ -19,7 +21,7 @@
                                 <?php
                                 $connexionManager = new ConnexionManager;
                                 if ($connexionManager->isLoggedOn()) { ?>
-                                    <div class="row">
+                                    <div class="rowR">
                                         <a href="#addnew<?= $uneRevue->getId() ?>" data-toggle="modal" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> RESERVER</a>
                                     </div>
                                 <?php } ?>
@@ -37,21 +39,25 @@
                                                 <div class="container-fluid">
                                                     <form method="POST" action="?action=reservation">
                                                         <div class="row form-group">
-                                                            <p> Vous avez le rang <strong><?= $uneRevue->getReservationRang() + 1 ?> </strong>dans la liste des abonnées qui ont réservé ce document </p>
+                                                            <?php
+                                                            $reservationManager = new ReservationManager;
+                                                            $reservations = $reservationManager->recupMaxRang($uneRevue->getId());
+                                                            ?>
+                                                            <p> Vous avez le rang <strong><?= $reservations + 1 ?> </strong>dans la liste des abonnées qui ont réservé ce document </p>
                                                         </div>
                                                         <div class="col-sm-10">
+                                                            <input type="hidden" class="form-control" name="rang" value="<?= $reservations + 1?> ">
+
                                                             <input type="hidden" class="form-control" name="idRevue" value="<?= $uneRevue->getId() ?> ">
 
                                                             <input type="hidden" class="form-control" name="id" value="<?= $uneRevue->getId() ?>">
 
-                                                            <input type="hidden" class="form-control" name="reservationRang" value="<?= $uneRevue->getReservationRang() ?> ">
-
                                                             <?php
                                                             $abonneManager = new abonneManager;
-                                                            if($connexionManager->isLoggedOn()){
-                                                            $abo = $abonneManager->getUtilisateurByMailU($_SESSION['mailU']);
+                                                            if ($connexionManager->isLoggedOn()) {
+                                                                $abo = $abonneManager->getUtilisateurByMailU($_SESSION['mailU']);
                                                             ?>
-                                                            <input type="hidden" class="form-control" name="idAbonne" value="<?= $abo->getId() ?>"> <?php } ?>
+                                                                <input type="hidden" class="form-control" name="idAbonne" value="<?= $abo->getId() ?>"> <?php } ?>
 
                                                         </div>
                                                         <div class="modal-footer">
@@ -70,9 +76,8 @@
                                 $txt = "Cette revue n'est pas empruntable";
                             }
                             ?>
-                            <p class="card-text">description de la revue...</p>
+                            <p class="card-text">Type de document : <?= $uneRevue->getDescripteur()->getLibelle() ?></p>
                             <p class="card-text"><?= $txt ?></p>
-
                         </div>
                     </div>
                     <div class="card-footer">

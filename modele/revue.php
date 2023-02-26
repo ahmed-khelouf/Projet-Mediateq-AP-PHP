@@ -5,7 +5,7 @@ class Revue {
     private $titre; 
     private $empruntable;
     private $lesNumeros ;
-    private $reservationRang;
+    private $descripteur ;
     
     /**
      * Constructeur de la classe Revue
@@ -13,15 +13,16 @@ class Revue {
      * @param integer $id
      * @param string $titre
      * @param string $empruntable
-     * @param integer $reservationRang
+     * @param Descripteur $descripteur
      */
-    public function __construct(int $id, string $titre, string $empruntable , int $reservationRang)
+    public function __construct(int $id, string $titre, string $empruntable , Descripteur $descripteur)
     {
         $this->id = $id;
         $this->titre = $titre;
         $this->empruntable = $empruntable;
-        $this->reservationRang =$reservationRang;
+        $this->descripteur = $descripteur;
     }
+
 
     /**
      * Accesseur de la propriété id
@@ -33,13 +34,16 @@ class Revue {
     }
 
     /**
-     * Accesseur de la propriété reservationRang
+     * Accesseur de la propriété descripteur
      *
-     * @return integer
+     * @return Descipteur
      */
-    public function getReservationRang() : int {
-        return $this->reservationRang;
+    public function getDescripteur() : Descripteur {
+        return $this->descripteur;
     }
+ 
+
+  
     /**
      * Accesseur de la propriété titre
      *
@@ -82,15 +86,7 @@ class Revue {
         $this->id = $id;
     }
 
-    /**
-     * Mutateur de la propriété reservationRang
-     *
-     * @param integer $reservationRang
-     * @return void
-     */
-    public function setReservationRang(int $reservationRang): void {
-        $this->reservationRang = $reservationRang;
-    }
+  
 
     /**
      * Mutateur de la propriété lesNumeros

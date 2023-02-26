@@ -1,8 +1,5 @@
 <?php
 
-
-include "$racine/vue/header.php";
-
 $connexionManager = new ConnexionManager();
 
 $abonneManager = new abonneManager();
@@ -20,12 +17,20 @@ if (isset($_POST["mailU"]) && isset($_POST["mdpU"])){
 if(isset($_SESSION['mailU'])){
     include "$racine/vue/v_accueil.php";
 }else{
+    include "$racine/vue/header.php";
     include "$racine/vue/vueConnexion.php";
+    include "$racine/vue/footer.php";
 }
 
 
+// ATTENDRE QUE PAGE PROFIL -> JULIEN
+if ($connexionManager->isLoggedOn()){ // si l'utilisateur est connecté on redirige vers le controleur monProfil
+    
+    include "$racine/controleur/reservation.php"; 
+        
+        
+    }
 
-include "$racine/vue/footer.php";
 
 
 ?>

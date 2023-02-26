@@ -13,13 +13,18 @@ class RevueManager extends Manager
         $etatManager = new EtatManager(); // Création d'un objet manager d'état
         $lesEtats = $etatManager->getList(); // chargement du dictionnaire des états
 
+        // recupération des descripteurs
+        $descripteurManager = new DescripteurManager(); // Création d'un objet manager de descripteur
+        $lesDescripteurs = $descripteurManager->getList(); 
+
         $q = $this->getPDO()->prepare('SELECT * FROM revue ORDER BY titre');
         $q->execute();
         $r1 = $q->fetchAll(PDO::FETCH_ASSOC);
 
         $lesRevues = array();
         foreach ($r1 as $revue) {
-            $lesRevues[$revue['id']] = new Revue($revue['id'], $revue['titre'], $revue['empruntable'], $revue['reservationRang']);
+            $descripteur = $lesDescripteurs[$revue['idDescripteur']];
+            $lesRevues[$revue['id']] = new Revue($revue['id'], $revue['titre'], $revue['empruntable'], $descripteur);
             // on récupère la collection de parutions de cette revue
             $q2 = $this->getPDO()->prepare('SELECT * FROM parution WHERE idRevue = :id ORDER BY numero');
             $q2->bindParam(':id',  $revue['id'], PDO::PARAM_INT);

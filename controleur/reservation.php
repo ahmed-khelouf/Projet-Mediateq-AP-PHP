@@ -1,6 +1,5 @@
 <?php
 
-
 $reservationManager = new ReservationManager(); 
 $reservations = $reservationManager->getList(); 
 
@@ -18,29 +17,32 @@ if(isset($_POST['add'])){
     // Ajouter une réservation 
     $idRevue = $_POST['idRevue'];
     $idAbonne = $_POST['idAbonne'];
-    $reservationManager->addReservation($idRevue , $idAbonne );
+    $rang = $_POST['rang'];
+    $reservationManager->addReservation($idRevue , $idAbonne , $rang );
 
-    // Modification du rang apres avoir ajouté un nouvelle réservation
-    $id = $_POST['id'];
-    $rang = $_POST['reservationRang'];
-    $revueManager ->updateRangReservation($id , $rang);
+    // Modification du rang apres avoir ajouté une nouvelle réservation
+    // $id = $_POST['id'];
+    // $rang = $_POST['reservationRang'];
+    // $revueManager ->updateRangReservation($id , $rang);
     
-    echo "La reservation bien été ajoutée";
+    header('location: index.php?action=reservation');
 }
 
 if(isset($_POST['supr'])){
+    // Supression d'une réservation
     $id = $_POST['idR'];
     $reservationManager ->supReservation($id);
 
+    // Modification du rang apres avoir supprimé une réservation
     $id = $_POST['id'];
     $rang = $_POST['reservationRang'];
     $revueManager ->updateRangReservationMoins($id , $rang);
 
-    echo "La reservation est sup";
+    header('location: index.php?action=reservation');
 }
-
-
 
 include "$racine/vue/header.php";
 include "$racine/vue/vueReservation.php";
 include "$racine/vue/footer.php";
+
+?>
