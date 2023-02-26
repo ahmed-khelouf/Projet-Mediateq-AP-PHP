@@ -10,22 +10,26 @@ $reservation = $reservationManager->nombreReservation($unAbonne->getId());
 <?php
 if ($connexionManager->isLoggedOn()) { ?>
     <div class="">
-        <table id="myTable" class="table table-bordered table-striped">
-            <thead>
-                <th>Titre</th>
-                <th>abonnee</th>
-                <th>ID Revue</th>
-            </thead>
             <?php foreach ($reservations as $reservation) { ?>
                 <?php if ($unAbonne->getId() === $reservation->getIdAbonne()->getId()) { ?>
                     <tbody>
-                        <tr>
-                            <td><?= $reservation->getRevue()->getTitre() ?></td>
-                            <td><?= $reservation->getIdAbonne()->getId() ?></td>
-                            <td><?= $reservation->getRevue()->getId() ?></td>
-                            <td><?= $reservation->getRang() ?></td>
-                            <td><a href='#delete_<?= $reservation->getId() ?>' class='btn btn-danger btn-sm' data-toggle='modal'><span class='glyphicon glyphicon-trash'></span> Supprimer</a></td>
-                        </tr>
+                        <div class="row">
+                            <div class="col-12 mt-3">
+                                <div class="card">
+                                    <div class="card-horizontal">
+                                        <div class="img-square-wrapper">
+                                            <img class="" src="" alt="<?= $reservation->getRevue()->getTitre() ?>">
+                                        </div>
+                                        <div class="card-body">
+                                            <h4 class="card-title"><?= $reservation->getRevue()->getTitre() ?></h4>
+                                            <a href='#delete_<?= $reservation->getId() ?>' class='btn btn-danger btn-sm' data-toggle='modal'><span class='glyphicon glyphicon-trash'></span> Supprimer</a>
+                                            <p class="card-text"><?= $reservation->getRevue()->getDescripteur()->getLibelle() ?></p>
+                                            <p><?= $reservation->getRang() ?></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </tbody>
                     <div class="modal fade" id="delete_<?= $reservation->getId() ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
@@ -59,36 +63,3 @@ if ($connexionManager->isLoggedOn()) { ?>
         <?php } else {
         echo ("tu es pas coooo ");
     } ?>
-
-
-
-<h2>Revues : </h2>
-<div class="container-fluid">
-    <?php
-    foreach ($reservations as $reservation) { 
-       if ($unAbonne->getId() === $reservation->getIdAbonne()->getId()) { 
-    ?>
-        <div class="row">
-            <div class="col-12 mt-3">
-                <div class="card">
-                    <div class="card-horizontal">
-                        <div class="img-square-wrapper">
-                            <img class="" src="" alt="<?= $reservation->getRevue()->getTitre() ?>">
-                        </div>
-                        <div class="card-body">
-                            <h4 class="card-title"><?= $reservation->getRevue()->getTitre() ?></h4>
-                            <a href='#delete_<?= $reservation->getId() ?>' class='btn btn-danger btn-sm' data-toggle='modal'><span class='glyphicon glyphicon-trash'></span> Supprimer</a>
-                            <p class="card-text"><?= $reservation->getRevue()->getDescripteur()->getLibelle() ?></p>
-                            <p><?= $reservation->getRang()?></p>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-    <?php } 
-    } ?>
-    
-</div>

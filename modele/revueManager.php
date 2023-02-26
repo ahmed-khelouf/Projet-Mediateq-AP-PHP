@@ -111,25 +111,4 @@ class RevueManager extends Manager
         return $this->getRevuesByListId($lesId);
     }
 
-    /**
-     * Rajoute + 1 au rang de la revue apres une insertion 
-     */
-    function updateRangReservation($id, $rang)
-    {
-        $q = $this->getPDO()->prepare('UPDATE revue set reservationRang = :reservationRang + 1 where id=:id');
-        $q->bindParam(':id', $id, PDO::PARAM_STR);
-        $q->bindParam(':reservationRang', $rang, PDO::PARAM_INT);
-        $q->execute();
-    }
-
-    /**
-     * Rajoute - 1 au rang de la revue apres une suppression
-     */
-    function updateRangReservationMoins($id, $rang)
-    {
-        $q = $this->getPDO()->prepare('UPDATE revue set reservationRang = :reservationRang - 1 where id=:id');
-        $q->bindParam(':id', $id, PDO::PARAM_STR);
-        $q->bindParam(':reservationRang', $rang, PDO::PARAM_INT);
-        $q->execute();
-    }
 }

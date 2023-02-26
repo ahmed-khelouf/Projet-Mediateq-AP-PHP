@@ -18,26 +18,16 @@ if(isset($_POST['add'])){
     $idRevue = $_POST['idRevue'];
     $idAbonne = $_POST['idAbonne'];
     $rang = $_POST['rang'];
-    $reservationManager->addReservation($idRevue , $idAbonne , $rang );
-
-    // Modification du rang apres avoir ajouté une nouvelle réservation
-    // $id = $_POST['id'];
-    // $rang = $_POST['reservationRang'];
-    // $revueManager ->updateRangReservation($id , $rang);
-    
+    $reservationManager->addReservation($idRevue , $idAbonne , $rang );    
     header('location: index.php?action=reservation');
 }
 
 if(isset($_POST['supr'])){
     // Supression d'une réservation
-    $id = $_POST['idR'];
-    $reservationManager ->supReservation($id);
-
-    // Modification du rang apres avoir supprimé une réservation
-    $id = $_POST['id'];
-    $rang = $_POST['reservationRang'];
-    $revueManager ->updateRangReservationMoins($id , $rang);
-
+    $idR = $_POST['idR'];
+    $idRevue = $_POST['id'];
+    $rang = $_POST['rang'];
+    $reservationManager ->supReservation($idR, $idRevue, $rang );
     header('location: index.php?action=reservation');
 }
 
