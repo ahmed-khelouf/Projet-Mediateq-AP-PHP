@@ -10,7 +10,7 @@ class Manager
     protected function dbConnect(): PDO
     {
         $login = "root";
-        $mdp = "";
+        $mdp = "root";
         $bd = "médiate-web";
         $serveur = "localhost";
 
