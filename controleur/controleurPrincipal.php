@@ -43,6 +43,8 @@ function chargerModeles($racine){
     require_once("$racine/modele/connexionManager.php");
     require_once("$racine/modele/descripteur.php");
     require_once("$racine/modele/descripteurManager.php");
+    require_once("$racine/modele/statut.php");
+    require_once("$racine/modele/statutManager.php");
 }
 ?>
 
