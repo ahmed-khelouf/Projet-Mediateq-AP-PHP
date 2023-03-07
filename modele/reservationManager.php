@@ -18,7 +18,8 @@ class ReservationManager extends Manager
                 $statutManager = new StatutManager();
                 $statuts = $statutManager->getList();
 
-                $q = $this->getPDO()->prepare('SELECT reservation.idR ,  idRevue ,  idAbonne , reservation.rang , reservation.idStatut FROM reservation inner join abonné on abonné.id=reservation.idAbonne inner join revue on reservation.idRevue=revue.id ');
+
+                $q = $this->getPDO()->prepare('SELECT reservation.idR ,  idRevue ,  idAbonne , reservation.rang , reservation.idStatut , reservation.dateReservation FROM reservation inner join abonné on abonné.id=reservation.idAbonne inner join revue on reservation.idRevue=revue.id ');
                 $q->execute();
                 //  fetchAll(PDO::FETCH_ASSOC) est une méthode de l'objet PDOStatement qui permet de récupérer le résultat d'une requête SQL sous forme de tableau associatif. Chaque ligne du résultat est représentée par un tableau associatif dont les clés correspondent aux noms des colonnes de la table et les valeurs correspondent aux valeurs des champs de chaque ligne.
                 $r1 = $q->fetchAll(PDO::FETCH_ASSOC);
@@ -27,7 +28,7 @@ class ReservationManager extends Manager
                         $revue = $revues[$uneReservation['idRevue']];
                         $abonne = $abonnes[$uneReservation['idAbonne']];
                         $statut = $statuts[$uneReservation['idStatut']];
-                        $lesReservations[$uneReservation['idR']] = new Reservation($uneReservation['idR'], $revue, $abonne, $uneReservation['rang'], $statut);
+                        $lesReservations[$uneReservation['idR']] = new Reservation($uneReservation['idR'], $revue, $abonne, $uneReservation['rang'], $statut , $uneReservation['dateReservation'] );
                 }
                 return $lesReservations;
         }
@@ -70,10 +71,10 @@ class ReservationManager extends Manager
         /**
          * modifie le statut pour les réservations dont le rang vient tout juste de passer à 1
          */
-        function UpdateStatut($idRevue, $rang)
+        function UpdateStatut($idRevue, $rang )
         {
                 if ($rang = 1) {
-                        $q = $this->getPDO()->prepare('UPDATE reservation set idStatut =  1 where idRevue=:idRevue AND rang = :rang');
+                        $q = $this->getPDO()->prepare('UPDATE reservation set idStatut =  1 where idRevue=:idRevue AND rang = :rang' );
                 }
                 $q->bindParam(':idRevue', $idRevue, PDO::PARAM_STR);
                 $q->bindParam(':rang', $rang, PDO::PARAM_INT);
@@ -83,18 +84,19 @@ class ReservationManager extends Manager
         /**
          * insert une reservation dans la base de données
          */
-        function addReservation($idRevue, $idAbonne, $rang)
+        function addReservation($idRevue, $idAbonne, $rang ,$numeroRevue )
         {
                 if ($rang > 1) {
                         $idStatut = 2;
                 } else {
                         $idStatut = 1;
                 }
-                $q = $this->getPDO()->prepare('INSERT INTO reservation (idRevue , dateReservation , idAbonne , rang , idStatut) VALUES (:idRevue , Current_Date , :idAbonne , :rang , :idStatut)');
+                $q = $this->getPDO()->prepare('INSERT INTO reservation (idRevue , dateReservation , idAbonne , rang , idStatut , numeroRevue ) VALUES (:idRevue , Current_Date , :idAbonne , :rang , :idStatut , :numeroRevue )');
                 $q->bindParam(':idRevue', $idRevue, PDO::PARAM_STR);
                 $q->bindParam(':idAbonne', $idAbonne, PDO::PARAM_INT);
                 $q->bindParam(':rang', $rang, PDO::PARAM_INT);
                 $q->bindParam(':idStatut', $idStatut, PDO::PARAM_INT);
+                $q->bindParam(':numeroRevue', $numeroRevue, PDO::PARAM_INT);
                 $q->execute();
         }
 

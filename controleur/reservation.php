@@ -18,7 +18,8 @@ if(isset($_POST['add'])){
     $idRevue = $_POST['idRevue'];
     $idAbonne = $_POST['idAbonne'];
     $rang = $_POST['rang'];
-    $reservationManager->addReservation($idRevue , $idAbonne , $rang );    
+    $numeroRevue = $_POST["numeroRevue"];
+    $reservationManager->addReservation($idRevue , $idAbonne , $rang , $numeroRevue );    
     header('location: index.php?action=reservation');
 }
 
