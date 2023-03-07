@@ -65,7 +65,7 @@ class ReservationManager extends Manager
          */
         function addReservation($idRevue, $idAbonne, $rang)
         {
-                $q = $this->getPDO()->prepare('INSERT INTO reservation (idRevue , dateReservation , idAbonne , rang ) VALUES (:idRevue , Current_Date , :idAbonne , :rang)');
+                $q = $this->getPDO()->prepare('INSERT INTO reservation (idRevue , dateReservation , idAbonne , rang , num) VALUES (:idRevue , Current_Date , :idAbonne , :rang , 0)');
                 $q->bindParam(':idRevue', $idRevue, PDO::PARAM_STR);
                 $q->bindParam(':idAbonne', $idAbonne, PDO::PARAM_INT);
                 $q->bindParam(':rang', $rang, PDO::PARAM_INT);
