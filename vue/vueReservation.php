@@ -2,7 +2,6 @@
 $connexionManager = new ConnexionManager;
 $reservationManager = new ReservationManager;
 $reservation = $reservationManager->nombreReservation($unAbonne->getId());
-
 ?>
 
 <h1>Réservation de <?= $unAbonne->getNom() ?> ID numero <?= $unAbonne->getId() ?></h1>
@@ -23,8 +22,9 @@ if ($connexionManager->isLoggedOn()) { ?>
                                         <div class="card-body">
                                             <h4 class="card-title"><?= $reservation->getRevue()->getTitre() ?></h4>
                                             <a href='#delete_<?= $reservation->getId() ?>' class='btn btn-danger btn-sm' data-toggle='modal'><span class='glyphicon glyphicon-trash'></span> Supprimer</a>
-                                            <p class="card-text"><?= $reservation->getRevue()->getDescripteur()->getLibelle() ?></p>
-                                            <p><?= $reservation->getRang() ?></p>
+                                            <p class="card-text"> Type de document : <?= $reservation->getRevue()->getDescripteur()->getLibelle() ?></p>
+                                            <p> Rang : <?= $reservation->getRang() ?></p>
+                                            <p> Statut : <?= $reservation->getStatut()->getLibelle() ?></p>
                                         </div>
                                     </div>
                                 </div>
@@ -50,7 +50,7 @@ if ($connexionManager->isLoggedOn()) { ?>
                                         <input type="hidden" class="form-control" name="id" value="<?= $reservation->getRevue()->getId() ?>">
 
                                         <input type="hidden" class="form-control" name="rang" value="<?= $reservation->getRang() ?> ">
-
+                                        
                                         <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Annuler</button>
                                         <button type="submit" name="supr" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Oui</a>
                                     </form>

@@ -20,9 +20,17 @@
                             ?>
                                 <?php
                                 $connexionManager = new ConnexionManager;
-                                if ($connexionManager->isLoggedOn()) { ?>
+                                if ($connexionManager->isLoggedOn() ) { ?>
                                     <div class="rowR">
+                                        <?php 
+                                         $reservationManager = new ReservationManager;
+                                         $abonneManager = new AbonneManager;
+                                         $abo = $abonneManager->getUtilisateurByMailU($_SESSION['mailU']);
+                                         $reservation = $reservationManager->AfficherBouton($abo->getId() , $uneRevue->getId());
+                                         if($reservation){
+                                        ?>
                                         <a href="#addnew<?= $uneRevue->getId() ?>" data-toggle="modal" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> RESERVER</a>
+                                        <?php } ?>
                                     </div>
                                 <?php } ?>
                                 <!-- Add New -->
