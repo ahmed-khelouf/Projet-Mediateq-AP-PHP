@@ -10,6 +10,8 @@ function controleurPrincipal($action) {
     $lesActions["deconnexion"] = "deconnexion.php";
     $lesActions["accueil"] = $lesActions["rechercheSimple"] ;
     $lesActions["defaut"] = $lesActions["accueil"];
+    $lesActions["mesPretsEnCours"] = "c_mesPretsEnCours.php";
+    
 
     if (array_key_exists($action, $lesActions)) {
         return $lesActions[$action];
@@ -45,6 +47,9 @@ function chargerModeles($racine){
     require_once("$racine/modele/descripteurManager.php");
     require_once("$racine/modele/statut.php");
     require_once("$racine/modele/statutManager.php");
+    require_once("$racine/modele/emprunt.php");
+    require_once("$racine/modele/empruntManager.php");
+
 }
 ?>
 
