@@ -52,14 +52,27 @@
                                                             $reservations = $reservationManager->recupMaxRang($uneRevue->getId());
                                                             ?>
                                                             <p> Vous avez le rang <strong><?= $reservations + 1 ?> </strong>dans la liste des abonnées qui ont réservé ce document </p>
+
+                                                            <?php $nbNumeros = count($uneRevue->getLesNumeros());
+                                                            if ($nbNumeros > 0) { ?>
+                                                            <select name="numeroRevue" id="numeroRevue">
+                                                                <?php foreach ($uneRevue->getLesNumeros() as $unNumero) { ?>
+                                                                    <option value="<?=$unNumero->getNumero()?>">
+                                                                        Numero Revue : <?=$unNumero->getNumero()?>
+                                                                    </option>
+                                                                <?php } ?>
+                                                            </select>
+                                                            <?php } ?>
+                                                                                                 
                                                         </div>
                                                         <div class="col-sm-10">
+
                                                             <input type="hidden" class="form-control" name="rang" value="<?= $reservations + 1?> ">
 
                                                             <input type="hidden" class="form-control" name="idRevue" value="<?= $uneRevue->getId() ?> ">
 
                                                             <input type="hidden" class="form-control" name="id" value="<?= $uneRevue->getId() ?>">
-
+                                                      
                                                             <?php
                                                             $abonneManager = new abonneManager;
                                                             if ($connexionManager->isLoggedOn()) {
