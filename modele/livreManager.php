@@ -29,7 +29,6 @@ class LivreManager extends Manager
                 $livre['commandeEnCours'] = false;
             }
             $lesLivres[$livre['id']] = new Livre($livre['id'], $livre['titre'], $livre['image'], $livre['commandeEnCours'], $lesPublics[$livre['idPublic']], $livre['ISBN'], $livre['auteur'],$livre['collection']);
-
             // on récupère la colection d'exemplaires de ce livre
             $q2 = $this->getPDO()->prepare('SELECT * FROM exemplaire WHERE idDocument = :id ORDER BY numero');
             $q2->bindParam(':id',  $livre['id'], PDO::PARAM_INT);

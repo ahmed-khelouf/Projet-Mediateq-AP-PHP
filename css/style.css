@@ -66,19 +66,48 @@ h2 {
   color: rgb(16, 214, 26);
 }
 
-.row h4{
+
+/*  VUE RESERVATION*/
+.row .title{
   margin-top:6px;
-  color: rgb(200, 12, 122);
-  padding-left: 7em;
+  color: rgb(27, 176, 218);
+  padding-left: 12em;
 }
 
-.row a {
-
+.row .btn  {
+  margin-top:6px;
+  margin-left: 45em;
 }
 
-.rowR{
+.row .trait-horizontal{
+order: none;
+border-top: 1px solid black;
+margin: 10px 0;
+}
+
+
+.row .rangStatut {
+  padding-top: 1em;
+  padding-bottom: 30px;
+  display: inline;
+}
+
+.row .rangStatut p:nth-child(1){
+  color: rgb(24, 197, 53);
+}
+
+.row .rangStatut p:nth-child(2){
+  color: rgb(200, 32, 32);
+}
+
+/* .rowR{
  
   padding-left: 45em;
 
+} */
+
+.trait-vertical{
+    border-left: 2px solid black;
+    height: auto;
 }
 

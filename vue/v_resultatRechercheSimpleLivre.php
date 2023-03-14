@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="card-horizontal">
                         <div class="img-square-wrapper">
-                            <img class="" src="<?= $unLivre->getImage() ?>" alt="<?= $unLivre->getTitre() ?>">
+                            <img class="" src="images/Livres/<?= $unLivre->getImage() ?>.jpg" alt="<?= $unLivre->getTitre() ?>">
                         </div>
                         <div class="card-body">
                             <h4 class="card-title"><?= $unLivre->getTitre() ?></h4>

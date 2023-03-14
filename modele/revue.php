@@ -41,9 +41,8 @@ class Revue {
     public function getDescripteur() : Descripteur {
         return $this->descripteur;
     }
- 
 
-  
+    
     /**
      * Accesseur de la propriété titre
      *
