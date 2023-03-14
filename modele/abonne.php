@@ -1,6 +1,6 @@
 <?php
 
-class Abonne {
+class Abonne  {
 
     private $id ; 
     private $nom;
@@ -8,10 +8,10 @@ class Abonne {
     private $dateNaissance;
     private $adresse;
     private $numTel;
-    private $typeAbonnement;
     private $finAbonnement;
     private $mdpU;
     private $mailU;
+
 
     /**
      * Constructeur de la classe utilisateur
@@ -22,14 +22,14 @@ class Abonne {
      * @param string $dateNaissance
      * @param string $adresse
      * @param integer $numTel
-     * @param string $typeAbonnement
      * @param string $finAbonnement
      * @param string $mdpU
      * @param string $mailU
+     * @param string TypeAbonnement $typeAbonnement
      */
 
 
-    public function __construct(int $id, string $nom, string $prenom , string $dateNaissance , string $adresse , string $numTel , string $typeAbonnement , string $finAbonnement , string $mdpU , string $mailU )
+    public function __construct(int $id, string $nom, string $prenom , string $dateNaissance , string $adresse , string $numTel , string $finAbonnement , string $mdpU , string $mailU)
     {
         $this->id = $id;
         $this->nom = $nom;
@@ -37,7 +37,6 @@ class Abonne {
         $this->dateNaissance = $dateNaissance;
         $this->adresse = $adresse;
         $this->numTel = $numTel;
-        $this->typeAbonnement = $typeAbonnement;
         $this->finAbonnement = $finAbonnement;
         $this->mdpU = $mdpU;
         $this->mailU = $mailU;
@@ -95,15 +94,6 @@ class Abonne {
      */
     public function getNumTel() : string{
         return $this->numTel;
-    }
-
-    /**
-     * Accesseur de la propriété typeAbonnement
-     *
-     * @return string
-     */
-    public function getTypeAbonnement() : string{
-        return $this->typeAbonnement;
     }
 
     /**
@@ -193,16 +183,6 @@ class Abonne {
         $this->numTel = $numTel;
     }
 
-    /**
-     * Mutateur de la propriété typeAbonnement
-     *
-     * @param string $typeAbonnement
-     * @return void
-     */
-    public function setTypeAbonnement(string $typeAbonnement): void {
-        $this->typeAbonnement = $typeAbonnement;
-    }
-    
     /**
      * Mutateur de la propriété finAbonnement
      *

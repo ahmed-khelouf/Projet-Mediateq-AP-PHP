@@ -14,7 +14,7 @@ class Reservation
      *
      * @param integer $id
      * @param Revue $idRevue
-     * @param Abonne $idAbonnee
+     * @param Abonne $idAbonne
      * @param Statut $idStatut
      * @param integer $rang
      * @param string $dateReservation
