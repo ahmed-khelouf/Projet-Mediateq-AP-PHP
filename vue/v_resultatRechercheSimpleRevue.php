@@ -18,23 +18,43 @@
                             if ($uneRevue->getEmpruntable()) {
                                 $txt = "Cette revue est empruntable";
                             ?>
-                                <?php
-                                $connexionManager = new ConnexionManager;
-                                if ($connexionManager->isLoggedOn() ) { ?>
-                                    <div class="rowR">
-                                        <?php 
-                                         $reservationManager = new ReservationManager;
-                                         $abonneManager = new AbonneManager;
-                                         $abo = $abonneManager->getUtilisateurByMailU($_SESSION['mailU']);
-                                         $reservation = $reservationManager->AfficherBouton($abo->getId() , $uneRevue->getId());
-                                         if($reservation){
-                                        ?>
-                                        <a href="#addnew<?= $uneRevue->getId() ?>" data-toggle="modal" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> RESERVER</a>
-                                        <?php } ?>
-                                    </div>
-                                <?php } ?>
+                            <?php
+                            } else {
+                                $txt = "Cette revue n'est pas empruntable";
+                            }
+                            ?>
+                            <p class="card-text">Type de document : <?= $uneRevue->getDescripteur()->getLibelle() ?></p>
+                            <p class="card-text"><?= $txt ?></p>
+
+                            <?php foreach ($uneRevue->getLesNumeros() as $unNumero) { ?>
+
+                                <div>
+                                    <li>
+                                        Numero Revue : <?= $unNumero->getNumero() ?> du : <?= $unNumero->getDateParution() ?> etat : <?= $unNumero->getEtat()->getLibelle() ?>
+                                    </li>
+                                    <?php
+                                    $connexionManager = new ConnexionManager;
+                                    if ($connexionManager->isLoggedOn()) { ?>
+                                        <div class="rowR">
+                                            <?php
+                                            $reservationManager = new ReservationManager;
+                                            $abonneManager = new AbonneManager;
+                                            $abo = $abonneManager->getUtilisateurByMailU($_SESSION['mailU']);
+                                            $reservation = $reservationManager->AfficherBouton($abo->getId(), $uneRevue->getId() , $unNumero->getNumero());
+                                            if ($reservation) {
+                                            ?>
+                                            <a href="#addnew<?= $uneRevue->getId() ?><?= $unNumero->getNumero() ?>" data-toggle="modal" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> RESERVER</a></br>
+                                            <?php } ?>
+                                        </div>
+                                    <?php } ?>
+
+                                </div>
+
+
                                 <!-- Add New -->
-                                <div class="modal fade" id="addnew<?= $uneRevue->getId() ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+                                <div class="modal fade" id="addnew<?= $uneRevue->getId() ?><?= $unNumero->getNumero() ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -49,30 +69,20 @@
                                                         <div class="row form-group">
                                                             <?php
                                                             $reservationManager = new ReservationManager;
-                                                            $reservations = $reservationManager->recupMaxRang($uneRevue->getId());
+                                                            $reservations = $reservationManager->recupMaxRang($uneRevue->getId(), $unNumero->getNumero());
                                                             ?>
-                                                            <p> Vous avez le rang <strong><?= $reservations + 1 ?> </strong>dans la liste des abonnées qui ont réservé ce document </p>
-
-                                                            <?php $nbNumeros = count($uneRevue->getLesNumeros());
-                                                            if ($nbNumeros > 0) { ?>
-                                                            <select name="numeroRevue" id="numeroRevue">
-                                                                <?php foreach ($uneRevue->getLesNumeros() as $unNumero) { ?>
-                                                                    <option value="<?=$unNumero->getNumero()?>">
-                                                                        Numero Revue : <?=$unNumero->getNumero()?>
-                                                                    </option>
-                                                                <?php } ?>
-                                                            </select>
-                                                            <?php } ?>
-                                                                                                 
+                                                            <p> Vous avez le rang <strong><?= $reservations + 1 ?> </strong>dans la liste des abonnées qui ont réservé ce document<?= $unNumero->getNumero() ?></p>
                                                         </div>
                                                         <div class="col-sm-10">
 
-                                                            <input type="hidden" class="form-control" name="rang" value="<?= $reservations + 1?> ">
+                                                            <input type="hidden" class="form-control" name="rang" value="<?= $reservations + 1 ?> ">
 
                                                             <input type="hidden" class="form-control" name="idRevue" value="<?= $uneRevue->getId() ?> ">
 
                                                             <input type="hidden" class="form-control" name="id" value="<?= $uneRevue->getId() ?>">
-                                                      
+
+                                                            <input type="hidden" class="form-control" name="numeroParution" value="<?= $unNumero->getNumero() ?>">
+
                                                             <?php
                                                             $abonneManager = new abonneManager;
                                                             if ($connexionManager->isLoggedOn()) {
@@ -91,16 +101,12 @@
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
-                            <?php
-                            } else {
-                                $txt = "Cette revue n'est pas empruntable";
-                            }
-                            ?>
-                            <p class="card-text">Type de document : <?= $uneRevue->getDescripteur()->getLibelle() ?></p>
-                            <p class="card-text"><?= $txt ?></p>
+                            <?php } ?>
                         </div>
                     </div>
+
                     <div class="card-footer">
                         <small class="text-muted">
                             <?php

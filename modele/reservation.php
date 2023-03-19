@@ -8,6 +8,7 @@ class Reservation
     private $rang;
     private $idStatut;
     private $dateReservation;
+    private $numeroParution;
 
     /**
      * construteur de la classe Reservation
@@ -18,8 +19,9 @@ class Reservation
      * @param Statut $idStatut
      * @param integer $rang
      * @param string $dateReservation
+     * @param string $numeroParution
      */
-    public function __construct(int $idR, Revue $idRevue, Abonne $idAbonne , int $rang , Statut $idStatut, string $dateReservation)
+    public function __construct(int $idR, Revue $idRevue, Abonne $idAbonne , int $rang , Statut $idStatut, string $dateReservation , string $numeroParution)
     {
         $this->idR = $idR;
         $this->idRevue = $idRevue;
@@ -27,6 +29,7 @@ class Reservation
         $this->rang = $rang;
         $this->idStatut = $idStatut;
         $this->dateReservation = $dateReservation;
+        $this->numeroParution = $numeroParution;
     }
 
 
@@ -38,6 +41,16 @@ class Reservation
     public function getId(): int
     {
         return $this->idR;
+    }
+
+     /**
+     * Accesseur de la propriété idR
+     *
+     * @return string
+     */
+    public function getNumeroParution(): string
+    {
+        return $this->numeroParution;
     }
 
     /**
