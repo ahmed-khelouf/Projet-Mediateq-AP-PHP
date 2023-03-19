@@ -69,6 +69,4 @@ if ($connexionManager->isLoggedOn()) { ?>
                 </div>
             <?php } ?>
         <?php } ?>
-    <?php } else {
-    echo ("tu es pas coooo ");
-} ?>
+    <?php } ?>

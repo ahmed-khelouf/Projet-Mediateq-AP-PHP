@@ -40,19 +40,15 @@
                                             $reservationManager = new ReservationManager;
                                             $abonneManager = new AbonneManager;
                                             $abo = $abonneManager->getUtilisateurByMailU($_SESSION['mailU']);
-                                            $reservation = $reservationManager->AfficherBouton($abo->getId(), $uneRevue->getId() , $unNumero->getNumero());
+                                            $reservation = $reservationManager->AfficherBouton($abo->getId(), $uneRevue->getId(), $unNumero->getNumero());
                                             if ($reservation) {
                                             ?>
-                                            <a href="#addnew<?= $uneRevue->getId() ?><?= $unNumero->getNumero() ?>" data-toggle="modal" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> RESERVER</a></br>
+                                                <a href="#addnew<?= $uneRevue->getId() ?><?= $unNumero->getNumero() ?>" data-toggle="modal" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> RESERVER</a></br>
                                             <?php } ?>
                                         </div>
                                     <?php } ?>
-
                                 </div>
-
-
                                 <!-- Add New -->
-
                                 <div class="modal fade" id="addnew<?= $uneRevue->getId() ?><?= $unNumero->getNumero() ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
                                     <div class="modal-dialog">

@@ -32,7 +32,6 @@ class Reservation
         $this->numeroParution = $numeroParution;
     }
 
-
     /**
      * Accesseur de la propriété idR
      *
@@ -41,16 +40,6 @@ class Reservation
     public function getId(): int
     {
         return $this->idR;
-    }
-
-     /**
-     * Accesseur de la propriété idR
-     *
-     * @return string
-     */
-    public function getNumeroParution(): string
-    {
-        return $this->numeroParution;
     }
 
     /**
@@ -83,7 +72,6 @@ class Reservation
         return $this->rang;
     }
 
-
     /**
      * Accesseur de la propriété idRevue
      *
@@ -102,4 +90,17 @@ class Reservation
     {
         return $this->idAbonne;
     }
+
+    /**
+     * Accesseur de la propriété numeroParution
+     *
+     * @return string
+     */
+    public function getNumeroParution(): string
+    {
+        return $this->numeroParution;
+    }
+ 
 }
+
+?>
