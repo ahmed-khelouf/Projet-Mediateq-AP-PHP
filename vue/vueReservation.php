@@ -1,4 +1,5 @@
 <?php
+
 $connexionManager = new ConnexionManager;
 $reservationManager = new ReservationManager;
 $reservation = $reservationManager->nombreReservation($unAbonne->getId());
@@ -29,6 +30,7 @@ if ($connexionManager->isLoggedOn()) { ?>
                                             <p> Statut : <strong><?= $reservation->getStatut()->getLibelle() ?></strong></p>
                                         </div>
                                         <p> Date : <strong><?= $reservation->getDate() ?></strong></p>
+                                        <p> Numero : <strong><?= $reservation->getNumeroParution() ?></strong></p>
                                         <a href='#delete_<?= $reservation->getId() ?>' class='btn btn-danger btn-sup' data-toggle='modal'><span class='glyphicon glyphicon-trash'></span> Supprimer</a>
                                     </div>
                                 </div>
@@ -56,6 +58,8 @@ if ($connexionManager->isLoggedOn()) { ?>
 
                                     <input type="hidden" class="form-control" name="rang" value="<?= $reservation->getRang() ?> ">
 
+                                    <input type="hidden" class="form-control" name="numeroParution" value="<?= $reservation->getNumeroParution() ?> ">
+
                                     <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Annuler</button>
                                     <button type="submit" name="supr" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Oui</a>
                                 </form>
@@ -65,6 +69,4 @@ if ($connexionManager->isLoggedOn()) { ?>
                 </div>
             <?php } ?>
         <?php } ?>
-    <?php } else {
-    echo ("tu es pas coooo ");
-} ?>
+    <?php } ?>

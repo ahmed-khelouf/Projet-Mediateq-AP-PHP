@@ -9,15 +9,17 @@ class descripteurManager extends Manager
      */
     public function getList(): array
     {
-        $q = $this->getPDO()->prepare('SELECT * FROM descripteur');
-        $q->execute();
-        $r1 = $q->fetchAll(PDO::FETCH_ASSOC);
-        $lesDescripteurs = array();
-        foreach ($r1 as $uneDescription) {
-            $lesDescripteurs[$uneDescription['id']] = new Descripteur($uneDescription['id'], $uneDescription['libelle']);
+        try {
+            $q = $this->getPDO()->prepare('SELECT * FROM descripteur');
+            $q->execute();
+            $r1 = $q->fetchAll(PDO::FETCH_ASSOC);
+            $lesDescripteurs = array();
+            foreach ($r1 as $uneDescription) {
+                $lesDescripteurs[$uneDescription['id']] = new Descripteur($uneDescription['id'], $uneDescription['libelle']);
+            }
+            return $lesDescripteurs;
+        } catch (PDOException $e) {
+            echo ("une erreur s'est produite lors de la récupération des descripteurs : " . $e->getMessage());
         }
-        return $lesDescripteurs;
     }
 }
-
-?>

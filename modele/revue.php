@@ -85,8 +85,6 @@ class Revue {
         $this->id = $id;
     }
 
-  
-
     /**
      * Mutateur de la propriété lesNumeros
      *

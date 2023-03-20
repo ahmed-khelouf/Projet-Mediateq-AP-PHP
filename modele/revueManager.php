@@ -9,38 +9,42 @@ class RevueManager extends Manager
      */
     public function getList(): array
     {
-        // recupération des états
-        $etatManager = new EtatManager(); // Création d'un objet manager d'état
-        $lesEtats = $etatManager->getList(); // chargement du dictionnaire des états
+        try {
+            // recupération des états
+            $etatManager = new EtatManager(); // Création d'un objet manager d'état
+            $lesEtats = $etatManager->getList(); // chargement du dictionnaire des états
 
-        // recupération des descripteurs
-        $descripteurManager = new DescripteurManager(); // Création d'un objet manager de descripteur
-        $lesDescripteurs = $descripteurManager->getList(); 
+            // recupération des descripteurs
+            $descripteurManager = new DescripteurManager(); // Création d'un objet manager de descripteur
+            $lesDescripteurs = $descripteurManager->getList();
 
-        $q = $this->getPDO()->prepare('SELECT * FROM revue ORDER BY titre');
-        $q->execute();
-        $r1 = $q->fetchAll(PDO::FETCH_ASSOC);
+            $q = $this->getPDO()->prepare('SELECT * FROM revue ORDER BY titre');
+            $q->execute();
+            $r1 = $q->fetchAll(PDO::FETCH_ASSOC);
 
-        $lesRevues = array();
-        foreach ($r1 as $revue) {
-            $descripteur = $lesDescripteurs[$revue['idDescripteur']];
-            $lesRevues[$revue['id']] = new Revue($revue['id'], $revue['titre'], $revue['empruntable'], $descripteur);
-            // on récupère la collection de parutions de cette revue
-            $q2 = $this->getPDO()->prepare('SELECT * FROM parution WHERE idRevue = :id ORDER BY numero');
-            $q2->bindParam(':id',  $revue['id'], PDO::PARAM_INT);
-            $q2->execute();
-            $r2 = $q2->fetchAll(PDO::FETCH_ASSOC);
-            $lesNumeros = array();
-            foreach ($r2 as $parution) {
-                if ($parution['photo'] == null) {
-                    $parution['photo'] = "";
+            $lesRevues = array();
+            foreach ($r1 as $revue) {
+                $descripteur = $lesDescripteurs[$revue['idDescripteur']];
+                $lesRevues[$revue['id']] = new Revue($revue['id'], $revue['titre'], $revue['empruntable'], $descripteur);
+                // on récupère la collection de parutions de cette revue
+                $q2 = $this->getPDO()->prepare('SELECT * FROM parution WHERE idRevue = :id AND idEtat!="00004"ORDER BY numero');
+                $q2->bindParam(':id',  $revue['id'], PDO::PARAM_INT);
+                $q2->execute();
+                $r2 = $q2->fetchAll(PDO::FETCH_ASSOC);
+                $lesNumeros = array();
+                foreach ($r2 as $parution) {
+                    if ($parution['photo'] == null) {
+                        $parution['photo'] = "";
+                    }
+                    $lesNumeros[$parution['numero']] = new Parution($parution['numero'], $lesRevues[$revue['id']], $parution['dateParution'], $parution['photo'], $lesEtats[$parution['idEtat']]);
                 }
-                $lesNumeros[$parution['numero']] = new Parution($parution['numero'], $lesRevues[$revue['id']], $parution['dateParution'], $parution['photo'], $lesEtats[$parution['idEtat']]);
+                // on instancie la collection d'exemplaires dans l'objet livre
+                $lesRevues[$revue['id']]->setlesNumeros($lesNumeros);
             }
-            // on instancie la collection d'exemplaires dans l'objet livre
-            $lesRevues[$revue['id']]->setlesNumeros($lesNumeros);
+            return $lesRevues;
+        } catch (PDOException $e) {
+            echo ("une erreur s'est produite lors de la récupération des revues : " . $e->getMessage());
         }
-        return $lesRevues;
     }
 
 
@@ -110,5 +114,4 @@ class RevueManager extends Manager
         }
         return $this->getRevuesByListId($lesId);
     }
-
 }

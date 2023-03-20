@@ -23,6 +23,7 @@
           <a class="nav-link" href="./?action=faq">FAQ</a>
         </li>
         <?php
+       
         $connexionManager = new ConnexionManager;
         if ($connexionManager->isLoggedOn()) {
           $abonneManager = new abonneManager;
