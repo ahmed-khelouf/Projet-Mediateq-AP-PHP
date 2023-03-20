@@ -22,6 +22,12 @@ class RayonManager extends Manager
         return $lesRayons;
     }
 
+    public function getRayonById(int $unId) : Rayon
+    {
+        $listeRayon = $this->getList();
+        $rayon = $listeRayon[$unId];
+        return $rayon;
+    }
 }
 
 ?>

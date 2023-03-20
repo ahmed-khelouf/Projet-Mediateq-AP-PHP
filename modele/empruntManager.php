@@ -7,27 +7,40 @@ class EmpruntManager extends Manager
      *
      * @return array
      */
-    public function getEmprunts() : array
-    {
-        $livreManager = new LivreManager();
-        $lesLivres = $livreManager->getList();
-
+    public function getList() : array
+    {   
+        $documentManager = new DocumentManager();
+        $lesDocuments = $documentManager->getList();
+        
+        $lesExemplaires = array();
+        foreach($lesDocuments as $unDocument)
+        {
+            $lesExemplairesDuDocument = $unDocument->getLesExemplaires();
+            foreach($lesExemplairesDuDocument as $unExemplaire)
+            {
+                $lesExemplaires[$unExemplaire->getNumero()] = $unExemplaire;
+            }
+        }
+        /*
         $DVDManager = new DvdManager();
         $lesDvds = $DVDManager->getList();
 
-        $lesDocuments = array_merge($lesLivres,$lesDvds); 
+        $lesDocuments = array_merge($lesLivres,$lesDvds);*/
+
+        /*$exemplaireManager = new ExemplaireManager();
+        $lesExemplaires = $exemplaireManager->getList();*/
         
-        $q = $this->getPDO()->prepare('SELECT idAbonne, idDocument, dateDebut, dateFin, prolongable FROM emprunt ');
+        $q = $this->getPDO()->prepare('SELECT id, idAbonne, numero, dateDebut, dateFin, prolongable FROM emprunt ');
         $q->execute();
         $r1 = $q->fetchAll(PDO::FETCH_ASSOC);
         $lesEmprunts = array();
         foreach($r1 as $unEmprunt)
         {
-            $lesEmprunts[$unEmprunt['idAbonne']][$unEmprunt['idDocument']] = new Emprunt($unEmprunt['idAbonne'], $lesDocuments[$unEmprunt['idDocument']], $unEmprunt['dateDebut'], $unEmprunt['dateFin'], $unEmprunt['prolongable']);
+            $lesEmprunts[$unEmprunt['idAbonne']][$unEmprunt['id']] = new Emprunt($unEmprunt['id'],$unEmprunt['idAbonne'], $lesExemplaires[$unEmprunt['numero']], $unEmprunt['dateDebut'], $unEmprunt['dateFin'], $unEmprunt['prolongable']);
         }
         return $lesEmprunts;
     }
-
+    
 }
 
 ?>

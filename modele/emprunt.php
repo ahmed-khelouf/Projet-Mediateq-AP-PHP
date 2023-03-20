@@ -1,28 +1,40 @@
 <?php
 
 class Emprunt {
+    private $id;
     private $abonne;
-    private $document; 
+    private $exemplaire; 
     private $dateDebut;
     private $dateFin;
     private $prolongable;
     
     /**
      * Constructeur de la classe Exemplaire
-     *
-     * param Abonne $abonne
-     * @param Document $document
+     * 
+     * @param int $id
+     * @param int $abonne
+     * @param Exemplaire $exemplaire
      * @param string $dateDebut
      * @param string $dateFin
      * @param bool $prolongable
      */
-    public function __construct(int $abonne, Document $document, string $dateDebut, string $dateFin, int $prolongable)
+    public function __construct(int $id, int $abonne, Exemplaire $exemplaire, string $dateDebut, string $dateFin, int $prolongable)
     {
+        $this->id = $id;
         $this->abonne = $abonne;
-        $this->document = $document;
+        $this->exemplaire = $exemplaire;
         $this->dateDebut = $dateDebut;
         $this->dateFin = $dateFin;
         $this->prolongable = $prolongable;
+    }
+
+    /**
+     * Accesseur de la propriété ISBN
+     *
+     * @return string
+     */
+    public function getId() : int {
+        return $this->id;
     }
 
     /**
@@ -39,8 +51,8 @@ class Emprunt {
      *
      * @return string
      */
-    public function getDocument() : Document {
-        return $this->document;
+    public function getExemplaire() : Exemplaire {
+        return $this->exemplaire;
     }
 
     /**

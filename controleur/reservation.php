@@ -1,5 +1,4 @@
 <?php
-
 $reservationManager = new ReservationManager(); 
 $reservations = $reservationManager->getList(); 
 
@@ -18,8 +17,7 @@ if(isset($_POST['add'])){
     $idRevue = $_POST['idRevue'];
     $idAbonne = $_POST['idAbonne'];
     $rang = $_POST['rang'];
-    $numeroRevue = $_POST["numeroRevue"];
-    $reservationManager->addReservation($idRevue , $idAbonne , $rang , $numeroRevue );    
+    $reservationManager->addReservation($idRevue , $idAbonne , $rang);    
     header('location: index.php?action=reservation');
 }
 

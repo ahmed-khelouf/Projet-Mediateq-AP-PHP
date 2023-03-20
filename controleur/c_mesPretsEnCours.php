@@ -9,6 +9,7 @@ $vues = array(); // tableau des vues à appeler
 //array_push($vues, "$racine/vue/v_mesPretsEnCours.php");
 //array_push($vues, "$racine/vue/v_nouveautes.php");
 //var_dump($_SESSION);
+
 if(isset($_SESSION['mailU'])){
     $abonneManager = new abonneManager();
     $abonne = $abonneManager->getUtilisateurByMailU($_SESSION['mailU']);
@@ -17,7 +18,7 @@ if(isset($_SESSION['mailU'])){
 $empruntManager = new EmpruntManager();
 
 //var_dump($empruntManager);
-$emprunts = $empruntManager->getEmprunts();
+$emprunts = $empruntManager->getList();
 //var_dump($emprunts);
 
 array_push($vues, "$racine/vue/v_mesPretsEnCours.php");

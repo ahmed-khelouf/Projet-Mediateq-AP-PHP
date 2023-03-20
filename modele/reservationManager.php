@@ -91,12 +91,11 @@ class ReservationManager extends Manager
                 } else {
                         $idStatut = 1;
                 }
-                $q = $this->getPDO()->prepare('INSERT INTO reservation (idRevue , dateReservation , idAbonne , rang , idStatut , numeroRevue ) VALUES (:idRevue , Current_Date , :idAbonne , :rang , :idStatut , :numeroRevue )');
+                $q = $this->getPDO()->prepare('INSERT INTO reservation (idRevue , dateReservation , idAbonne , rang , idStatut) VALUES (:idRevue , Current_Date , :idAbonne , :rang , :idStatut)');
                 $q->bindParam(':idRevue', $idRevue, PDO::PARAM_STR);
                 $q->bindParam(':idAbonne', $idAbonne, PDO::PARAM_INT);
                 $q->bindParam(':rang', $rang, PDO::PARAM_INT);
                 $q->bindParam(':idStatut', $idStatut, PDO::PARAM_INT);
-                $q->bindParam(':numeroRevue', $numeroRevue, PDO::PARAM_INT);
                 $q->execute();
         }
 

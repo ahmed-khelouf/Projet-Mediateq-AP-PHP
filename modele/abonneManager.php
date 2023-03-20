@@ -5,9 +5,9 @@ class abonneManager extends Manager
 
 
     /**
-     * Renvoie un tableau associatif contenant l'ensemble des objets Abonnee
+     * Renvoie un tableau associatif contenant l'ensemble des objets Abonne
      *
-     * @return abonnee
+     * @return abonne
      */
     public function getUtilisateurByMailU($mailU): ?Abonne
     {
@@ -16,9 +16,9 @@ class abonneManager extends Manager
         $q->execute();
         if ($q->rowCount() == 1) {
             $user = $q->fetch(PDO::FETCH_ASSOC);
-            $unAbonnee = new Abonne((int)$user['id'], $user['nom'], $user['prenom'], $user['dateNaissance'], $user['adresse'], $user['numTel'], $user['typeAbonnement'], $user['finAbonnement'], $user['mdpU'], $user['mailU']);
+            $unAbonne = new Abonne((int)$user['id'], $user['nom'], $user['prenom'], $user['dateNaissance'], $user['adresse'], $user['numTel'], $user['typeAbonnement'], $user['finAbonnement'], $user['mdpU'], $user['mailU']);
 
-            return $unAbonnee;
+            return $unAbonne;
         } else {
             return null;
         }
@@ -32,10 +32,10 @@ class abonneManager extends Manager
         $q->execute();
         $r1 = $q->fetchAll(PDO::FETCH_ASSOC);
 
-        $lesAbonnees = array();
+        $lesAbonnes = array();
         foreach ($r1 as $user) {
-            $lesAbonnees[$user['id']] = new Abonne((int)$user['id'], $user['nom'], $user['prenom'], $user['dateNaissance'], $user['adresse'], $user['numTel'], $user['typeAbonnement'], $user['finAbonnement'], $user['mdpU'], $user['mailU']);
+            $lesAbonnes[$user['id']] = new Abonne((int)$user['id'], $user['nom'], $user['prenom'], $user['dateNaissance'], $user['adresse'], $user['numTel'], $user['typeAbonnement'], $user['finAbonnement'], $user['mdpU'], $user['mailU']);
         }
-        return $lesAbonnees;
+        return $lesAbonnes;
     }
 }

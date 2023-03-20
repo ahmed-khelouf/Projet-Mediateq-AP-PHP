@@ -29,7 +29,23 @@ class Exemplaire {
 
     
     // a completer getter/setter
+        /**
+     * Accesseur de la propriété libelle de la propriété rayon
+     *
+     * @return int
+     */
+    public function getNumero() : int {
+        return $this->numero;
+    }
 
+        /**
+     * Accesseur de la propriété libelle de la propriété rayon
+     *
+     * @return Document
+     */
+    public function getDocument() : Document {
+        return $this->document;
+    }
 
     /**
      * Accesseur de la propriété libelle de la propriété rayon
@@ -39,6 +55,17 @@ class Exemplaire {
     public function getLeRayon() : string {
         return $this->rayon->getLibelle();
     }
+
+        /**
+     * Accesseur de la propriété libelle de la propriété rayon
+     *
+     * @return Etat
+     */
+    public function getEtat() : Etat{
+        return $this->etat;
+    }
+
+    
 
 }
 ?>
