@@ -15,11 +15,15 @@ if(isset($_SESSION['mailU'])){
     $abonne = $abonneManager->getUtilisateurByMailU($_SESSION['mailU']);
 }
 
-$empruntManager = new EmpruntManager();
+$empruntManager = new EmpruntExemplaireManager();
 
 //var_dump($empruntManager);
 $emprunts = $empruntManager->getList();
 //var_dump($emprunts);
+
+$empruntParutionManager = new EmpruntParutionManager();
+
+$empruntsParution = $empruntParutionManager->getList();
 
 array_push($vues, "$racine/vue/v_mesPretsEnCours.php");
 

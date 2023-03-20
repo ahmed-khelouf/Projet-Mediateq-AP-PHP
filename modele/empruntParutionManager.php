@@ -1,6 +1,6 @@
 <?php
 
-class EmpruntManager extends Manager
+class EmpruntParutionManager extends Manager
 {
     /**
      * Renvoie un tableau associatif contenant l'ensemble des objets Etat
@@ -9,7 +9,10 @@ class EmpruntManager extends Manager
      */
     public function getList() : array
     {   
-        $documentManager = new DocumentManager();
+        $parutionManager = new ParutionManager();
+        $lesParutions = $parutionManager->getList();
+        
+        /*$documentManager = new DocumentManager();
         $lesDocuments = $documentManager->getList();
         
         $lesExemplaires = array();
@@ -20,7 +23,7 @@ class EmpruntManager extends Manager
             {
                 $lesExemplaires[$unExemplaire->getNumero()] = $unExemplaire;
             }
-        }
+        }*/
         /*
         $DVDManager = new DvdManager();
         $lesDvds = $DVDManager->getList();
@@ -30,13 +33,13 @@ class EmpruntManager extends Manager
         /*$exemplaireManager = new ExemplaireManager();
         $lesExemplaires = $exemplaireManager->getList();*/
         
-        $q = $this->getPDO()->prepare('SELECT id, idAbonne, numero, dateDebut, dateFin, prolongable FROM emprunt ');
+        $q = $this->getPDO()->prepare('SELECT id, idAbonne, idParution, dateDebut, dateFin, prolongable FROM emprunt_parution ');
         $q->execute();
         $r1 = $q->fetchAll(PDO::FETCH_ASSOC);
         $lesEmprunts = array();
         foreach($r1 as $unEmprunt)
         {
-            $lesEmprunts[$unEmprunt['idAbonne']][$unEmprunt['id']] = new Emprunt($unEmprunt['id'],$unEmprunt['idAbonne'], $lesExemplaires[$unEmprunt['numero']], $unEmprunt['dateDebut'], $unEmprunt['dateFin'], $unEmprunt['prolongable']);
+            $lesEmprunts[$unEmprunt['idAbonne']][$unEmprunt['id']] = new EmpruntParution($unEmprunt['id'],$unEmprunt['idAbonne'], $lesParutions[$unEmprunt['idParution']], $unEmprunt['dateDebut'], $unEmprunt['dateFin'], $unEmprunt['prolongable']);
         }
         return $lesEmprunts;
     }

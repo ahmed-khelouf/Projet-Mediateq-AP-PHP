@@ -3,7 +3,6 @@
 class Emprunt {
     private $id;
     private $abonne;
-    private $exemplaire; 
     private $dateDebut;
     private $dateFin;
     private $prolongable;
@@ -13,16 +12,14 @@ class Emprunt {
      * 
      * @param int $id
      * @param int $abonne
-     * @param Exemplaire $exemplaire
      * @param string $dateDebut
      * @param string $dateFin
      * @param bool $prolongable
      */
-    public function __construct(int $id, int $abonne, Exemplaire $exemplaire, string $dateDebut, string $dateFin, int $prolongable)
+    public function __construct(int $id, int $abonne, string $dateDebut, string $dateFin, int $prolongable)
     {
         $this->id = $id;
         $this->abonne = $abonne;
-        $this->exemplaire = $exemplaire;
         $this->dateDebut = $dateDebut;
         $this->dateFin = $dateFin;
         $this->prolongable = $prolongable;
@@ -44,15 +41,6 @@ class Emprunt {
      */
     public function getAbonne() : int {
         return $this->abonne;
-    }
-
-    /**
-     * Accesseur de la propriété auteur
-     *
-     * @return string
-     */
-    public function getExemplaire() : Exemplaire {
-        return $this->exemplaire;
     }
 
     /**

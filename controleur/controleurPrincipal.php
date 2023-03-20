@@ -48,8 +48,12 @@ function chargerModeles($racine){
     require_once("$racine/modele/statut.php");
     require_once("$racine/modele/statutManager.php");
     require_once("$racine/modele/emprunt.php");
-    require_once("$racine/modele/empruntManager.php");
+    require_once("$racine/modele/empruntExemplaire.php");
+    require_once("$racine/modele/empruntExemplaireManager.php");
+    require_once("$racine/modele/empruntParution.php");
+    require_once("$racine/modele/empruntParutionManager.php");
     require_once("$racine/modele/documentManager.php");
+    require_once("$racine/modele/parutionManager.php");
 
 }
 ?>

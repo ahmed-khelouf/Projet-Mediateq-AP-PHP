@@ -34,6 +34,15 @@ class Parution {
         return $this->numero;
     }
 
+        /**
+     * Accesseur de la propriété numero
+     *
+     * @return Revue
+     */
+    public function getRevue() : Revue {
+        return $this->revue;
+    }
+
     /**
      * Accesseur de la propriété dateParution
      *
@@ -50,6 +59,15 @@ class Parution {
      */
     public function getPhoto() : string {
         return $this->photo;
+    }
+
+        /**
+     * Accesseur de la propriété photo
+     *
+     * @return Etat
+     */
+    public function getEtat() : Etat {
+        return $this->etat;
     }
 
     

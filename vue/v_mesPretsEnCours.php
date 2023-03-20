@@ -34,6 +34,39 @@
 
     <?php
     }
+    foreach($empruntsParution[$abonne->getId()] as $unEmprunt){
+        ?>
+        <div class="row">
+            <div class="col-12 mt-3">
+                <div class="card">
+                    <h4 class="card-text"><?= $unEmprunt->getParution()->getRevue()->getTitre() ?></h4>
+                    <div class="card-horizontal">
+                        <div class="img-square-wrapper">
+                            <img class="" src="images/Revues/<?=$unEmprunt->getParution()->getPhoto()?>.jpg" alt="<?= $unEmprunt->getParution()->getRevue()->getTitre() ?>">
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-text">Parution numéro <?= $unEmprunt->getParution()->getNumero() ?></h4>
+                            <p class="card-text">Date de début <?= $unEmprunt->getDateDebut() ?></p>
+                            <p class="card-text">Date de fin <?= $unEmprunt->getDateFin() ?></p>
+                            <p class="card-text">
+                            <?php
+                                if($unEmprunt->peutProlonger() == 1){
+                                    echo "Prolongable";
+                                }
+                                else {
+                                    echo "Non Prolongable";
+                                }?>
+                            </p>
+                            <p class="card-text"><?= $unEmprunt->getParution()->getEtat()->getTitre()?></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <?php
+    }
 ?>
 
 </div>
