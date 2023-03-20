@@ -14,6 +14,7 @@ class ConnexionManager extends Manager
         if( !is_null($util)){
             $mdpBD = $util->getMdpU();
             //Penser a hasher le mdp avant de le comparer pour plus tard !!!
+            // $mdpU = crypt($mdpU, $mdpBD);
             if (trim($mdpBD) == trim($mdpU)) {
             // if (trim($mdpBD) == trim(crypt($mdpU, $mdpBD))) {
                 

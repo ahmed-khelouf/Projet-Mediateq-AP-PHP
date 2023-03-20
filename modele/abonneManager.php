@@ -5,7 +5,7 @@ class abonneManager extends Manager
 
 
      /**
-      * Renvoie un tableau associatif contenant l'ensemble des objets Abonnee
+      * Renvoie un tableau associatif contenant l'ensemble des objets Abonne
       *
       * @return abonne
       */
@@ -45,8 +45,8 @@ class abonneManager extends Manager
         $ret = false;
     
         if (isset($_SESSION["mailU"])) {
-            $abonneManager = new abonneManager();
-            $util = $abonneManager->getUtilisateurByMailU($_SESSION["mailU"]);
+            $abonneeManager = new abonneManager();
+            $util = $abonneeManager->getUtilisateurByMailU($_SESSION["mailU"]);
             if ($util->getMailU() == $_SESSION["mailU"] && $util->getId() == $_SESSION["id"]
             ) {
                 $ret = true;
@@ -56,5 +56,20 @@ class abonneManager extends Manager
     }
 
 }
+
+// function updateMdp($id, $mdpU) {
+// 	try {
+// 		$cnx = getPDO();
+// 		$mdpHash = password_hash($mdpU, PASSWORD_DEFAULT);
+// 		$req = $cnx->prepare('UPDATE abonné SET mdpU = :mdpHash WHERE id = :id');
+// 		$req->bindParam(':id', $id, PDO::PARAM_INT);
+// 		$req->bindParam(':mdpHash', $mdpHash, PDO::PARAM_STR);
+// 		$resultat = $req->execute();
+// 		return $resultat;
+// 	} catch (PDOException $e) {
+// 		print "Erreur !: " . $e->getMessage();
+// 		die();
+// 	}	
+// }
 
 

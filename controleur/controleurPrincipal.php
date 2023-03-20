@@ -7,6 +7,7 @@ function controleurPrincipal($action) {
     $lesActions["nouveautes"] = "c_nouveautes.php";
     $lesActions["faq"] = "c_faq.php";
     $lesActions["connexion"] = "connexion.php";
+    $lesActions["monDossier"] = "c_abonne.php";
     $lesActions["deconnexion"] = "deconnexion.php";
     $lesActions["accueil"] = $lesActions["rechercheSimple"] ;
     $lesActions["defaut"] = $lesActions["accueil"];
@@ -49,6 +50,8 @@ function chargerModeles($racine){
     require_once("$racine/modele/statutManager.php");
     require_once("$racine/modele/emprunt.php");
     require_once("$racine/modele/empruntManager.php");
+    require_once("$racine/modele/typeAbonnement.php");
+    require_once("$racine/modele/typeAbonnementManager.php");
 
 }
 ?>

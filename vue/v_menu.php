@@ -33,7 +33,7 @@
               <?= $abo->getPrenom() ?>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Mon dossier</a>
+            <a class="dropdown-item" href="./?action=monDossier">Mon dossier</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="./?action=mesPretsEnCours">Mes prêts en cours</a>
               <a class="dropdown-item" href="./?action=reservation">Mes réservations</a>
