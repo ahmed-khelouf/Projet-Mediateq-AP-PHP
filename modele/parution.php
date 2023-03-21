@@ -44,6 +44,15 @@ class Parution {
     }
 
     /**
+     * Accesseur de la propriété etat
+     *
+     * @return Etat
+     */
+    public function getEtat() : Etat {
+        return $this->etat;
+    }
+
+    /**
      * Accesseur de la propriété dateParution
      *
      * @return string

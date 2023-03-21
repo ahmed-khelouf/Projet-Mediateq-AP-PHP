@@ -1,4 +1,5 @@
 <?php
+
 $reservationManager = new ReservationManager(); 
 $reservations = $reservationManager->getList(); 
 
@@ -17,7 +18,8 @@ if(isset($_POST['add'])){
     $idRevue = $_POST['idRevue'];
     $idAbonne = $_POST['idAbonne'];
     $rang = $_POST['rang'];
-    $reservationManager->addReservation($idRevue , $idAbonne , $rang);    
+    $numeroParution = $_POST["numeroParution"];
+    $reservationManager->addReservation($idRevue , $idAbonne , $rang , $numeroParution );    
     header('location: index.php?action=reservation');
 }
 
@@ -26,7 +28,8 @@ if(isset($_POST['supr'])){
     $idR = $_POST['idR'];
     $idRevue = $_POST['id'];
     $rang = $_POST['rang'];
-    $reservationManager ->supReservation($idR, $idRevue, $rang );
+    $numeroParution = $_POST["numeroParution"];
+    $reservationManager ->supReservation($idR, $idRevue, $rang  , $numeroParution);
     header('location: index.php?action=reservation');
 }
 

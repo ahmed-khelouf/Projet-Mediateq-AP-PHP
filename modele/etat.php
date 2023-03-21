@@ -30,7 +30,7 @@ class Etat {
      *
      * @return string
      */
-    public function getTitre() : string {
+    public function getLibelle() : string {
         return $this->libelle;
     }
 
