@@ -7,17 +7,18 @@ $titre = "Nouveautés - Catalogue - Mediateq";
 
 $vues = array(); 
 
+// Recupération de l'objet étudiant
 if(isset($_SESSION['mailU'])){
     $abonneManager = new abonneManager();
     $abonne = $abonneManager->getUtilisateurByMailU($_SESSION['mailU']);
 }
 
+// Récupération des objets Emprunts d'exemplaires et Emprunts de parutions
 $empruntManager = new EmpruntExemplaireManager();
 $emprunts = $empruntManager->getList();
 
 $empruntParutionManager = new EmpruntParutionManager();
 $empruntsParution = $empruntParutionManager->getList();
-
 
 array_push($vues, "$racine/vue/v_mesPretsHistorique.php");
 

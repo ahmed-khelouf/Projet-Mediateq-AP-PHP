@@ -24,7 +24,7 @@ class EmpruntParutionManager extends Manager
     }
 
         /**
-     * Renvoie un tableau associatif contenant l'ensemble des objets EmpruntParution actuels
+     * Renvoie un tableau associatif contenant l'ensemble des objets EmpruntParution non archivés
      *
      * @return array
      */

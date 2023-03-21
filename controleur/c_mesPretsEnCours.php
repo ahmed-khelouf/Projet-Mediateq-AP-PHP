@@ -7,11 +7,13 @@ $titre = "Nouveautés - Catalogue - Mediateq";
 
 $vues = array(); 
 
+// Recupération de l'objet étudiant
 if(isset($_SESSION['mailU'])){
     $abonneManager = new abonneManager();
     $abonne = $abonneManager->getUtilisateurByMailU($_SESSION['mailU']);
 }
 
+// Récupération des objets Emprunts d'exemplaires et Emprunts de parutions (seulement les éléments non-archivés)
 $empruntManager = new EmpruntExemplaireManager();
 $emprunts = $empruntManager->getListActual();
 

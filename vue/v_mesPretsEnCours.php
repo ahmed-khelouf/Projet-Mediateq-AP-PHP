@@ -1,6 +1,7 @@
 <h2>Emprunts en cours pour l'abonné <?php echo $abonne->getNom()?>: </h2>
 <div class="container-fluid">
 <?php
+    // Pour chaque emprunt dans la liste, créer un affichage correspondant
     foreach($emprunts[$abonne->getId()] as $unEmprunt){
         ?>
         <div class="row">
@@ -35,6 +36,7 @@
 
     <?php
     }
+    // Pour chaque parution dans la liste, créer un affichage correspondant
     foreach($empruntsParution[$abonne->getId()] as $unEmprunt){
         ?>
         <div class="row">
