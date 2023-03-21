@@ -11,6 +11,7 @@ function controleurPrincipal($action) {
     $lesActions["accueil"] = $lesActions["rechercheSimple"] ;
     $lesActions["defaut"] = $lesActions["accueil"];
     $lesActions["mesPretsEnCours"] = "c_mesPretsEnCours.php";
+    $lesActions["mesPretsHistorique"] = "c_mesPretsHistorique.php";
     
 
     if (array_key_exists($action, $lesActions)) {
