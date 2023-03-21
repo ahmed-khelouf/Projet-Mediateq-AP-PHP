@@ -8,7 +8,7 @@ class Emprunt {
     private $prolongable;
     
     /**
-     * Constructeur de la classe Exemplaire
+     * Constructeur de la classe Emprunt
      * 
      * @param int $id
      * @param int $abonne
@@ -26,7 +26,7 @@ class Emprunt {
     }
 
     /**
-     * Accesseur de la propriété ISBN
+     * Accesseur de la propriété Id
      *
      * @return string
      */
@@ -35,7 +35,7 @@ class Emprunt {
     }
 
     /**
-     * Accesseur de la propriété ISBN
+     * Accesseur de la propriété Abonné
      *
      * @return string
      */
@@ -44,7 +44,7 @@ class Emprunt {
     }
 
     /**
-     * Accesseur de la propriété collection
+     * Accesseur de la propriété DateDébut
      *
      * @return string
      */
@@ -54,7 +54,7 @@ class Emprunt {
 
 
         /**
-     * Accesseur de la propriété collection
+     * Accesseur de la propriété DateFin
      *
      * @return string
      */
@@ -63,17 +63,12 @@ class Emprunt {
     }
 
             /**
-     * Accesseur de la propriété collection
+     * Accesseur de la propriété estProlongable
      *
      * @return string
      */
     public function peutProlonger() : int {
         return $this->prolongable;
     }
-
-    
-    // a completer getter/setter
-
-
 }
 ?>

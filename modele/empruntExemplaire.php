@@ -4,7 +4,7 @@ class EmpruntExemplaire extends Emprunt {
     private $exemplaire; 
     
     /**
-     * Constructeur de la classe Exemplaire
+     * Constructeur de la classe EmrpruntExemplaire
      * 
      * @param int $id
      * @param int $abonne
@@ -21,7 +21,7 @@ class EmpruntExemplaire extends Emprunt {
     }
 
     /**
-     * Accesseur de la propriété auteur
+     * Accesseur de la propriété Exemplaire
      *
      * @return string
      */

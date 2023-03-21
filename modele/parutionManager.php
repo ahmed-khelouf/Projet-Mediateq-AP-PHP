@@ -3,7 +3,7 @@
 class ParutionManager extends Manager
 {
         /**
-         * Renvoie un tableau associatif contenant l'ensemble des objets Reservation
+         * Renvoie un tableau associatif contenant l'ensemble des objets Parution
          *
          * @return array
          */

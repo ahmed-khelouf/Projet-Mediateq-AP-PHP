@@ -3,7 +3,7 @@
 class DocumentManager extends Manager
 {
     /**
-     * Renvoie un tableau associatif contenant l'ensemble des objets Etat
+     * Renvoie un tableau associatif contenant l'ensemble des objets Documents
      *
      * @return array
      */

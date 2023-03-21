@@ -30,7 +30,7 @@ class Exemplaire {
     
     // a completer getter/setter
         /**
-     * Accesseur de la propriété libelle de la propriété rayon
+     * Accesseur de la propriété libelle de la propriété Numero
      *
      * @return int
      */
@@ -39,7 +39,7 @@ class Exemplaire {
     }
 
         /**
-     * Accesseur de la propriété libelle de la propriété rayon
+     * Accesseur de la propriété libelle de la propriété Document
      *
      * @return Document
      */
@@ -57,7 +57,7 @@ class Exemplaire {
     }
 
         /**
-     * Accesseur de la propriété libelle de la propriété rayon
+     * Accesseur de la propriété libelle de la propriété Etat
      *
      * @return Etat
      */

@@ -3,7 +3,7 @@
 class EmpruntExemplaireManager extends Manager
 {
     /**
-     * Renvoie un tableau associatif contenant l'ensemble des objets Etat
+     * Renvoie un tableau associatif contenant l'ensemble des objets EmpruntExemplaire
      *
      * @return array
      */
@@ -21,14 +21,6 @@ class EmpruntExemplaireManager extends Manager
                 $lesExemplaires[$unExemplaire->getNumero()] = $unExemplaire;
             }
         }
-        /*
-        $DVDManager = new DvdManager();
-        $lesDvds = $DVDManager->getList();
-
-        $lesDocuments = array_merge($lesLivres,$lesDvds);*/
-
-        /*$exemplaireManager = new ExemplaireManager();
-        $lesExemplaires = $exemplaireManager->getList();*/
         
         $q = $this->getPDO()->prepare('SELECT id, idAbonne, numero, dateDebut, dateFin, prolongable FROM emprunt ');
         $q->execute();

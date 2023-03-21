@@ -35,7 +35,7 @@ class Parution {
     }
 
         /**
-     * Accesseur de la propriété numero
+     * Accesseur de la propriété Revue
      *
      * @return Revue
      */
@@ -62,17 +62,13 @@ class Parution {
     }
 
         /**
-     * Accesseur de la propriété photo
+     * Accesseur de la propriété Etat
      *
      * @return Etat
      */
     public function getEtat() : Etat {
         return $this->etat;
     }
-
-    
-    // a completer getter/setter
-
 
 }
 ?>
