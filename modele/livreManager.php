@@ -96,9 +96,6 @@ class LivreManager extends Manager
     }
 
    
-    
-
-
     /**
      * Renvoie un tableau associatif contenant l'ensemble des objets Livre dont la date d'achat date de moins de $nbJours jours
      *
@@ -118,5 +115,7 @@ class LivreManager extends Manager
         return $this->getLivresByListId($lesId);
 
     }
+
+    
 
 }

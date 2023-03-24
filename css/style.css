@@ -67,47 +67,35 @@ h2 {
 }
 
 
-/*  VUE RESERVATION*/
-.row .title{
-  margin-top:6px;
-  color: rgb(27, 176, 218);
-  padding-left: 12em;
+
+
+
+
+/* test */
+
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-.row .btn  {
-  margin-top:6px;
-  margin-left: 45em;
+th, td {
+  text-align: left;
+  padding: 8px;
+  border: 1px solid #ddd;
 }
 
-.row .trait-horizontal{
-order: none;
-border-top: 1px solid black;
-margin: 10px 0;
+th {
+  background-color: #f2f2f2;
 }
 
-
-.row .rangStatut {
-  padding-top: 1em;
-  padding-bottom: 30px;
-  display: inline;
+tr:nth-child(even) {
+  background-color: #f2f2f2;
 }
 
-.row .rangStatut p:nth-child(1){
-  color: rgb(24, 197, 53);
+img.revue {
+  width: 200px;
+  height: 300px;
 }
-
-.row .rangStatut p:nth-child(2){
-  color: rgb(200, 32, 32);
-}
-
-/* .rowR{
- 
-  padding-left: 45em;
-
-} */
-
-.trait-vertical{
-    border-left: 2px solid black;
-    height: auto;
-}
-

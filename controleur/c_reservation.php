@@ -34,7 +34,7 @@ if(isset($_POST['supr'])){
 }
 
 include "$racine/vue/header.php";
-include "$racine/vue/vueReservation.php";
+include "$racine/vue/v_reservation.php";
 include "$racine/vue/footer.php";
 
 ?>

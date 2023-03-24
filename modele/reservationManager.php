@@ -19,6 +19,8 @@ class ReservationManager extends Manager
                         $statutManager = new StatutManager();
                         $statuts = $statutManager->getList();
 
+                  
+
                         $q = $this->getPDO()->prepare('SELECT * FROM reservation');
                         $q->execute();
                         //  fetchAll(PDO::FETCH_ASSOC) est une méthode de l'objet PDOStatement qui permet de récupérer le résultat d'une requête SQL sous forme de tableau associatif. Chaque ligne du résultat est représentée par un tableau associatif dont les clés correspondent aux noms des colonnes de la table et les valeurs correspondent aux valeurs des champs de chaque ligne.

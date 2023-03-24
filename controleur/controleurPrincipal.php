@@ -3,15 +3,15 @@ function controleurPrincipal($action) {
     $lesActions = array();
     $lesActions["rechercheSimple"] = "c_rechercheSimple.php";
     $lesActions["rechercheAvancee"] = "c_rechercheAvancee.php";
-    $lesActions["reservation"] = "reservation.php";
+    $lesActions["reservation"] = "c_reservation.php";
     $lesActions["nouveautes"] = "c_nouveautes.php";
     $lesActions["faq"] = "c_faq.php";
-    $lesActions["connexion"] = "connexion.php";
-    $lesActions["deconnexion"] = "deconnexion.php";
+    $lesActions["connexion"] = "c_connexion.php";
+    $lesActions["deconnexion"] = "c_deconnexion.php";
     $lesActions["accueil"] = $lesActions["rechercheSimple"] ;
     $lesActions["defaut"] = $lesActions["accueil"];
     $lesActions["mesPretsEnCours"] = "c_mesPretsEnCours.php";
-    
+    $lesActions["revue"] = "c_revue.php";
 
     if (array_key_exists($action, $lesActions)) {
         return $lesActions[$action];
@@ -27,8 +27,7 @@ function chargerModeles($racine){
     require_once("$racine/modele/Livre.php");
     require_once("$racine/modele/Dvd.php");
     require_once("$racine/modele/Exemplaire.php");
-    require_once("$racine/modele/parution.php");
-    require_once("$racine/modele/parutionManager.php");
+    require_once("$racine/modele/Parution.php");
     require_once("$racine/modele/LivreManager.php");
     require_once("$racine/modele/DvdManager.php");
     require_once("$racine/modele/Etat.php");

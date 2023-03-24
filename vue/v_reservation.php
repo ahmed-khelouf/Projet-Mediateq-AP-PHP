@@ -48,7 +48,7 @@ if ($connexionManager->isLoggedOn()) { ?>
                                 </center>
                             </div>
                             <div class="modal-body">
-                                <p class="text-center">Etes-vous sure de vouloir la reservation <?= $reservation->getId() ?></p>
+                                <p class="text-center">Etes-vous sur de vouloir supprimer la reservation <?= $reservation->getId() ?></p>
                             </div>
                             <div class="modal-footer">
                                 <form method="POST" action="?action=reservation">

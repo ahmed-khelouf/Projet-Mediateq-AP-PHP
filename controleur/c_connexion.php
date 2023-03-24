@@ -18,7 +18,7 @@ if(isset($_SESSION['mailU'])){
     include "$racine/vue/v_accueil.php";
 }else{
     include "$racine/vue/header.php";
-    include "$racine/vue/vueConnexion.php";
+    include "$racine/vue/v_connexion.php";
     include "$racine/vue/footer.php";
 }
 
@@ -26,7 +26,7 @@ if(isset($_SESSION['mailU'])){
 // ATTENDRE QUE PAGE PROFIL -> JULIEN
 if ($connexionManager->isLoggedOn()){ // si l'utilisateur est connecté on redirige vers le controleur monProfil
     
-    include "$racine/controleur/reservation.php"; 
+    include "$racine/controleur/c_reservation.php"; 
         
         
     }
