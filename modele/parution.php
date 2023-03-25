@@ -70,14 +70,7 @@ class Parution {
         return $this->photo;
     }
 
-        /**
-     * Accesseur de la propriété Etat
-     *
-     * @return Etat
-     */
-    public function getEtat() : Etat {
-        return $this->etat;
-    }
+  
 
 }
 ?>

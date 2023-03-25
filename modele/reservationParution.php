@@ -1,75 +1,26 @@
 <?php
 
-class ReservationParution
+class ReservationParution extends Reservation
 {
-    private $idR;
-    private $idRevue;
-    private $idAbonne;
-    private $rang;
-    private $idStatut;
-    private $dateReservation;
+    private $revue;
     private $numeroParution;
 
     /**
      * construteur de la classe Reservation
      *
      * @param integer $id
-     * @param Revue $idRevue
-     * @param Abonne $idAbonne
-     * @param Statut $idStatut
+     * @param Revue $revue
+     * @param Abonne $abonne
+     * @param Statut $statut
      * @param integer $rang
      * @param string $dateReservation
      * @param string $numeroParution
      */
-    public function __construct(int $idR, Revue $idRevue, Abonne $idAbonne , int $rang , Statut $idStatut, string $dateReservation , string $numeroParution)
+    public function __construct(int $idR, Revue $revue, Abonne $abonne , int $rang , Statut $statut, string $dateReservation , string $numeroParution)
     {
-        $this->idR = $idR;
-        $this->idRevue = $idRevue;
-        $this->idAbonne = $idAbonne;
-        $this->rang = $rang;
-        $this->idStatut = $idStatut;
-        $this->dateReservation = $dateReservation;
+        parent::__construct($idR, $abonne, $rang, $statut, $dateReservation);
+        $this->revue = $revue;
         $this->numeroParution = $numeroParution;
-    }
-
-    /**
-     * Accesseur de la propriété idR
-     *
-     * @return integer
-     */
-    public function getId(): int
-    {
-        return $this->idR;
-    }
-
-    /**
-     * Accesseur de la propriété date
-     *
-     * @return string
-     */
-    public function getDate(): string
-    {
-        return $this->dateReservation;
-    }
-
-    /**
-     * Accesseur de la propriété idStatut
-     *
-     * @return Statut
-     */
-    public function getStatut(): Statut
-    {
-        return $this->idStatut;
-    }
-
-    /**
-     * Accesseur de la propriété rang
-     *
-     * @return integer
-     */
-    public function getRang(): int
-    {
-        return $this->rang;
     }
 
     /**
@@ -79,16 +30,7 @@ class ReservationParution
      */
     public function getRevue(): Revue
     {
-        return $this->idRevue;
-    }
-
-    /**
-     * Accesseur de la propriété idAbonne
-     * @return Abonne
-     */
-    public function getIdAbonne(): Abonne
-    {
-        return $this->idAbonne;
+        return $this->revue;
     }
 
     /**

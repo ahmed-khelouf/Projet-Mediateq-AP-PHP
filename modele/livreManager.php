@@ -50,15 +50,17 @@ class LivreManager extends Manager
     /**
      * Renvoie l'objet Livre dont l'id correspond à la valeur du parametre $id
      *
-     * @param integer $id
+     * @param string $id
      * @return void
      */
-    public function getLivreById(int $id) : Livre // récupère un objet Livre en fonction de son id
+    public function getLivreById(string $id) : Livre // récupère un objet Livre en fonction de son id
     {
         $catalogue = $this->getList();
-        if ($catalogue == null) return -1;
+        
         return $catalogue[$id];
     }
+
+    
 
     /**
      * Renvoie un tableau associatif contenant l'ensemble des objets Livre dont les identifiants appartiennent au tableau d'entier $listeId

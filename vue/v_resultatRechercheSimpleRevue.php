@@ -16,6 +16,7 @@
                             if ($uneRevue->getEmpruntable()) {
                                 $txt = "Cette revue est empruntable";
                             ?>
+                            <!-- redirection dans une page qui affiche les parutions de la revue en question -->
                                 <a href="index.php?action=revue&id=<?= $uneRevue->getId() ?>">Voir plus</a>
                             <?php
                             } else {

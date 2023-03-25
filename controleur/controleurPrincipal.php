@@ -11,7 +11,10 @@ function controleurPrincipal($action) {
     $lesActions["accueil"] = $lesActions["rechercheSimple"] ;
     $lesActions["defaut"] = $lesActions["accueil"];
     $lesActions["mesPretsEnCours"] = "c_mesPretsEnCours.php";
+    $lesActions["mesPretsHistorique"] = "c_mesPretsHistorique.php";
     $lesActions["revue"] = "c_revue.php";
+    $lesActions["livre"] = "c_livre.php";
+    $lesActions["dvd"] = "c_dvd.php";
 
     if (array_key_exists($action, $lesActions)) {
         return $lesActions[$action];
@@ -22,11 +25,12 @@ function controleurPrincipal($action) {
 
 
 function chargerModeles($racine){
+    
     require_once("$racine/modele/Manager.php");
     require_once("$racine/modele/Document.php");
+    require_once("$racine/modele/DocumentManager.php");
     require_once("$racine/modele/Livre.php");
     require_once("$racine/modele/Dvd.php");
-    require_once("$racine/modele/DvdManager.php");
     require_once("$racine/modele/Exemplaire.php");
     require_once("$racine/modele/Parution.php");
     require_once("$racine/modele/LivreManager.php");
@@ -39,8 +43,11 @@ function chargerModeles($racine){
     require_once("$racine/modele/RevueManager.php");
     require_once("$racine/modele/TypePublic.php");
     require_once("$racine/modele/TypePublicManager.php");
+    require_once("$racine/modele/reservation.php");
     require_once("$racine/modele/reservationParution.php");
     require_once("$racine/modele/reservationParutionManager.php");
+    require_once("$racine/modele/reservationExemplaire.php");
+    require_once("$racine/modele/reservationExemplaireManager.php");
     require_once("$racine/modele/abonne.php");
     require_once("$racine/modele/abonneManager.php");
     require_once("$racine/modele/connexionManager.php");
@@ -49,8 +56,10 @@ function chargerModeles($racine){
     require_once("$racine/modele/statut.php");
     require_once("$racine/modele/statutManager.php");
     require_once("$racine/modele/emprunt.php");
-    require_once("$racine/modele/empruntManager.php");
-
+    require_once("$racine/modele/empruntParution.php");
+    require_once("$racine/modele/empruntExemplaire.php");
+    require_once("$racine/modele/empruntParutionManager.php");
+    require_once("$racine/modele/empruntExemplaireManager.php");
 }
 ?>
 

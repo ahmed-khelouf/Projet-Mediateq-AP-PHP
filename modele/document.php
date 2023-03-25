@@ -11,13 +11,13 @@ class Document {
     /**
      * construteur de la classe Document
      *
-     * @param integer $id
+     * @param string $id
      * @param string $titre
      * @param string $image
      * @param boolean $commandeEnCours
      * @param TypePublic $public
      */
-    public function __construct(int $id, string $titre, string $image, bool $commandeEnCours, TypePublic $public)
+    public function __construct(string $id, string $titre, string $image, bool $commandeEnCours, TypePublic $public)
     {
         $this->id = $id;
         $this->titre = $titre;
@@ -30,9 +30,9 @@ class Document {
     /**
      * Accesseur de la propriété id
      *
-     * @return integer
+     * @return string
      */
-    public function getId() : int {
+    public function getId() : string {
         return $this->id;
     }
 
