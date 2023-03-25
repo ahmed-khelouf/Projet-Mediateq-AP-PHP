@@ -1,6 +1,6 @@
 <?php
 
-class Reservation
+class ReservationParution
 {
     private $idR;
     private $idRevue;

@@ -1,16 +1,16 @@
 <?php
-
-$connexionManager = new ConnexionManager;
-$reservationManager = new ReservationManager;
+// Récupération du nombre de réservations de l'abonné courant
 $reservation = $reservationManager->nombreReservation($unAbonne->getId());
 ?>
-
 <h1>Réservation de <?= $unAbonne->getNom() ?> ID numero <?= $unAbonne->getId() ?></h1>
 <h3>Nombre de réservation <?= $reservation ?></h3>
 <?php
+// Vérification de la connexion de l'utilisateurs
 if ($connexionManager->isLoggedOn()) { ?>
     <div class="">
+        <!-- Boucle pour afficher toutes les réservations de l'abonné courant -->
         <?php foreach ($reservations as $reservation) { ?>
+            <!-- Vérification si la réservation est celle de l'abonné courant -->
             <?php if ($unAbonne->getId() === $reservation->getIdAbonne()->getId()) { ?>
                 <tbody>
                     <div class="row">
@@ -38,6 +38,7 @@ if ($connexionManager->isLoggedOn()) { ?>
                         </div>
                     </div>
                 </tbody>
+                <!-- Modal pour confirmer la suppression de la réservation -->
                 <div class="modal fade" id="delete_<?= $reservation->getId() ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -52,15 +53,14 @@ if ($connexionManager->isLoggedOn()) { ?>
                             </div>
                             <div class="modal-footer">
                                 <form method="POST" action="?action=reservation">
+                                    <!-- les champs cachés pour envoyer les données nécessaires à la suppression -->
                                     <input type="hidden" class="form-control" name="idR" value="<?= $reservation->getId() ?>">
-
                                     <input type="hidden" class="form-control" name="id" value="<?= $reservation->getRevue()->getId() ?>">
-
                                     <input type="hidden" class="form-control" name="rang" value="<?= $reservation->getRang() ?> ">
-
                                     <input type="hidden" class="form-control" name="numeroParution" value="<?= $reservation->getNumeroParution() ?> ">
-
+                                    <!-- Bouton pour annuler la suppression -->
                                     <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Annuler</button>
+                                    <!-- Bouton pour confirmer la suppression -->
                                     <button type="submit" name="supr" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Oui</a>
                                 </form>
                             </div>

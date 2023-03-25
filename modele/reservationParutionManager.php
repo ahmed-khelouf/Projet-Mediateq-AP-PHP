@@ -1,6 +1,6 @@
 <?php
 
-class ReservationManager extends Manager
+class ReservationParutionManager extends Manager
 {
         /**
          * Renvoie un tableau associatif contenant l'ensemble des objets Reservation
@@ -19,9 +19,7 @@ class ReservationManager extends Manager
                         $statutManager = new StatutManager();
                         $statuts = $statutManager->getList();
 
-                  
-
-                        $q = $this->getPDO()->prepare('SELECT * FROM reservation');
+                        $q = $this->getPDO()->prepare('SELECT * FROM reservation order by dateReservation desc');
                         $q->execute();
                         //  fetchAll(PDO::FETCH_ASSOC) est une méthode de l'objet PDOStatement qui permet de récupérer le résultat d'une requête SQL sous forme de tableau associatif. Chaque ligne du résultat est représentée par un tableau associatif dont les clés correspondent aux noms des colonnes de la table et les valeurs correspondent aux valeurs des champs de chaque ligne.
                         $r1 = $q->fetchAll(PDO::FETCH_ASSOC);
@@ -30,7 +28,7 @@ class ReservationManager extends Manager
                                 $revue = $revues[$uneReservation['idRevue']];
                                 $abonne = $abonnes[$uneReservation['idAbonne']];
                                 $statut = $statuts[$uneReservation['idStatut']];
-                                $lesReservations[$uneReservation['idR']] = new Reservation($uneReservation['idR'], $revue, $abonne, $uneReservation['rang'], $statut, $uneReservation['dateReservation'], $uneReservation['numeroParution']);
+                                $lesReservations[$uneReservation['idR']] = new ReservationParution($uneReservation['idR'], $revue, $abonne, $uneReservation['rang'], $statut, $uneReservation['dateReservation'], $uneReservation['numeroParution']);
                         }
                         return $lesReservations;
                 } catch (PDOException $e) {
@@ -191,3 +189,4 @@ class ReservationManager extends Manager
                 }
         }
 }
+?>
