@@ -56,6 +56,7 @@ class LivreManager extends Manager
     public function getLivreById(int $id) : Livre // récupère un objet Livre en fonction de son id
     {
         $catalogue = $this->getList();
+        if ($catalogue == null) return -1;
         return $catalogue[$id];
     }
 

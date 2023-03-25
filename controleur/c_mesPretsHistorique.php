@@ -13,14 +13,14 @@ if(isset($_SESSION['mailU'])){
     $abonne = $abonneManager->getUtilisateurByMailU($_SESSION['mailU']);
 }
 
-// Récupération des objets Emprunts d'exemplaires et Emprunts de parutions (seulement les éléments non-archivés)
+// Récupération des objets Emprunts d'exemplaires et Emprunts de parutions
 $empruntManager = new EmpruntExemplaireManager();
-$emprunts = $empruntManager->getListActual();
+$emprunts = $empruntManager->getList();
 
 $empruntParutionManager = new EmpruntParutionManager();
-$empruntsParution = $empruntParutionManager->getListActual();
+$empruntsParution = $empruntParutionManager->getList();
 
-array_push($vues, "$racine/vue/v_mesPretsEnCours.php");
+array_push($vues, "$racine/vue/v_mesPretsHistorique.php");
 
 // appel du script de vue qui permet de gerer l'affichage des donnees
 include "$racine/vue/header.php";

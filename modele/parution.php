@@ -16,7 +16,7 @@ class Parution {
      * @param string $photo
      * @param Etat $etat
      */
-    public function __construct(string $numero, Revue $revue, string $dateParution, string $photo, Etat $etat)
+    public function __construct(int $numero, Revue $revue, string $dateParution, string $photo, Etat $etat)
     {
         $this->numero = $numero;
         $this->revue = $revue;
@@ -32,6 +32,15 @@ class Parution {
      */
     public function getNumero() : int {
         return $this->numero;
+    }
+
+        /**
+     * Accesseur de la propriété Revue
+     *
+     * @return Revue
+     */
+    public function getRevue() : Revue {
+        return $this->revue;
     }
 
     /**
@@ -61,12 +70,14 @@ class Parution {
         return $this->photo;
     }
 
-
-    public function getRevue() : Revue {
-        return $this->revue;}
-    
-    // a completer getter/setter
-
+        /**
+     * Accesseur de la propriété Etat
+     *
+     * @return Etat
+     */
+    public function getEtat() : Etat {
+        return $this->etat;
+    }
 
 }
 ?>
