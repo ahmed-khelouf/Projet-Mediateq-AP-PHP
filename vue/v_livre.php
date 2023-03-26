@@ -58,11 +58,13 @@
                                             <p> Vous avez le rang <strong><?= $reservations + 1 ?> </strong>dans la liste des abonnées qui ont réservé ce document</p>
                                         </div>
                                         <div class="col-sm-10">
-                                            <!-- les champs cachés pour envoyer les données nécessaires à la ajout -->
-                                            <input type="hidden" class="form-control" name="rang" value="<?= $reservations + 1 ?> ">
-                                            <input type="hidden" class="form-control" name="idDoc" value="<?= $unLivre->getId() ?> ">
-                                            <input type="hidden" class="form-control" name="numeroExemplaire" value="<?= $unExemplaire->getNumero() ?>">
-                                            <input type="hidden" class="form-control" name="idAbonne" value="<?= $abo->getId() ?>">
+                                            <?php if ($connexionManager->isLoggedOn()) { ?>
+                                                <!-- les champs cachés pour envoyer les données nécessaires à la ajout -->
+                                                <input type="hidden" class="form-control" name="rang" value="<?= $reservations + 1 ?> ">
+                                                <input type="hidden" class="form-control" name="idDoc" value="<?= $unLivre->getId() ?> ">
+                                                <input type="hidden" class="form-control" name="numeroExemplaire" value="<?= $unExemplaire->getNumero() ?>">
+                                                <input type="hidden" class="form-control" name="idAbonne" value="<?= $abo->getId() ?>">
+                                            <?php } ?>
                                         </div>
                                         <div class="modal-footer">
                                             <!-- Bouton pour annuler la réservation -->

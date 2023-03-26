@@ -44,6 +44,7 @@ function chargerModeles($racine){
     require_once("$racine/modele/TypePublic.php");
     require_once("$racine/modele/TypePublicManager.php");
     require_once("$racine/modele/reservation.php");
+    require_once("$racine/modele/reservationManager.php");
     require_once("$racine/modele/reservationParution.php");
     require_once("$racine/modele/reservationParutionManager.php");
     require_once("$racine/modele/reservationExemplaire.php");

@@ -5,7 +5,12 @@ $reservationsParutions = $reservationParutionManager->getList();
 
 //Création d'un objet manager de reservationExemplaire
 $reservationExemplaireManager = new ReservationExemplaireManager(); 
-$reservationsExemplaires = $reservationExemplaireManager->getList();
+$reservationsExemplairesLivres = $reservationExemplaireManager->getListLivres();
+$reservationsExemplairesDVD = $reservationExemplaireManager->getListDVD();
+
+// Création d'un objet manager de reservation
+$reservationManager = new ReservationManager();
+
 
 //Création d'un objet manager de livre
 $livreManager = new LivreManager();
@@ -52,7 +57,7 @@ if(isset($_POST['supr'])){
 }
 
 //Permet d'ajouter une nouvelle réservation de parution
-if(isset($_POST['add'])){
+if(isset($_POST['addRevue'])){
     $idRevue = $_POST['idRevue'];
     $idAbonne = $_POST['idAbonne'];
     $rang = $_POST['rang'];
@@ -75,5 +80,3 @@ if(isset($_POST['supr'])){
 include "$racine/vue/header.php";
 include "$racine/vue/v_reservation.php";
 include "$racine/vue/footer.php";
-
-?>

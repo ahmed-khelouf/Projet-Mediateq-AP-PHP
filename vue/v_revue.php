@@ -61,17 +61,19 @@
                                             <p> Vous avez le rang <strong><?= $reservations + 1 ?> </strong>dans la liste des abonnées qui ont réservé ce document</p>
                                         </div>
                                         <div class="col-sm-10">
-                                            <!-- les champs cachés pour envoyer les données nécessaires à la ajout -->
-                                            <input type="hidden" class="form-control" name="rang" value="<?= $reservations + 1 ?> ">
-                                            <input type="hidden" class="form-control" name="idRevue" value="<?= $uneRevue->getId() ?> ">
-                                            <input type="hidden" class="form-control" name="numeroParution" value="<?= $unNumero->getNumero() ?>">
-                                            <input type="hidden" class="form-control" name="idAbonne" value="<?= $abo->getId() ?>">
+                                            <?php if ($connexionManager->isLoggedOn()) { ?>
+                                                <!-- les champs cachés pour envoyer les données nécessaires à la ajout -->
+                                                <input type="hidden" class="form-control" name="rang" value="<?= $reservations + 1 ?> ">
+                                                <input type="hidden" class="form-control" name="idRevue" value="<?= $uneRevue->getId() ?> ">
+                                                <input type="hidden" class="form-control" name="numeroParution" value="<?= $unNumero->getNumero() ?>">
+                                                <input type="hidden" class="form-control" name="idAbonne" value="<?= $abo->getId() ?>">
+                                            <?php } ?>
                                         </div>
                                         <div class="modal-footer">
                                             <!-- Bouton pour annuler la réservation -->
                                             <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Annuler la réservation</button>
                                             <!-- Bouton pour confirmer la réservation -->
-                                            <button type="submit" name="add" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> CONFIRMER</a>
+                                            <button type="submit" name="addRevue" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> CONFIRMER</a>
                                             </button>
                                         </div>
                                     </form>
