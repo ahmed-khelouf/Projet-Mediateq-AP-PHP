@@ -40,6 +40,21 @@ class abonneManager extends Manager
         
     }
 
+    function updateMdp($id, $mdpU) {
+	    try {
+		// $mdpHash = password_hash($mdpU, PASSWORD_DEFAULT);
+		$req = $this->getPDO()->prepare('UPDATE abonné SET mdpU = :mdpU WHERE id = :id');
+		$req->bindParam(':id', $id, PDO::PARAM_INT);
+		$req->bindParam(':mdpU', $mdpU, PDO::PARAM_STR);
+		$resultat = $req->execute();
+		return $resultat;
+	    } catch (PDOException $e) {
+		print "Erreur !: " . $e->getMessage();
+		die();
+        }
+	}	
+
+
     function recupid() {
 
         $ret = false;
@@ -57,19 +72,5 @@ class abonneManager extends Manager
 
 }
 
-// function updateMdp($id, $mdpU) {
-// 	try {
-// 		$cnx = getPDO();
-// 		$mdpHash = password_hash($mdpU, PASSWORD_DEFAULT);
-// 		$req = $cnx->prepare('UPDATE abonné SET mdpU = :mdpHash WHERE id = :id');
-// 		$req->bindParam(':id', $id, PDO::PARAM_INT);
-// 		$req->bindParam(':mdpHash', $mdpHash, PDO::PARAM_STR);
-// 		$resultat = $req->execute();
-// 		return $resultat;
-// 	} catch (PDOException $e) {
-// 		print "Erreur !: " . $e->getMessage();
-// 		die();
-// 	}	
-// }
 
 

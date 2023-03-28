@@ -8,9 +8,9 @@ if(isset($_SESSION['mailU'])) {
 }
 
 // Si le formulaire de modification de mot de passe est soumis
-if(isset($_POST['id']) && isset($_POST['mdpU'])) {
-	$id = $_POST['id'];
-	$mdpU = $_POST['mdpU'];
+	if(isset($_POST['id']) && isset($_POST['mdpU'])) {
+		$id = $_POST['id'];
+		$mdpU = $_POST['mdpU'];
 	
 
 	// Mettre à jour le mot de passe de l'utilisateur
