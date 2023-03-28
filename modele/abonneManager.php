@@ -11,12 +11,17 @@ class abonneManager extends Manager
       */
     public function getUtilisateurByMailU($mailU) : ?Abonne
     {
+
+        $typeAbonnementManager = new typeAbonnementManager();
+        $types = $typeAbonnementManager->getList();
+
         $q = $this->getPDO()->prepare('SELECT * FROM abonné where mailU=:mailU');
         $q->bindParam(':mailU',  $mailU, PDO::PARAM_STR);
         $q->execute();
         if($q->rowCount()==1){
             $user = $q->fetch(PDO::FETCH_ASSOC);
-        $unAbonnee = new Abonne((int)$user['id'], $user['nom'] , $user['prenom'] , $user['dateNaissance'] , $user['adresse'] , $user['numTel'] , $user['finAbonnement'] , $user['mdpU'] , $user['mailU']); 
+            $type = $types[$user['typeAbonnement']];
+        $unAbonnee = new Abonne((int)$user['id'], $user['nom'] , $user['prenom'] , $user['dateNaissance'] , $user['adresse'] , $user['numTel'] , $user['finAbonnement'] , $user['mdpU'] , $user['mailU'], $type); 
         
         return $unAbonnee;
         }
@@ -27,6 +32,9 @@ class abonneManager extends Manager
     public function getList() : array 
     {
 
+        $typeAbonnementManager = new typeAbonnementManager();
+        $types = $typeAbonnementManager->getList();
+        
         $q = $this->getPDO()->prepare('SELECT * FROM abonné');
         $q->execute();
         $r1 = $q->fetchAll(PDO::FETCH_ASSOC);
@@ -34,7 +42,8 @@ class abonneManager extends Manager
         $lesAbonnees = array();
         foreach($r1 as $user)
         {
-            $lesAbonnees[$user['id']] = new Abonne((int)$user['id'], $user['nom'] , $user['prenom'] , $user['dateNaissance'] , $user['adresse'] , $user['numTel'] , $user['typeAbonnement'] , $user['finAbonnement'] , $user['mdpU'] , $user['mailU']); 
+            $type = $types[$user['typeAbonnement']];
+            $lesAbonnees[$user['id']] = new Abonne((int)$user['id'], $user['nom'] , $user['prenom'] , $user['dateNaissance'] , $user['adresse'] , $user['numTel'] , $user['finAbonnement'] , $user['mdpU'] , $user['mailU'], $type); 
         }
         return $lesAbonnees;
         
@@ -52,7 +61,29 @@ class abonneManager extends Manager
 		print "Erreur !: " . $e->getMessage();
 		die();
         }
-	}	
+	}
+
+    function insertAbo($nom, $prenom, $dateNaiss, $adresse, $numTel, $finAbo, $mdpU, $mailU, $typeAbonnement) {
+        try {
+            $mdpCrypte = password_hash($mdpU, PASSWORD_DEFAULT);
+            $req = $this->getPDO()->prepare('INSERT INTO abonné (nom, prenom, dateNaissance, adresse, numTel, typeAbonnement, finAbonnement, mdpU, mailU) VALUES (:nom, :prenom, :dateNaissance, :adresse, :numTel, :typeAbonnement, :finAbonnement, :mdpU, :mailU)');
+            $req->bindParam(':nom', $nom, PDO::PARAM_STR);
+            $req->bindParam(':prenom', $prenom, PDO::PARAM_STR);
+            $req->bindParam(':dateNaissance', $dateNaiss, PDO::PARAM_STR);
+            $req->bindParam(':adresse', $adresse, PDO::PARAM_STR);
+            $req->bindParam(':numTel', $numTel, PDO::PARAM_STR);
+            $req->bindParam(':typeAbonnement', $typeAbonnement, PDO::PARAM_STR);
+            $req->bindParam(':finAbonnement', $finAbo, PDO::PARAM_STR);
+            $req->bindParam(':mdpU', $mdpCrypte, PDO::PARAM_STR);
+            $req->bindParam(':mailU', $mailU, PDO::PARAM_STR);
+            $resultat = $req->execute();
+            return $resultat;
+        } catch (PDOException $e) {
+            print "Erreur !: " . $e->getMessage();
+            die();
+        }
+    }
+    
 
 
     function recupid() {

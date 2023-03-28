@@ -35,11 +35,12 @@
 		<table  id="myTable" class="table table-bordered table-striped">
 			<thead>
 				<th>Expire le :</th>
-				<th>TypeAbonnement</th>
+				<th>TypeAbonnement </th>
 			</thead>
 			<tbody>
 				<tr>
 					<td><?= $unAbonne->getFinAbonnement() ?></td>
+					<td><?= $unAbonne->getTypeAbonnement()->getLibelle()?></td>
                     
 				</tr>
 			</tbody>
@@ -84,7 +85,43 @@
 	<input type="hidden" name="id" value="<?= $unAbonne->getId() ?>">
 	<input type="submit" value="Modifier mon mot de passe">
 	</form>
-			
+
+
+	<h2>Inscription</h2>
+	<form method="post" action="./?action=monDossier">
+    <label for="nom">Nom :</label>
+    <input type="text" name="nom" required><br>
+
+    <label for="prenom">Prénom :</label>
+    <input type="text" name="prenom" required><br>
+
+    <label for="dateNaiss">Date de naissance :</label>
+    <input type="text" name="dateNaissance" required><br>
+
+    <label for="adresse">Adresse :</label>
+    <input type="text" name="adresse" required><br>
+
+    <label for="numTel">Numéro de téléphone :</label>
+    <input type="tel" name="numTel" required><br>
+
+    <label for="finAbo">Fin de l'abonnement :</label>
+    <input type="text" name="finAbonnement" required><br>
+
+    <label for="mdpU">Mot de passe :</label>
+    <input type="password" name="mdpU" required><br>
+
+    <label for="mailU">Adresse e-mail :</label>
+    <input type="email" name="mailU" required><br>
+
+    <label for="typeAbonnement">Type d'abonnement :</label>
+    <select name="typeAbonnement" required>
+        <option value="1">1</option>
+        <option value="2">2</option>
+    </select><br>
+
+    <input type="submit" value="Valider">
+</form>
+
 <?php
 
 ?>

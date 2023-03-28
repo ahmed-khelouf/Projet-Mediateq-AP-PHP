@@ -3,28 +3,52 @@
 class ConnexionManager extends Manager
 {
     function login($mailU, $mdpU)
-    {
-        if (!isset($_SESSION)) {
-            session_start();
+{
+    if (!isset($_SESSION)) {
+        session_start();
+    }
+    try {
+        $abonneManager = new abonneManager();
+        $util = $abonneManager->getUtilisateurByMailU($mailU);
+        if (!is_null($util)) {
+            $mdpBD = $util->getMdpU();
+            if (password_verify($mdpU, $mdpBD)) {
+                // le mot de passe est correct
+                $_SESSION["mailU"] = $mailU;
+                $_SESSION["mdpU"] = $mdpBD;
+            } else {
+                // le mot de passe est incorrect
+                echo "Mot de passe ou identifiant incorrect";
+            }
+        } else {
+            // l'utilisateur n'existe pas en base de données
+            echo "Utilisateur inexistant";
         }
+    } catch (Exception $e) {
+        echo "Erreur lors de la connexion : " . $e->getMessage();
+    }
+}
+
+
+    function comparePassword($mailU, $mdpU) {
         try {
             $abonneManager = new abonneManager();
             $util = $abonneManager->getUtilisateurByMailU($mailU);
             if (!is_null($util)) {
                 $mdpBD = $util->getMdpU();
-                //Penser a hasher le mdp avant de le comparer pour plus tard !!!
-                if (trim($mdpBD) == trim($mdpU)) {
-                    // if (trim($mdpBD) == trim(crypt($mdpU, $mdpBD))) {
-
-                    // le mot de passe est celui de l'utilisateur dans la base de donnees
-                    $_SESSION["mailU"] = $mailU;
-                    $_SESSION["mdpU"] = $mdpBD;
+                if (password_verify($mdpU, $mdpBD)) {
+                    return true;
+                } else {
+                    return false;
                 }
+            } else {
+                return false;
             }
         } catch (Exception $e) {
-            echo "Erreur lors de la connexion : " . $e->getMessage();
+            echo "Erreur : " . $e->getMessage();
         }
     }
+    
 
     function logout()
     {

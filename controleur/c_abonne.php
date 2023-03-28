@@ -19,6 +19,19 @@ if(isset($_SESSION['mailU'])) {
 	// Rediriger l'utilisateur vers la page de connexion
 }
 
+if(isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['dateNaissance']) && isset($_POST['adresse']) && isset($_POST['numTel']) && isset($_POST['typeAbonnement']) && isset($_POST['finAbonnement']) && isset($_POST['mdpU']) && isset($_POST['mailU'])) {
+	$nom = $_POST['nom'];
+	$prenom = $_POST['prenom'];
+	$dateNaiss = $_POST['dateNaissance'];
+	$adresse = $_POST['adresse'];
+	$numTel = $_POST['numTel'];
+	$finAbo = $_POST['finAbonnement'];
+	$mdpU = $_POST['mdpU'];
+	$mailU = $_POST['mailU'];
+	$typeAbonnement = $_POST['typeAbonnement'];
+
+	$abonneManager->insertAbo($nom, $prenom, $dateNaiss, $adresse, $numTel, $finAbo, $mdpU, $mailU, $typeAbonnement);
+}
 // Inclusion de la vue
 include "$racine/vue/header.php";
 include "$racine/vue/v_monDossier.php";

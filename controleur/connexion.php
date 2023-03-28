@@ -26,7 +26,7 @@ if(isset($_SESSION['mailU'])){
 // ATTENDRE QUE PAGE PROFIL -> JULIEN
 if ($connexionManager->isLoggedOn()){ // si l'utilisateur est connecté on redirige vers le controleur monProfil
     
-    include "$racine/controleur/reservation.php"; 
+    include "$racine/controleur/c_abonne.php"; 
         
         
     }

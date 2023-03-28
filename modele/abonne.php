@@ -11,6 +11,7 @@ class Abonne  {
     private $finAbonnement;
     private $mdpU;
     private $mailU;
+    private $typeAbonnement;
 
 
     /**
@@ -29,7 +30,7 @@ class Abonne  {
      */
 
 
-    public function __construct(int $id, string $nom, string $prenom , string $dateNaissance , string $adresse , string $numTel , string $finAbonnement , string $mdpU , string $mailU)
+    public function __construct(int $id, string $nom, string $prenom , string $dateNaissance , string $adresse , string $numTel , string $finAbonnement , string $mdpU , string $mailU,TypeAbonnement $typeAbonnement)
     {
         $this->id = $id;
         $this->nom = $nom;
@@ -40,6 +41,8 @@ class Abonne  {
         $this->finAbonnement = $finAbonnement;
         $this->mdpU = $mdpU;
         $this->mailU = $mailU;
+        $this->typeAbonnement = $typeAbonnement;
+
     }
 
     /**
@@ -96,8 +99,17 @@ class Abonne  {
         return $this->numTel;
     }
 
+     /**
+     * Accesseur de la propriété typeabonnement
+     *
+     * @return TypeAbonnement
+     */
+    public function getTypeAbonnement() : TypeAbonnement {
+        return $this->typeAbonnement;
+    }
+
     /**
-     * Accesseur de la propriété typeAbonnement
+     * Accesseur de la propriété finAbonnement
      *
      * @return string
      */
@@ -181,6 +193,16 @@ class Abonne  {
      */
     public function setNumTel(int $numTel): void {
         $this->numTel = $numTel;
+    }
+
+    /**
+     * Mutateur de la propriété typeAbonnement
+     *
+     * @param string $typeAbonnement
+     * @return void
+     */
+    public function setTypeAbonnement(TypeAbonnement $typeAbonnement): void {
+        $this->$typeAbonnement = $typeAbonnement;
     }
 
     /**
