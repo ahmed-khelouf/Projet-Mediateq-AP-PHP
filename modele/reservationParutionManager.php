@@ -115,7 +115,7 @@ class ReservationParutionManager extends Manager
                         } else {
                                 $idStatut = 1;
                         }
-                        $q = $this->getPDO()->prepare('INSERT INTO reservation (idAbonne, rang, idStatut, dateReservation) VALUES (:idAbonne, :rang, :idStatut, CURRENT_DATE); INSERT INTO reservationParution (idR, idRevue, numeroParution) VALUES (LAST_INSERT_ID(), :idRevue, :numeroParution)');
+                        $q = $this->getPDO()->prepare('INSERT INTO reservation (idAbonne, rang, idStatut, dateReservation) VALUES (:idAbonne, :rang, :idStatut, CURRENT_TIMESTAMP()); INSERT INTO reservationParution (idR, idRevue, numeroParution) VALUES (LAST_INSERT_ID(), :idRevue, :numeroParution)');
                         $q->bindParam(':idAbonne', $idAbonne, PDO::PARAM_INT);
                         $q->bindParam(':rang', $rang, PDO::PARAM_INT);
                         $q->bindParam(':idStatut', $idStatut, PDO::PARAM_INT);

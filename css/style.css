@@ -32,7 +32,7 @@ footer {
 
 div.card{
     position : relative;
-    background-color : cornsilk;
+    background-color : #f7f7f7;
     box-shadow: 1px 1px 4px #bbb;
 }
 
@@ -69,33 +69,54 @@ h2 {
 
 
 
+/* AFFICHAGE REVUE */
 
-
-/* test */
-
-
-table {
-  border-collapse: collapse;
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
+.revuedetails {
+  display: flex;
+  align-items: center;
+  margin: 20px;
 }
 
-th, td {
-  text-align: left;
-  padding: 8px;
-  border: 1px solid #ddd;
+.revuedetails img {
+  width: 150px;
+  margin-right: 20px;
 }
 
-th {
-  background-color: #f2f2f2;
+.card-body img {
+  margin-bottom: 10px;
 }
 
-tr:nth-child(even) {
-  background-color: #f2f2f2;
+.card-title strong {
+  text-decoration: underline;
 }
 
-img.revue {
-  width: 200px;
-  height: 300px;
+
+.card-body ul li {
+  line-height: 2em;
 }
+
+
+.card-text.numero {
+  color: #3366CC; /* bleu */
+  text-shadow: 1px 1px #B3C7E7; /* surbrillance bleue */
+  border: 1px solid #B3C7E7; /* bordure bleue */
+}
+
+.card-text.date {
+  color: #8BC34A; /* vert */
+  text-shadow: 1px 1px #D4EDDA; /* surbrillance verte */
+  border: 1px solid #D4EDDA; /* bordure verte */
+}
+
+.card-text.etat {
+  color: #FF9800; /* orange */
+  text-shadow: 1px 1px #FFE5B4; /* surbrillance orange */
+  border: 1px solid #FFE5B4; /* bordure orange */
+}
+
+.card-text.libelle {
+  color: #9C27B0; /* violet */
+  text-shadow: 1px 1px #E8C2E7; /* surbrillance violette */
+  border: 1px solid #E8C2E7; /* bordure violette */
+}
+

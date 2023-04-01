@@ -157,7 +157,7 @@ class ReservationExemplaireManager extends Manager
                         } else {
                                 $idStatut = 1;
                         }
-                        $q = $this->getPDO()->prepare('INSERT INTO reservation (idAbonne, rang, idStatut, dateReservation) VALUES (:idAbonne, :rang, :idStatut, CURRENT_DATE); INSERT INTO reservationExemplaire (idR, idDoc, numeroExemplaire) VALUES (LAST_INSERT_ID(), :idDoc, :numeroExemplaire)');
+                        $q = $this->getPDO()->prepare('INSERT INTO reservation (idAbonne, rang, idStatut, dateReservation) VALUES (:idAbonne, :rang, :idStatut, CURRENT_TIMESTAMP()); INSERT INTO reservationExemplaire (idR, idDoc, numeroExemplaire) VALUES (LAST_INSERT_ID(), :idDoc, :numeroExemplaire)');
                         $q->bindParam(':idAbonne', $idAbonne, PDO::PARAM_INT);
                         $q->bindParam(':rang', $rang, PDO::PARAM_INT);
                         $q->bindParam(':idStatut', $idStatut, PDO::PARAM_INT);
@@ -218,4 +218,3 @@ class ReservationExemplaireManager extends Manager
                 }
         }
 }
-?>

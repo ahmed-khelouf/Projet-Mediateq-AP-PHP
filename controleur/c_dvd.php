@@ -1,5 +1,7 @@
 <?php
 
+$titre = "DVD - Mediateq";
+
 // Création d'un objet manager de abonne
 $abonneManager = new abonneManager;
 $abo = $abonneManager->getList();

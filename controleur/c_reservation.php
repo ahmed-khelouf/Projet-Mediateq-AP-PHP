@@ -1,4 +1,6 @@
 <?php
+$titre = "Réservation - Mediateq";
+
 //Création d'un objet manager de reservationParution
 $reservationParutionManager = new ReservationParutionManager(); 
 $reservationsParutions = $reservationParutionManager->getList();

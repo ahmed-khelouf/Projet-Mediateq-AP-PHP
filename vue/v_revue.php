@@ -1,88 +1,114 @@
-<div class="revuedetails">
-    <h2> <?= $uneRevue->getTitre() ?>:</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Couverture</th>
-                <th>Titre de la revue</th>
-                <th>Numéro de parution</th>
-                <th>Date de parution</th>
-                <th>Etat</th>
-                <!-- Vérifier si l'utilisateur est connecté pour afficher la partie reserver du tableau  -->
-                <?php if ($connexionManager->isLoggedOn()) { ?>
-                    <th>Réserver</th>
-                <?php  } ?>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Boucle pour parcourir tous les parution (numero) de la revue -->
-            <?php foreach ($uneRevue->getLesNumeros() as $unNumero) { ?>
-                <tr>
-                    <td><img class="revue" src="images/Revues/<?= $unNumero->getPhoto() ?>.jpg"></td>
-                    <td><?= $uneRevue->getTitre() ?></td>
-                    <td><?= $unNumero->getNumero() ?></td>
-                    <td><?= $unNumero->getDateParution() ?></td>
-                    <td><?= $unNumero->getEtat()->getLibelle() ?></td>
-                    <?php
-                    if ($connexionManager->isLoggedOn()) {
-                        //Vérifier si l'utilisateur a déjà réservé ce document
-                        $abo = $abonneManager->getUtilisateurByMailU($_SESSION['mailU']);
-                        $reservation = $reservationManager->AfficherBouton($abo->getId(), $uneRevue->getId(), $unNumero->getNumero());
-                    ?>
-                        <td>
-                            <!-- Afficher le bouton "Réserver" si l'utilisateur n'a pas encore réservé ce document est qu'il est connecté -->
-                            <?php if ($reservation) { ?>
-                                <a href="#addnew<?= $uneRevue->getId() ?><?= $unNumero->getNumero() ?>" data-toggle="modal" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> RESERVER</a></br>
-                            <?php } else {
-                                // Afficher un message si l'utilisateur a déjà réservé ce document
-                                echo "Vous avez déjà réservé ce document";
-                            } ?>
-                        </td>
-                    <?php } ?>
-                </tr>
-                <!-- Modal pour ajouter une nouvelle réservation -->
-                <div class="modal fade" id="addnew<?= $uneRevue->getId() ?><?= $unNumero->getNumero() ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <center>
-                                    <h4 class="modal-title" id="myModalLabel">Est-ce bien le doument que vous désirez réserver : <strong><?= $uneRevue->getTitre() ?> numero : <?= $unNumero->getNumero() ?></strong></h4>
-                                </center>
-                            </div>
-                            <div class="modal-body">
-                                <div class="container-fluid">
-                                    <form method="POST" action="?action=reservation">
-                                        <div class="row form-group">
-                                            <?php
-                                            // Récupérer le rangMax de l'utilisateur dans la liste des abonnés qui a réservé ce document (revue + numéro) 
-                                            $reservations = $reservationManager->recupMaxRang($uneRevue->getId(), $unNumero->getNumero());
-                                            ?>
-                                            <p> Vous avez le rang <strong><?= $reservations + 1 ?> </strong>dans la liste des abonnées qui ont réservé ce document</p>
-                                        </div>
-                                        <div class="col-sm-10">
-                                            <?php if ($connexionManager->isLoggedOn()) { ?>
-                                                <!-- les champs cachés pour envoyer les données nécessaires à la ajout -->
-                                                <input type="hidden" class="form-control" name="rang" value="<?= $reservations + 1 ?> ">
-                                                <input type="hidden" class="form-control" name="idRevue" value="<?= $uneRevue->getId() ?> ">
-                                                <input type="hidden" class="form-control" name="numeroParution" value="<?= $unNumero->getNumero() ?>">
-                                                <input type="hidden" class="form-control" name="idAbonne" value="<?= $abo->getId() ?>">
-                                            <?php } ?>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <!-- Bouton pour annuler la réservation -->
-                                            <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Annuler la réservation</button>
-                                            <!-- Bouton pour confirmer la réservation -->
-                                            <button type="submit" name="addRevue" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> CONFIRMER</a>
-                                            </button>
-                                        </div>
-                                    </form>
+<div class="revuedetails bg-light">
+    <div class="row">
+        <?php foreach ($uneRevue->getLesNumeros() as $unNumero) { ?>
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <!-- Section de l'image de couverture et du titre de la revue -->
+                    <div class="card-body text-center">
+                        <img class="img-fluid mx-auto d-block" src="images/Revues/<?= $unNumero->getPhoto() ?>.jpg" alt="Couverture">
+                        <h5 class="card-title"><strong><?= $uneRevue->getTitre() ?></strong></h5>
+                    </div>
+                    <!-- Section des informations du numéro de la revue -->
+                    <div class="card-body text-center">
+                        <ul>
+                            <li>
+                                <p class="card-text numero"><strong>Numéro : <?= $unNumero->getNumero() ?></strong></p>
+                            </li>
+                            <li>
+                                <p class="card-text date"><strong>Paru le : <?= $unNumero->getDateParution() ?></strong></p>
+                            </li>
+                            <li>
+                                <p class="card-text etat"><strong>Etat : <?= $unNumero->getEtat()->getLibelle() ?></strong></p>
+                            </li>
+                            <li>
+                                <p class="card-text libelle"><strong> Type de document : <?= $unNumero->getRevue()->getDescripteur()->getLibelle() ?></strong></p>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Section de réservation -->
+                    <div class="card-body text-center">
+                        <?php
+                        // Si la personne est connecté
+                        if ($connexionManager->isLoggedOn()) {
+                            $abo = $abonneManager->getUtilisateurByMailU($_SESSION['mailU']);
+                            $reservation = $reservationManager->AfficherBouton($abo->getId(), $uneRevue->getId(), $unNumero->getNumero());
+                            if ($reservation) { ?>
+                            <!-- Bouton de réservation -->
+                                <a href="#addnew<?= $uneRevue->getId() ?><?= $unNumero->getNumero() ?>" data-toggle="modal" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> RÉSERVER</a>
+                            <?php } else { ?>
+                                 <!-- Message si l'utilisateur a déjà réservé ce document -->
+                                <span class="text-danger font-weight-bold">Vous avez déjà réservé ce document</span>
+                        <?php }
+                        } ?>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal pour ajouter une nouvelle réservation -->
+            <div class="modal fade" id="addnew<?= $uneRevue->getId() ?><?= $unNumero->getNumero() ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <!-- Titre de la modal -->
+                            <h4 class="modal-title" id="myModalLabel">Confirmation de la réservation</h4>
+                            <!-- Bouton pour fermer la modal -->
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Texte de confirmation de la réservation -->
+                            <p class="text-center">Êtes-vous sûr de vouloir réserver le document suivant ?</p>
+                            <!-- Informations sur la revue et son numéro -->
+                            <div class="card mb-3">
+                                <div class="card-header text-center"><strong><?= $uneRevue->getTitre() ?> numéro <?= $unNumero->getNumero() ?></strong></div>
+                                <div class="card-body">
+                                    <p class="card-text">Type de document : <?= $uneRevue->getDescripteur()->getLibelle() ?></p>
+                                    <p class="card-text">Paru le : <?= $unNumero->getDateParution() ?></p>
+                                    <p class="card-text"><strong><span style="color:red;">État : <?= $unNumero->getEtat()->getLibelle() ?></span></strong></p>
+                                    <p class="card-text"> <img class="img-fluid mx-auto d-block" src="images/Revues/<?= $unNumero->getPhoto() ?>.jpg">
                                 </div>
+                            </div>
+                            <div class="container-fluid">
+                                <form method="POST" action="?action=reservation">
+                                    <?php
+                                    // Récupérer le rangMax de l'utilisateur dans la liste des abonnés qui a réservé ce document (revue + numéro) 
+                                    $reservations = $reservationManager->recupMaxRang($uneRevue->getId(), $unNumero->getNumero());
+                                    ?>
+                                    <!-- les champs cachés pour envoyer les données nécessaires à la ajout -->
+                                    <input type="hidden" class="form-control" name="rang" value="<?= $reservations + 1 ?> ">
+                                    <input type="hidden" class="form-control" name="idRevue" value="<?= $uneRevue->getId() ?> ">
+                                    <input type="hidden" class="form-control" name="numeroParution" value="<?= $unNumero->getNumero() ?>">
+                                    <input type="hidden" class="form-control" name="idAbonne" value="<?= $abo->getId() ?>">
+                                    <div class="row justify-content-center">
+                                        <div class="col-8">
+                                            <!-- Afficher le rang de l'utilisateur dans la liste des abonnés ayant réservé ce document -->
+                                            <p class="text-center">Vous avez le rang <strong><span style="color:red;"><?= $reservations + 1 ?></span></strong> dans la liste des abonnés ayant réservé ce document</p>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                        <button type="submit" name="addRevue" class="btn btn-primary">Confirmer la réservation</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
-            <?php } ?>
-        </tbody>
-    </table>
+            </div>
+        <?php } ?>
+    </div>
 </div>
+
+
+<!-- <script>
+        $(document).ready(function() {
+            // Sélectionner le bouton de confirmation de la première modal
+            var confirmationBtn = $('#addnew<?= $uneRevue->getId() ?><?= $unNumero->getNumero() ?>').find('[name="addRevue"]');
+            // Ajouter un écouteur d'événement pour le clic sur le bouton de confirmation
+            confirmationBtn.on('click', function() {
+                // Sélectionner la deuxième modal et l'ouvrir
+                var deuxiemeModal = $('#deuxiemeModal');
+                deuxiemeModal.modal('show');
+            });
+        });
+    </script> -->

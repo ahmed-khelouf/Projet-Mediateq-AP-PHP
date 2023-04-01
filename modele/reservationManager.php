@@ -18,5 +18,3 @@ class ReservationManager extends Manager
                 }
         }
 }
-
-?>
