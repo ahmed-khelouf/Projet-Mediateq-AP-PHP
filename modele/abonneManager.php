@@ -63,9 +63,15 @@ class abonneManager extends Manager
         }
 	}
 
-    function insertAbo($nom, $prenom, $dateNaiss, $adresse, $numTel, $finAbo, $mdpU, $mailU, $typeAbonnement) {
+    function insertAbo($nom, $prenom, $dateNaiss, $adresse, $numTel, $finAbo, $mailU, $typeAbonnement) {
         try {
-            $mdpCrypte = password_hash($mdpU, PASSWORD_DEFAULT);
+            // Générer le mot de passe par défaut
+            $mdpDefaut = date_format(date_create($dateNaiss), "dmY") . strtoupper(substr($nom, 0, 2));
+    
+            // Crypter le mot de passe par défaut
+            $mdpCrypte = password_hash($mdpDefaut, PASSWORD_DEFAULT);
+    
+            // Insérer les données de l'abonné avec le mot de passe par défaut
             $req = $this->getPDO()->prepare('INSERT INTO abonné (nom, prenom, dateNaissance, adresse, numTel, typeAbonnement, finAbonnement, mdpU, mailU) VALUES (:nom, :prenom, :dateNaissance, :adresse, :numTel, :typeAbonnement, :finAbonnement, :mdpU, :mailU)');
             $req->bindParam(':nom', $nom, PDO::PARAM_STR);
             $req->bindParam(':prenom', $prenom, PDO::PARAM_STR);
@@ -83,6 +89,7 @@ class abonneManager extends Manager
             die();
         }
     }
+    
     
 
 

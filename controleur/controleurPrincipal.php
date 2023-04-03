@@ -9,6 +9,7 @@ function controleurPrincipal($action) {
     $lesActions["connexion"] = "connexion.php";
     $lesActions["monDossier"] = "c_abonne.php";
     $lesActions["deconnexion"] = "deconnexion.php";
+    $lesActions["inscription"] = "c_inscription.php";
     $lesActions["accueil"] = $lesActions["rechercheSimple"] ;
     $lesActions["defaut"] = $lesActions["accueil"];
     $lesActions["mesPretsEnCours"] = "c_mesPretsEnCours.php";
