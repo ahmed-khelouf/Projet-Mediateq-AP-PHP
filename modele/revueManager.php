@@ -47,7 +47,7 @@ class RevueManager extends Manager
         }
     }
 
-
+    
     /**
      * Renvoie l'objet Revue dont l'id correspond à la valeur du parametre $id
      *
@@ -59,6 +59,8 @@ class RevueManager extends Manager
         $catalogueRevue = $this->getList();
         return $catalogueRevue[$id];
     }
+
+    
 
     /**
      * Renvoie un tableau associatif contenant l'ensemble des objets Revue dont les identifiants appartiennent au tableau d'entier $listeId
@@ -114,4 +116,6 @@ class RevueManager extends Manager
         }
         return $this->getRevuesByListId($lesId);
     }
+
+ 
 }

@@ -49,10 +49,10 @@ class DvdManager extends Manager
     /**
      * Renvoie l'objet Dvd dont l'id correspond à la valeur du parametre $id
      *
-     * @param integer $id
+     * @param string $id
      * @return void
      */
-    public function getDvdById(int $id) : Livre
+    public function getDvdById(string $id) : Dvd
     {
         $catalogue = $this->getList();
         return $catalogue[$id];

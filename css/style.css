@@ -32,7 +32,7 @@ footer {
 
 div.card{
     position : relative;
-    background-color : cornsilk;
+    background-color : #f7f7f7;
     box-shadow: 1px 1px 4px #bbb;
 }
 
@@ -67,47 +67,56 @@ h2 {
 }
 
 
-/*  VUE RESERVATION*/
-.row .title{
-  margin-top:6px;
-  color: rgb(27, 176, 218);
-  padding-left: 12em;
+
+
+/* AFFICHAGE REVUE */
+
+.revuedetails {
+  display: flex;
+  align-items: center;
+  margin: 20px;
 }
 
-.row .btn  {
-  margin-top:6px;
-  margin-left: 45em;
+.revuedetails img {
+  width: 150px;
+  margin-right: 20px;
 }
 
-.row .trait-horizontal{
-order: none;
-border-top: 1px solid black;
-margin: 10px 0;
+.card-body img {
+  margin-bottom: 10px;
+}
+
+.card-title strong {
+  text-decoration: underline;
 }
 
 
-.row .rangStatut {
-  padding-top: 1em;
-  padding-bottom: 30px;
-  display: inline;
+.card-body ul li {
+  line-height: 2em;
 }
 
-.row .rangStatut p:nth-child(1){
-  color: rgb(24, 197, 53);
+
+.card-text.numero {
+  color: #3366CC; /* bleu */
+  text-shadow: 1px 1px #B3C7E7; /* surbrillance bleue */
+  border: 1px solid #B3C7E7; /* bordure bleue */
 }
 
-.row .rangStatut p:nth-child(2){
-  color: rgb(200, 32, 32);
+.card-text.date {
+  color: #8BC34A; /* vert */
+  text-shadow: 1px 1px #D4EDDA; /* surbrillance verte */
+  border: 1px solid #D4EDDA; /* bordure verte */
 }
 
-/* .rowR{
- 
-  padding-left: 45em;
+.card-text.etat {
+  color: #FF9800; /* orange */
+  text-shadow: 1px 1px #FFE5B4; /* surbrillance orange */
+  border: 1px solid #FFE5B4; /* bordure orange */
+}
 
-} */
-
-.trait-vertical{
-    border-left: 2px solid black;
-    height: auto;
+.card-text.libelle {
+  color: #9C27B0; /* violet */
+  text-shadow: 1px 1px #E8C2E7; /* surbrillance violette */
+  border: 1px solid #E8C2E7; /* bordure violette */
 }
 

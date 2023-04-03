@@ -22,6 +22,13 @@ class EtatManager extends Manager
         return $lesEtats;
     }
 
+    public function getEtatById(int $unId) : Etat
+    {
+        $listeEtat = $this->getList();
+        $etat = $listeEtat[$unId];
+        return $etat;
+    }
+
 }
 
 ?>

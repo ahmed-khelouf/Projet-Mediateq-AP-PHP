@@ -13,9 +13,10 @@
                         </div>
                         <div class="card-body">
                             <h4 class="card-title"><?= $unDvd->getSynopsis() ?></h4>
-                            <p class="card-text"><?= $unLivre->getRealisateur() ?></p>
-                            <p class="card-text"><?= $unLivre->getDuree() ?></p>
-                            <p class="card-text"><?= $unLivre->getCollection() ?></p>
+                            <p class="card-text"><?= $unDvd->getRealisateur() ?></p>
+                            <p class="card-text"><?= $unDvd->getDuree() ?></p>
+                         <!-- redirection dans une page qui affiche les parutions de la revue en question -->
+                         <a href="index.php?action=dvd&id=<?= $unDvd->getId() ?>">Voir plus</a>
                         </div>
                     </div>
                     <div class="card-footer">

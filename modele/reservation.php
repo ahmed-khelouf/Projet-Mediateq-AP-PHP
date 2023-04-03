@@ -3,33 +3,28 @@
 class Reservation
 {
     private $idR;
-    private $idRevue;
-    private $idAbonne;
+    private $abonne;
     private $rang;
-    private $idStatut;
+    private $statut;
     private $dateReservation;
-    private $numeroParution;
+
 
     /**
      * construteur de la classe Reservation
      *
      * @param integer $id
-     * @param Revue $idRevue
-     * @param Abonne $idAbonne
-     * @param Statut $idStatut
+     * @param Abonne $abonne
+     * @param Statut $statut
      * @param integer $rang
      * @param string $dateReservation
-     * @param string $numeroParution
      */
-    public function __construct(int $idR, Revue $idRevue, Abonne $idAbonne , int $rang , Statut $idStatut, string $dateReservation , string $numeroParution)
+    public function __construct(int $idR , Abonne $abonne , int $rang , Statut $statut, string $dateReservation )
     {
         $this->idR = $idR;
-        $this->idRevue = $idRevue;
-        $this->idAbonne = $idAbonne;
+        $this->abonne = $abonne;
         $this->rang = $rang;
-        $this->idStatut = $idStatut;
+        $this->statut = $statut;
         $this->dateReservation = $dateReservation;
-        $this->numeroParution = $numeroParution;
     }
 
     /**
@@ -53,13 +48,13 @@ class Reservation
     }
 
     /**
-     * Accesseur de la propriété idStatut
+     * Accesseur de la propriété statut
      *
      * @return Statut
      */
     public function getStatut(): Statut
     {
-        return $this->idStatut;
+        return $this->statut;
     }
 
     /**
@@ -73,34 +68,13 @@ class Reservation
     }
 
     /**
-     * Accesseur de la propriété idRevue
-     *
-     * @return Revue
-     */
-    public function getRevue(): Revue
-    {
-        return $this->idRevue;
-    }
-
-    /**
-     * Accesseur de la propriété idAbonne
+     * Accesseur de la propriété abonne
      * @return Abonne
      */
-    public function getIdAbonne(): Abonne
+    public function getAbonne(): Abonne
     {
-        return $this->idAbonne;
-    }
-
-    /**
-     * Accesseur de la propriété numeroParution
-     *
-     * @return string
-     */
-    public function getNumeroParution(): string
-    {
-        return $this->numeroParution;
+        return $this->abonne;
     }
  
 }
-
 ?>

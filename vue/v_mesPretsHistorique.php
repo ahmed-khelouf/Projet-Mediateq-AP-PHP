@@ -1,4 +1,4 @@
-<h2>Emprunts en cours pour l'abonné <?php echo $abonne->getNom()?>: </h2>
+<h2>Historique des documents empruntés par l'abonné <?php echo $abonne->getNom()?>: </h2>
 <div class="container-fluid">
 <?php
     // Pour chaque emprunt dans la liste, créer un affichage correspondant
@@ -19,11 +19,11 @@
                             <p class="card-text">
                             Status: 
                             <?php
-                                if($unEmprunt->peutProlonger() == 1){
-                                    echo "Prolongable";
+                                if($unEmprunt->peutProlonger() == 2){
+                                    echo "Rendu";
                                 }
                                 else {
-                                    echo "Non Prolongable";
+                                    echo "En cours";
                                 }?>
                             </p>
                             <p class="card-text">Etat: <?= $unEmprunt->getExemplaire()->getEtat()->getTitre()?></p>
@@ -32,10 +32,12 @@
                 </div>
             </div>
         </div>
-
-
     <?php
-    }
+    }?>
+</div>
+<h2>Historique des revues empruntées par l'abonné <?php echo $abonne->getNom()?>: </h2>
+<div class="container-fluid">
+<?php
     // Pour chaque parution dans la liste, créer un affichage correspondant
     foreach($empruntsParution[$abonne->getId()] as $unEmprunt){
         ?>
@@ -52,13 +54,13 @@
                             <p class="card-text">Date de début: <?= $unEmprunt->getDateDebut() ?></p>
                             <p class="card-text">Date de fin: <?= $unEmprunt->getDateFin() ?></p>
                             <p class="card-text">
-                            Status:
+                            Status : 
                             <?php
-                                if($unEmprunt->peutProlonger() == 1){
-                                    echo "Prolongable";
+                                if($unEmprunt->peutProlonger() == 2){
+                                    echo "Rendu";
                                 }
                                 else {
-                                    echo "Non Prolongable";
+                                    echo "En cours";
                                 }?>
                             </p>
                             <p class="card-text">Etat: <?= $unEmprunt->getParution()->getEtat()->getTitre()?></p>
