@@ -7,6 +7,7 @@ class Document {
     private $commandeEnCours; 
     private $typePublic;
     private $lesExemplaires ;
+    private $synopsis;
     
     /**
      * construteur de la classe Document
@@ -16,14 +17,16 @@ class Document {
      * @param string $image
      * @param boolean $commandeEnCours
      * @param TypePublic $public
+     * @param string $synopsis
      */
-    public function __construct(string $id, string $titre, string $image, bool $commandeEnCours, TypePublic $public)
+    public function __construct(string $id, string $titre, string $image, bool $commandeEnCours, TypePublic $public , string $synopsis)
     {
         $this->id = $id;
         $this->titre = $titre;
         $this->image = $image;
         $this->commandeEnCours = $commandeEnCours;
         $this->typePublic = $public;
+        $this->synopsis = $synopsis;
 
     }
 
@@ -70,6 +73,15 @@ class Document {
      */
     public function getTypePublic() : TypePublic {
         return $this->typePublic;
+    }
+    
+    /**
+     * Accesseur de la propriété synopsis
+     *
+     * @return string
+     */
+    public function getSynopsis() : string {
+        return $this->synopsis;
     }
 
     /**

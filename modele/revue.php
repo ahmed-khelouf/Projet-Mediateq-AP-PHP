@@ -6,6 +6,8 @@ class Revue {
     private $empruntable;
     private $lesNumeros ;
     private $descripteur ;
+    private $logo ;
+    private $periodicite ;
     
     /**
      * Constructeur de la classe Revue
@@ -14,13 +16,16 @@ class Revue {
      * @param string $titre
      * @param string $empruntable
      * @param Descripteur $descripteur
+     * @param string logo
      */
-    public function __construct(int $id, string $titre, string $empruntable , Descripteur $descripteur)
+    public function __construct(int $id, string $titre, string $empruntable , Descripteur $descripteur , string $logo , string $periodicite)
     {
         $this->id = $id;
         $this->titre = $titre;
         $this->empruntable = $empruntable;
         $this->descripteur = $descripteur;
+        $this->logo = $logo;
+        $this->periodicite = $periodicite;
     }
 
 
@@ -31,6 +36,24 @@ class Revue {
      */
     public function getId() : int {
         return $this->id;
+    }
+
+    /**
+     * Accesseur de la propriété periodicite
+     *
+     * @return integer
+     */
+    public function getPeriodicite() : string {
+        return $this->periodicite;
+    }
+
+    /**
+     * Accesseur de la propriété id
+     *
+     * @return string
+     */
+    public function getLogo() : string {
+        return $this->logo;
     }
 
     /**

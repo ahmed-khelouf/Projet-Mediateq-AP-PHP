@@ -1,7 +1,6 @@
 <?php
 
 class Dvd extends Document {
-    private $synopsis;
     private $realisateur; 
     private $duree;
     
@@ -19,20 +18,11 @@ class Dvd extends Document {
      */
     public function __construct(string $id, string $titre, string $image, bool $commandeEnCours, TypePublic $public, string $synopsis, string $realisateur, int $duree)
     {
-        parent::__construct($id, $titre, $image, $commandeEnCours, $public);
-        $this->synopsis = $synopsis;
+        parent::__construct($id, $titre, $image, $commandeEnCours, $public , $synopsis);
         $this->realisateur = $realisateur;
         $this->duree = $duree;
     }
 
-    /**
-     * Accesseur de la propriété synopsis
-     *
-     * @return string
-     */
-    public function getSynopsis() : string {
-        return $this->synopsis;
-    }
 
     /**
      * Accesseur de la propriété realisateur

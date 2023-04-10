@@ -16,10 +16,11 @@ class Livre extends Document {
      * @param string $ISBN
      * @param string $auteur
      * @param string $collection
+     * @param string $synopsis
      */
-    public function __construct(string $id, string $titre, string $image, bool $commandeEnCours, TypePublic $public, string $ISBN, string $auteur, string $collection)
+    public function __construct(string $id, string $titre, string $image, bool $commandeEnCours, TypePublic $public, string $synopsis , string $ISBN, string $auteur, string $collection)
     {
-        parent::__construct($id, $titre, $image, $commandeEnCours, $public);
+        parent::__construct($id, $titre, $image, $commandeEnCours, $public , $synopsis);
         $this->ISBN = $ISBN;
         $this->auteur = $auteur;
         $this->collection = $collection;

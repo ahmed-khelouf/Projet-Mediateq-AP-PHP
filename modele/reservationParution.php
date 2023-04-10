@@ -3,7 +3,7 @@
 class ReservationParution extends Reservation
 {
     private $revue;
-    private $numeroParution;
+    private $parution;
 
     /**
      * construteur de la classe Reservation
@@ -14,13 +14,13 @@ class ReservationParution extends Reservation
      * @param Statut $statut
      * @param integer $rang
      * @param string $dateReservation
-     * @param string $numeroParution
+     * @param Parution $numeroParution
      */
-    public function __construct(int $idR, Revue $revue, Abonne $abonne , int $rang , Statut $statut, string $dateReservation , string $numeroParution)
+    public function __construct(int $idR, Revue $revue, Abonne $abonne , int $rang , Statut $statut, string $dateReservation , Parution $parution)
     {
         parent::__construct($idR, $abonne, $rang, $statut, $dateReservation);
         $this->revue = $revue;
-        $this->numeroParution = $numeroParution;
+        $this->parution = $parution;
     }
 
     /**
@@ -36,11 +36,11 @@ class ReservationParution extends Reservation
     /**
      * Accesseur de la propriété numeroParution
      *
-     * @return string
+     * @return Parution
      */
-    public function getNumeroParution(): string
+    public function getParution(): Parution
     {
-        return $this->numeroParution;
+        return $this->parution;
     }
  
 }

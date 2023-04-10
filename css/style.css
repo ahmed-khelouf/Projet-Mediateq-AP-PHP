@@ -66,55 +66,73 @@ h2 {
   color: rgb(16, 214, 26);
 }
 
+.img-small {
+  width: 50%;
+}
+
+/* AFFICHAGE DES EXEMPLAIRES ET PARUTIONS DANS LA RECHERCHE */
+
+.img-square-wrapper { /* image de la revue dans la recherche */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* AFFICHAGE LIVRE */
+
+.livredetails { /* bloc du livre */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 
+/* AFFICHAGE DES PARUTION ET EXEMLAIRE */
 
-/* AFFICHAGE REVUE */
-
-.revuedetails {
+.revuedetails { /* bloc de la revue */
   display: flex;
   align-items: center;
   margin: 20px;
 }
 
-.revuedetails img {
+.revuedetails img { /* image de la revue */
   width: 150px;
   margin-right: 20px;
 }
 
-.card-body img {
+.card-body img { /* image de la revue */
   margin-bottom: 10px;
 }
 
-.card-title strong {
+.card-title strong { /* titre de la revue */
   text-decoration: underline;
 }
 
 
-.card-body ul li {
+.card-body ul li { /* liste  */
   line-height: 2em;
 }
 
 
-.card-text.numero {
+.card-text.bleu {
   color: #3366CC; /* bleu */
   text-shadow: 1px 1px #B3C7E7; /* surbrillance bleue */
   border: 1px solid #B3C7E7; /* bordure bleue */
 }
 
-.card-text.date {
+.card-text.vert {
   color: #8BC34A; /* vert */
   text-shadow: 1px 1px #D4EDDA; /* surbrillance verte */
   border: 1px solid #D4EDDA; /* bordure verte */
 }
 
-.card-text.etat {
+.card-text.orange {
   color: #FF9800; /* orange */
   text-shadow: 1px 1px #FFE5B4; /* surbrillance orange */
   border: 1px solid #FFE5B4; /* bordure orange */
 }
 
-.card-text.libelle {
+.card-text.violet {
   color: #9C27B0; /* violet */
   text-shadow: 1px 1px #E8C2E7; /* surbrillance violette */
   border: 1px solid #E8C2E7; /* bordure violette */

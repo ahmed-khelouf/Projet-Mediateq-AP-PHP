@@ -32,6 +32,7 @@ function chargerModeles($racine){
     require_once("$racine/modele/Livre.php");
     require_once("$racine/modele/Dvd.php");
     require_once("$racine/modele/Exemplaire.php");
+    require_once("$racine/modele/exemplaireManager.php");
     require_once("$racine/modele/Parution.php");
     require_once("$racine/modele/parutionManager.php");
     require_once("$racine/modele/LivreManager.php");

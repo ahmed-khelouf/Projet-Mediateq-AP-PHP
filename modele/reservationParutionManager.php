@@ -19,6 +19,9 @@ class ReservationParutionManager extends Manager
                         $statutManager = new StatutManager();
                         $statuts = $statutManager->getList();
 
+                        $parutionManager = new ParutionManager();
+                        $parutions = $parutionManager->getList();
+
                         $q = $this->getPDO()->prepare('SELECT * FROM reservation inner join reservationParution on reservationParution.idR=reservation.idR order by dateReservation desc');
                         $q->execute();
                         //  fetchAll(PDO::FETCH_ASSOC) est une méthode de l'objet PDOStatement qui permet de récupérer le résultat d'une requête SQL sous forme de tableau associatif. Chaque ligne du résultat est représentée par un tableau associatif dont les clés correspondent aux noms des colonnes de la table et les valeurs correspondent aux valeurs des champs de chaque ligne.
@@ -28,7 +31,8 @@ class ReservationParutionManager extends Manager
                                 $revue = $revues[$uneReservation['idRevue']];
                                 $abonne = $abonnes[$uneReservation['idAbonne']];
                                 $statut = $statuts[$uneReservation['idStatut']];
-                                $lesReservations[$uneReservation['idR']] = new ReservationParution($uneReservation['idR'], $revue, $abonne, $uneReservation['rang'], $statut, $uneReservation['dateReservation'], $uneReservation['numeroParution']);
+                                $parution = $parutions[$uneReservation['numeroParution']];
+                                $lesReservations[$uneReservation['idR']] = new ReservationParution($uneReservation['idR'], $revue, $abonne, $uneReservation['rang'], $statut, $uneReservation['dateReservation'], $parution);
                         }
                         return $lesReservations;
                 } catch (PDOException $e) {

@@ -1,77 +1,98 @@
-<div class="revuedetails">
-    <h2> <?= $unDvd->getTitre() ?>:</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Titre du livre</th>
-                <th>Numéro de parution</th>
-                <th>Date de parution</th>
-                <th>Etat</th>
-                <!-- Vérifier si l'utilisateur est connecté pour afficher la partie reserver du tableau  -->
-                <?php if ($connexionManager->isLoggedOn()) { ?>
-                    <th>Réserver</th>
-                <?php  } ?>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Boucle pour parcourir tous les parution (numero) de la revue -->
-            <?php foreach ($unDvd->getLesExemplaires() as $unExemplaire) { ?>
-                <tr>
-                    <td><?= $unDvd->getTitre()  ?></td>
-                    <td><?= $unExemplaire->getNumero() ?></td>
-                    <td><?= $unExemplaire->getEtat()->getLibelle() ?></td>
-                    <?php
-                    if ($connexionManager->isLoggedOn()) {
-                        //Vérifier si l'utilisateur a déjà réservé ce document
-                        $abo = $abonneManager->getUtilisateurByMailU($_SESSION['mailU']);
-                        $reservation = $reservationExemplaireManager->AfficherBouton($abo->getId(), $unDvd->getId(), $unExemplaire->getNumero());
-                    ?>
-                        <td>
-                            <!-- Afficher le bouton "Réserver" si l'utilisateur n'a pas encore réservé ce document est qu'il est connecté -->
-                            <?php if ($reservation) { ?>
-                                <a href="#addnew<?= $unDvd->getId() ?><?= $unExemplaire->getNumero() ?>" data-toggle="modal" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> RESERVER</a></br>
-                            <?php } else {
-                                // Afficher un message si l'utilisateur a déjà réservé ce document
-                                echo "Vous avez déjà réservé ce document";
-                            } ?>
-                        </td>
-                    <?php } ?>
-                </tr>
-                <!-- Modal pour ajouter une nouvelle réservation -->
+
+
+<div class="livredetails bg-light">
+    <div class="row justify-content-center">
+    <?php foreach ($unDvd->getLesExemplaires() as $unExemplaire) { ?>
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <!-- Section de l'image de couverture et du titre de la revue -->
+                    <div class="card-body text-center">
+                    <img class="img-fluid mx-auto d-block" src="images/Dvd/<?= $unDvd->getImage() ?>.jpg" alt="Couverture" width="50%">
+
+                        <h5 class="card-title"><strong><?= $unDvd->getTitre() ?></strong></h5>
+                    </div>
+                    <!-- Section des informations du numéro de la revue -->
+                    <div class="card-body text-center">
+                        <ul>
+                            <li>
+                                <p class="card-text bleu"><strong>Auteur : <?= $unDvd->getRealisateur() ?></strong></p>
+                            </li>
+                            <li>
+                                <p class="card-text vert"><strong>Public: <?= $unDvd->getTypePublic()->getLibelle() ?></strong></p>
+                            </li>
+                            <li>
+                                <p class="card-text orange"><strong>Durée: <?= $unDvd->getDuree()?></strong></p>
+                            </li>
+                            <li>
+                                <p class="card-text violet"><strong>Etat : <?= $unExemplaire->getEtat()->getLibelle() ?></strong></p>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Section de réservation -->
+                    <div class="card-body text-center">
+                        <?php
+                        // Si la personne est connecté
+                        if ($connexionManager->isLoggedOn()) {
+                            $abo = $abonneManager->getUtilisateurByMailU($_SESSION['mailU']);
+                            $reservation = $reservationExemplaireManager->AfficherBouton($abo->getId(), $unDvd->getId(), $unExemplaire->getNumero());
+                            if ($reservation) { ?>
+                                <!-- Bouton de réservation -->
+                                <a href="#addnew<?= $unDvd->getId() ?><?= $unExemplaire->getNumero() ?>" data-toggle="modal" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> RÉSERVER</a>
+                            <?php } else { ?>
+                                <!-- Message si l'utilisateur a déjà réservé ce document -->
+                                <span class="text-danger font-weight-bold">Vous avez déjà réservé ce document</span>
+                        <?php }
+                        } ?>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal pour ajouter une nouvelle réservation -->
+            <?php if ($connexionManager->isLoggedOn()) { ?>
                 <div class="modal fade" id="addnew<?= $unDvd->getId() ?><?= $unExemplaire->getNumero() ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <center>
-                                    <h4 class="modal-title" id="myModalLabel">Est-ce bien le doument que vous désirez réserver : <strong><?= $unDvd->getTitre() ?> numero : <?= $unExemplaire->getNumero() ?></strong></h4>
-                                </center>
+                                <!-- Titre de la modal -->
+                                <h4 class="modal-title" id="myModalLabel">Confirmation de la réservation</h4>
+                                <!-- Bouton pour fermer la modal -->
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
                             <div class="modal-body">
+                                <!-- Texte de confirmation de la réservation -->
+                                <p class="text-center">Êtes-vous sûr de vouloir réserver le document suivant ?</p>
+                                <!-- Informations sur la revue et son numéro -->
+                                <div class="card mb-3">
+                                    <div class="card-header text-center"><strong><?= $unDvd->getTitre() ?></strong></div>
+                                    <div class="card-body">
+                                        <p class="card-text">Realisateur : <?= $unDvd->getRealisateur() ?></p>
+                                        <p class="card-text">Durée : <?= $unDvd->getDuree() ?></p>
+                                        <p class="card-text">Public: <?= $unDvd->getTypePublic()->getLibelle() ?></p>
+                                        <p class="card-text"><strong><span style="color:red;">État : <?= $unExemplaire->getEtat()->getLibelle() ?></span></strong></p>
+                                        <p class="card-text"> <img class="img-fluid mx-auto d-block" src="images/Dvd/<?= $unDvd->getImage() ?>.jpg"alt="Couverture" width="50%">
+                                    </div>
+                                </div>
                                 <div class="container-fluid">
                                     <form method="POST" action="?action=reservation">
-                                        <div class="row form-group">
-                                            <?php
-                                            // Récupérer le rangMax de l'utilisateur dans la liste des abonnés qui a réservé ce document (revue + numéro) 
-                                            $reservations = $reservationExemplaireManager->recupMaxRang($unDvd->getId(), $unExemplaire->getNumero());
-                                            ?>
-                                            <p> Vous avez le rang <strong><?= $reservations + 1 ?> </strong>dans la liste des abonnées qui ont réservé ce document</p>
-                                        </div>
-                                        <div class="col-sm-10">
-                                            <?php if ($connexionManager->isLoggedOn()) { ?>
-                                                <!-- les champs cachés pour envoyer les données nécessaires à la ajout -->
-                                                <input type="hidden" class="form-control" name="rang" value="<?= $reservations + 1 ?> ">
-                                                <input type="hidden" class="form-control" name="idDoc" value="<?= $unDvd->getId() ?> ">
-                                                <input type="hidden" class="form-control" name="numeroExemplaire" value="<?= $unExemplaire->getNumero() ?>">
-                                                <input type="hidden" class="form-control" name="idAbonne" value="<?= $abo->getId() ?>">
-                                            <?php } ?>
+                                        <?php
+                                        // Récupérer le rangMax de l'utilisateur dans la liste des abonnés qui a réservé ce document (revue + numéro) 
+                                        $reservations = $reservationExemplaireManager->recupMaxRang($unDvd->getId(), $unExemplaire->getNumero());
+                                        ?>
+                                        <!-- les champs cachés pour envoyer les données nécessaires à la ajout -->
+                                        <input type="hidden" class="form-control" name="rang" value="<?= $reservations + 1 ?> ">
+                                        <input type="hidden" class="form-control" name="idDoc" value="<?=$unDvd->getId()  ?> ">
+                                        <input type="hidden" class="form-control" name="numeroExemplaire" value="<?= $unExemplaire->getNumero() ?>">
+                                        <input type="hidden" class="form-control" name="idAbonne" value="<?= $abo->getId() ?>">
+                                        <div class="row justify-content-center">
+                                            <div class="col-8">
+                                                <!-- Afficher le rang de l'utilisateur dans la liste des abonnés ayant réservé ce document -->
+                                                <p class="text-center">Vous avez le rang <strong><span style="color:red;"><?= $reservations + 1 ?></span></strong> dans la liste des abonnés ayant réservé ce document</p>
+                                            </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <!-- Bouton pour annuler la réservation -->
-                                            <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Annuler la réservation</button>
-                                            <!-- Bouton pour confirmer la réservation -->
-                                            <button type="submit" name="add" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> CONFIRMER</a>
-                                            </button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                            <button type="submit" name="add" class="btn btn-primary">Confirmer la réservation</button>
                                         </div>
                                     </form>
                                 </div>
@@ -79,7 +100,7 @@
                         </div>
                     </div>
                 </div>
-            <?php } ?>
-        </tbody>
-    </table>
+        <?php  }
+        } ?>
+    </div>
 </div>

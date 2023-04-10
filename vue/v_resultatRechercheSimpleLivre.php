@@ -4,22 +4,35 @@
 
     foreach ($livres as $unLivre) {
     ?>
-
-        <div class="row">
-            <div class="col-12 mt-3">
-                <div class="card">
+        <div class="row justify-content-center">
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
                     <div class="card-horizontal">
-                        <div class="img-square-wrapper">
-                            <img class="" src="images/Livres/<?= $unLivre->getImage() ?>.jpg" alt="<?= $unLivre->getTitre() ?>">
-                        </div>
-                        <div class="card-body">
-                            <h4 class="card-title"><?= $unLivre->getId() ?></h4>
-                            <h4 class="card-title"><?= $unLivre->getTitre() ?></h4>
-                            <p class="card-text"><?= $unLivre->getISBN() ?></p>
-                            <p class="card-text"><?= $unLivre->getAuteur() ?></p>
-                            <p class="card-text"><?= $unLivre->getCollection() ?></p>
-                            <!-- redirection dans une page qui affiche les exemplaires du livre en question -->
-                            <a href="index.php?action=livre&id=<?= $unLivre->getId() ?>">Voir plus</a>
+                        <div class="card-body text-center">
+                            <h4 class="card-title mb-3"><strong><?= $unLivre->getTitre() ?></strong></h4>
+                            <div class="img-square-wrapper mx-auto ">
+                                <img class="img-fluid d-block" src="images/Livres/<?= $unLivre->getImage() ?>.jpg" alt="<?= $unLivre->getTitre() ?>">
+                            </div>
+                            <ul class="list-unstyled mb-4">
+                                <li>
+                                    <p class="card-text "><strong> Synopsis :</strong> <?= $unLivre->getSynopsis() ?></p>
+                                    <p style="margin-bottom: 2px;"></p>
+                                </li>
+                                <li>
+                                    <p class="card-text"><strong>Auteur :</strong> <?= $unLivre->getAuteur() ?></p>
+                                </li>
+                                <li>
+                                    <p class="card-text "><strong>Collection :</strong> <?= $unLivre->getCollection() ?></p>
+                                </li>
+                                <li>
+                                    <p class="card-text "><strong>ISBN :</strong> <?= $unLivre->getISBN() ?></p>
+                                </li>
+                                <li>
+                                    <p class="card-text "><strong>Public :</strong> <?= $unLivre->getTypePublic()->getLibelle() ?></p>
+                                </li>
+                            </ul>
+                            <!-- redirection dans une page qui affiche les exemplaire du livre en question -->
+                            <a href="index.php?action=livre&id=<?= $unLivre->getId() ?>" class="btn btn-primary">Voir plus</a>
                         </div>
                     </div>
                     <div class="card-footer">
