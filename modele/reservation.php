@@ -18,7 +18,7 @@ class Reservation
      * @param integer $rang
      * @param string $dateReservation
      */
-    public function __construct(int $idR , Abonne $abonne , int $rang , Statut $statut, string $dateReservation )
+    public function __construct(string $idR , Abonne $abonne , int $rang , Statut $statut, string $dateReservation )
     {
         $this->idR = $idR;
         $this->abonne = $abonne;
@@ -30,9 +30,9 @@ class Reservation
     /**
      * Accesseur de la propriété idR
      *
-     * @return integer
+     * @return string
      */
-    public function getId(): int
+    public function getId(): string
     {
         return $this->idR;
     }

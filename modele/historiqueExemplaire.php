@@ -1,6 +1,6 @@
 <?php
 
-class ReservationExemplaire extends Reservation
+class HistoriqueExemplaire extends Historique
 {
     private $document;
     private $exemplaire;
@@ -11,14 +11,12 @@ class ReservationExemplaire extends Reservation
      * @param string $id
      * @param Document $document
      * @param Abonne $abonne
-     * @param Statut $statut
-     * @param integer $rang
      * @param string $dateReservation
      * @param Exemplaire $exemplaire
      */
-    public function __construct(string $idR, Document $document, Abonne $abonne, int $rang, Statut $statut, string $dateReservation, Exemplaire $exemplaire)
+    public function __construct(string $id, Document $document, Abonne $abonne, int $rang,  string $dateReservation, Exemplaire $exemplaire)
     {
-        parent::__construct($idR, $abonne, $rang, $statut, $dateReservation);
+        parent::__construct($id, $abonne,  $dateReservation);
         $this->document = $document;
         $this->exemplaire = $exemplaire;
     }

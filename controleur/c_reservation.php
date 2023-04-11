@@ -2,14 +2,14 @@
 //Titre de la page
 $titre = "Réservation - Mediateq";
 
-//Création d'un objet manager de reservationParution
-$reservationParutionManager = new ReservationParutionManager();
-$reservationsParutions = $reservationParutionManager->getList();
-
 //Création d'un objet manager de reservationExemplaire
 $reservationExemplaireManager = new ReservationExemplaireManager();
 $reservationsExemplairesLivres = $reservationExemplaireManager->getListLivres();
 $reservationsExemplairesDVD = $reservationExemplaireManager->getListDVD();
+
+//Création d'un objet manager de reservationParution
+$reservationParutionManager = new ReservationParutionManager();
+$reservationsParutions = $reservationParutionManager->getList();
 
 // Création d'un objet manager de reservation
 $reservationManager = new ReservationManager();
@@ -33,6 +33,12 @@ $connexionManager = new ConnexionManager();
 $abonneManager = new abonneManager();
 $abo = $abonneManager->getList();
 
+//Création d'un objet manager de historiqueParution
+$historiqueParutionManager = new HistoriqueParutionManager();
+
+//Création d'un objet manager de historiqueExemplaire
+$historiqueExemplaireManager = new HistoriqueExemplaireManager();
+
 //Vérifie si un utilisateur est connecté et récupère les informations de l'utilisateur connecté
 if ($connexionManager->isLoggedOn()) {
     $unAbonne = $abonneManager->getUtilisateurByMailU($_SESSION['mailU']);
@@ -45,6 +51,7 @@ if (isset($_POST['add'])) {
     $rang = $_POST['rang'];
     $numeroExemplaire = $_POST["numeroExemplaire"];
     $reservationExemplaireManager->addReservation($idDoc, $idAbonne, $rang, $numeroExemplaire);
+    $historiqueExemplaireManager->addHistorique($idAbonne , $idDoc , $numeroExemplaire);
     header('location: index.php?action=reservation');
 }
 
@@ -65,6 +72,7 @@ if (isset($_POST['addRevue'])) {
     $rang = $_POST['rang'];
     $numeroParution = $_POST["numeroParution"];
     $reservationParutionManager->addReservation($idRevue, $idAbonne, $rang, $numeroParution);
+    $historiqueParutionManager->addHistorique($idAbonne , $idRevue , $numeroParution);
     header('location: index.php?action=reservation');
 }
 

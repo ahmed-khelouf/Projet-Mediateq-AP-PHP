@@ -63,6 +63,11 @@ function chargerModeles($racine){
     require_once("$racine/modele/empruntExemplaire.php");
     require_once("$racine/modele/empruntParutionManager.php");
     require_once("$racine/modele/empruntExemplaireManager.php");
+    require_once("$racine/modele/historique.php");
+    require_once("$racine/modele/historiqueParution.php");
+    require_once("$racine/modele/historiqueParutionManager.php");
+    require_once("$racine/modele/historiqueExemplaire.php");
+    require_once("$racine/modele/historiqueExemplaireManager.php");
 }
 ?>
 
