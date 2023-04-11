@@ -1,12 +1,12 @@
 <div class="details bg-light">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center mx-auto">
         <!-- Boucle itérant sur chaque exemplaire d'un livre -->
         <?php foreach ($unLivre->getLesExemplaires() as $unExemplaire) { ?>
             <div class="col-md-6 mb-4">
                 <div class="card h-100">
                     <!-- Section de l'image de couverture et du titre de la revue -->
                     <div class="card-body text-center">
-                        <img class="img-fluid mx-auto d-block" src="images/Livres/<?= $unLivre->getImage() ?>.jpg" alt="Couverture" width="50%">
+                        <img class="img-fluid mx-auto d-block" src="images/Livres/<?= $unLivre->getImage() ?>.jpg" alt="Couverture" width="35%">
                         <h5 class="card-title"><strong><?= $unLivre->getTitre() ?></strong></h5>
                     </div>
                     <!-- Section des informations du numéro de la revue -->
@@ -73,7 +73,7 @@
                                         <p class="card-text">Collection : <?= $unLivre->getCollection() ?></p>
                                         <p class="card-text"><strong><span style="color:red;">État : <?= $unExemplaire->getEtat()->getLibelle() ?></span></strong></p>
                                         <p class="card-text">
-                                            <img class="img-fluid mx-auto d-block" src="images/Livres/<?= $unLivre->getImage() ?>.jpg" width="50%">
+                                            <img class="img-fluid mx-auto d-block" src="images/Livres/<?= $unLivre->getImage() ?>.jpg" width="35%">
                                         </p>
                                     </div>
                                 </div>

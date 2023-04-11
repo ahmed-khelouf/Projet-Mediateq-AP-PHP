@@ -25,5 +25,3 @@ $uneRevue = $revueManager->getRevueById($idRevue);
 include "$racine/vue/header.php";
 include "$racine/vue/v_revue.php";
 include "$racine/vue/footer.php";
-
-?>

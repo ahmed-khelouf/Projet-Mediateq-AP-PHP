@@ -22,7 +22,7 @@ class ReservationParutionManager extends Manager
                         $parutionManager = new ParutionManager();
                         $parutions = $parutionManager->getList();
 
-                        $q = $this->getPDO()->prepare('SELECT * FROM reservation inner join reservationParution on reservationParution.idR=reservation.idR order by dateReservation desc');
+                        $q = $this->getPDO()->prepare('SELECT * FROM reservationParution order by dateReservation desc');
                         $q->execute();
                         //  fetchAll(PDO::FETCH_ASSOC) est une méthode de l'objet PDOStatement qui permet de récupérer le résultat d'une requête SQL sous forme de tableau associatif. Chaque ligne du résultat est représentée par un tableau associatif dont les clés correspondent aux noms des colonnes de la table et les valeurs correspondent aux valeurs des champs de chaque ligne.
                         $r1 = $q->fetchAll(PDO::FETCH_ASSOC);
@@ -46,7 +46,7 @@ class ReservationParutionManager extends Manager
         function getRang($idRevue, $numeroParution)
         {
                 try {
-                        $q = $this->getPDO()->prepare('SELECT rang FROM reservation inner join reservationParution on reservationParution.idR=reservation.idR WHERE idRevue = :idRevue  AND numeroParution = :numeroParution');
+                        $q = $this->getPDO()->prepare('SELECT rang FROM reservationParution  WHERE idRevue = :idRevue  AND numeroParution = :numeroParution');
                         $q->bindParam(':idRevue', $idRevue, PDO::PARAM_STR);
                         $q->bindParam(':numeroParution', $numeroParution, PDO::PARAM_INT);
                         $q->execute();
@@ -63,7 +63,7 @@ class ReservationParutionManager extends Manager
         function recupMaxRang($idRevue, $numeroParution)
         {
                 try {
-                        $q = $this->getPDO()->prepare('SELECT MAX(rang) FROM reservation inner join reservationParution on reservationParution.idR=reservation.idR WHERE idRevue = :idRevue AND numeroParution = :numeroParution');
+                        $q = $this->getPDO()->prepare('SELECT MAX(rang) FROM reservationParution  WHERE idRevue = :idRevue AND numeroParution = :numeroParution');
                         $q->bindParam(':idRevue', $idRevue, PDO::PARAM_INT);
                         $q->bindParam(':numeroParution', $numeroParution, PDO::PARAM_INT);
                         $q->execute();
@@ -80,7 +80,7 @@ class ReservationParutionManager extends Manager
         function UpdateRang($idRevue, $rang, $numeroParution)
         {
                 try {
-                        $q = $this->getPDO()->prepare('UPDATE reservation inner join reservationParution on reservationParution.idR=reservation.idR set rang = rang - 1 where idRevue = :idRevue AND numeroParution=:numeroParution AND rang > :rang ');
+                        $q = $this->getPDO()->prepare('UPDATE reservationParution set rang = rang - 1 where idRevue = :idRevue AND numeroParution=:numeroParution AND rang > :rang ');
                         $q->bindParam(':idRevue', $idRevue, PDO::PARAM_STR);
                         $q->bindParam(':rang', $rang, PDO::PARAM_INT);
                         $q->bindParam(':numeroParution', $numeroParution, PDO::PARAM_INT);
@@ -97,7 +97,7 @@ class ReservationParutionManager extends Manager
         {
                 try {
                         if ($rang = 1) {
-                                $q = $this->getPDO()->prepare('UPDATE reservation inner join reservationParution on reservationParution.idR=reservation.idR set idStatut =  1 where idRevue=:idRevue AND numeroParution=:numeroParution AND rang = :rang');
+                                $q = $this->getPDO()->prepare('UPDATE reservationParution set idStatut =  1 where idRevue=:idRevue AND numeroParution=:numeroParution AND rang = :rang');
                         }
                         $q->bindParam(':idRevue', $idRevue, PDO::PARAM_STR);
                         $q->bindParam(':rang', $rang, PDO::PARAM_INT);
@@ -111,7 +111,7 @@ class ReservationParutionManager extends Manager
         /**
          * insertion d'une reservation dans la base de données
          */
-        function addReservation($idDoc, $idAbonne, $rang, $numeroParution)
+        function addReservation($idRevue, $idAbonne, $rang, $numeroParution)
         {
                 try {
                         if ($rang > 1) {
@@ -119,11 +119,11 @@ class ReservationParutionManager extends Manager
                         } else {
                                 $idStatut = 1;
                         }
-                        $q = $this->getPDO()->prepare('INSERT INTO reservation (idAbonne, rang, idStatut, dateReservation) VALUES (:idAbonne, :rang, :idStatut, CURRENT_TIMESTAMP()); INSERT INTO reservationParution (idR, idRevue, numeroParution) VALUES (LAST_INSERT_ID(), :idRevue, :numeroParution)');
+                        $q = $this->getPDO()->prepare('INSERT INTO reservationParution (idAbonne, rang, idStatut, dateReservation , idRevue , numeroParution) VALUES (:idAbonne, :rang, :idStatut, CURRENT_TIMESTAMP() , :idRevue , :numeroParution)');
                         $q->bindParam(':idAbonne', $idAbonne, PDO::PARAM_INT);
                         $q->bindParam(':rang', $rang, PDO::PARAM_INT);
                         $q->bindParam(':idStatut', $idStatut, PDO::PARAM_INT);
-                        $q->bindParam(':idRevue', $idDoc, PDO::PARAM_STR);
+                        $q->bindParam(':idRevue', $idRevue, PDO::PARAM_STR);
                         $q->bindParam(':numeroParution', $numeroParution, PDO::PARAM_INT);
                         $q->execute();
                 } catch (PDOException $e) {
@@ -138,12 +138,9 @@ class ReservationParutionManager extends Manager
         {
                 try {
                         $q = $this->getPDO()->prepare('DELETE FROM reservationParution WHERE idR = :idR');
-                        $q1 = $this->getPDO()->prepare('DELETE FROM reservation WHERE idR = :idR');
                         $q->bindParam(':idR', $idR, PDO::PARAM_STR);
-                        $q1->bindParam(':idR', $idR, PDO::PARAM_STR);
                         $success = $q->execute();
-                        $success2 = $q1->execute();
-                        if ($success && $success2) {
+                        if ($success ) {
                                 $maxRangReservation = $this->recupMaxRang($idRevue, $numeroParution);
                                 if ($maxRangReservation > $rang) {
                                         $this->UpdateRang($idRevue, $rang, $numeroParution);
@@ -161,7 +158,7 @@ class ReservationParutionManager extends Manager
         function AfficherBouton($idAbonne, $idRevue, $numeroParution)
         {
                 try {
-                        $q = $this->getPDO()->prepare('SELECT numeroParution from reservation inner join reservationParution on reservationParution.idR=reservation.idR where idAbonne= :idAbonne AND idRevue = :idRevue');
+                        $q = $this->getPDO()->prepare('SELECT numeroParution from reservationParution where idAbonne= :idAbonne AND idRevue = :idRevue');
                         $q->bindParam(':idAbonne', $idAbonne, PDO::PARAM_INT);
                         $q->bindParam(':idRevue', $idRevue, PDO::PARAM_STR);
                         $q->execute();
@@ -180,5 +177,3 @@ class ReservationParutionManager extends Manager
                 }
         }
 }
-
-?>

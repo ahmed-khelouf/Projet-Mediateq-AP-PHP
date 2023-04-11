@@ -1,13 +1,12 @@
 <div class="details bg-light">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center mx-auto">
         <!-- Boucle itérant sur chaque exemplaire du DVD -->
         <?php foreach ($unDvd->getLesExemplaires() as $unExemplaire) { ?>
             <div class="col-md-6 mb-4">
                 <div class="card h-100">
                     <!-- Section de l'image de couverture et du titre de la revue -->
                     <div class="card-body text-center">
-                        <img class="img-fluid mx-auto d-block" src="images/Dvd/<?= $unDvd->getImage() ?>.jpg" alt="Couverture" width="50%">
-
+                        <img class="img-fluid mx-auto d-block" src="images/Dvd/<?= $unDvd->getImage() ?>.jpg" alt="Couverture" width="30%">
                         <h5 class="card-title"><strong><?= $unDvd->getTitre() ?></strong></h5>
                     </div>
                     <!-- Section des informations du numéro de la revue -->
@@ -73,7 +72,7 @@
                                         <p class="card-text">Durée : <?= $unDvd->getDuree() ?></p>
                                         <p class="card-text">Public: <?= $unDvd->getTypePublic()->getLibelle() ?></p>
                                         <p class="card-text"><strong><span style="color:red;">État : <?= $unExemplaire->getEtat()->getLibelle() ?></span></strong></p>
-                                        <p class="card-text"> <img class="img-fluid mx-auto d-block" src="images/Dvd/<?= $unDvd->getImage() ?>.jpg" alt="Couverture" width="50%">
+                                        <p class="card-text"> <img class="img-fluid mx-auto d-block" src="images/Dvd/<?= $unDvd->getImage() ?>.jpg" alt="Couverture" width="30%">
                                     </div>
                                 </div>
                                 <div class="container-fluid">

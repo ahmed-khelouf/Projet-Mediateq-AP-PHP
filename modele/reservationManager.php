@@ -8,15 +8,15 @@ class ReservationManager extends Manager
         function nombreReservation($idAbonne)
         {
                 try {
-                        $q = $this->getPDO()->prepare('SELECT count(reservation.idR) from reservation where idAbonne=:idAbonne');
+                        $q = $this->getPDO()->prepare('SELECT COUNT(*) FROM (
+                        SELECT idR FROM reservationExemplaire WHERE idAbonne=:idAbonne
+                        UNION ALL
+                        SELECT idR FROM reservationParution WHERE idAbonne=:idAbonne ) AS total');
                         $q->bindParam(':idAbonne', $idAbonne, PDO::PARAM_INT);
                         $q->execute();
-                        // fetchColumn est utilisé pour récupérer la valeur d'une seule colonne de la première ligne d'un résultat
                         return $q->fetchColumn();
                 } catch (PDOException $e) {
                         echo ("Une erreur s'est produite : " . $e->getMessage());
                 }
         }
 }
-
-?>

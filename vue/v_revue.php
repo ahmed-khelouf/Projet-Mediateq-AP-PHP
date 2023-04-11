@@ -6,7 +6,7 @@
                 <div class="card h-100">
                     <!-- Section de l'image de couverture et du titre de la revue -->
                     <div class="card-body text-center">
-                        <img class="img-fluid mx-auto d-block" src="images/Revues/<?= $unNumero->getPhoto() ?>.jpg" alt="Couverture">
+                        <img class="img-fluid mx-auto d-block" src="images/Revues/<?= $unNumero->getPhoto() ?>.jpg" alt="Couverture" width="50%">
                         <h5 class="card-title"><strong><?= $uneRevue->getTitre() ?></strong></h5>
                     </div>
                     <!-- Section des informations du numéro de la revue -->
@@ -71,7 +71,7 @@
                                         <p class="card-text">Type de document : <?= $uneRevue->getDescripteur()->getLibelle() ?></p>
                                         <p class="card-text">Paru le : <?= $unNumero->getDateParution() ?></p>
                                         <p class="card-text"><strong><span style="color:red;">État : <?= $unNumero->getEtat()->getLibelle() ?></span></strong></p>
-                                        <p class="card-text"> <img class="img-fluid mx-auto d-block" src="images/Revues/<?= $unNumero->getPhoto() ?>.jpg">
+                                        <p class="card-text"> <img class="img-fluid mx-auto d-block" src="images/Revues/<?= $unNumero->getPhoto() ?>.jpg" width="50%">
                                     </div>
                                 </div>
                                 <div class="container-fluid">

@@ -25,5 +25,3 @@ $unLivre = $livreManager->getLivreById($idDoc);
 include "$racine/vue/header.php";
 include "$racine/vue/v_livre.php";
 include "$racine/vue/footer.php";
-
-?>

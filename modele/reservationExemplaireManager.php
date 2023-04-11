@@ -22,7 +22,7 @@ class ReservationExemplaireManager extends Manager
                         $exemplaireManager = new ExemplaireManager();
                         $exemplaires = $exemplaireManager->getList();
 
-                        $q = $this->getPDO()->prepare('SELECT * FROM reservation inner join reservationExemplaire on reservationExemplaire.idR=reservation.idR inner join exemplaire on exemplaire.idDocument=reservationExemplaire.idDoc inner join document on exemplaire.idDocument=document.id inner join livre on livre.idDocument=document.id group by reservation.idR order by dateReservation desc');
+                        $q = $this->getPDO()->prepare('SELECT * FROM reservationExemplaire inner join  exemplaire on exemplaire.idDocument=reservationExemplaire.idDoc inner join document on exemplaire.idDocument=document.id inner join livre on livre.idDocument=document.id  order by dateReservation desc');
                         $q->execute();
                         //  fetchAll(PDO::FETCH_ASSOC) est une méthode de l'objet PDOStatement qui permet de récupérer le résultat d'une requête SQL sous forme de tableau associatif. Chaque ligne du résultat est représentée par un tableau associatif dont les clés correspondent aux noms des colonnes de la table et les valeurs correspondent aux valeurs des champs de chaque ligne.
                         $r1 = $q->fetchAll(PDO::FETCH_ASSOC);
@@ -60,7 +60,7 @@ class ReservationExemplaireManager extends Manager
                         $exemplaireManager = new ExemplaireManager();
                         $exemplaires = $exemplaireManager->getList();
 
-                        $q = $this->getPDO()->prepare('SELECT * FROM reservation inner join reservationExemplaire on reservationExemplaire.idR=reservation.idR inner join exemplaire on exemplaire.idDocument=reservationExemplaire.idDoc inner join document on exemplaire.idDocument=document.id inner join dvd on dvd.idDocument=document.id group by reservation.idR desc');
+                        $q = $this->getPDO()->prepare('SELECT * FROM reservationExemplaire inner join exemplaire on exemplaire.idDocument=reservationExemplaire.idDoc inner join document on exemplaire.idDocument=document.id inner join dvd on dvd.idDocument=document.id group by idR desc');
                         $q->execute();
                         //  fetchAll(PDO::FETCH_ASSOC) est une méthode de l'objet PDOStatement qui permet de récupérer le résultat d'une requête SQL sous forme de tableau associatif. Chaque ligne du résultat est représentée par un tableau associatif dont les clés correspondent aux noms des colonnes de la table et les valeurs correspondent aux valeurs des champs de chaque ligne.
                         $r1 = $q->fetchAll(PDO::FETCH_ASSOC);
@@ -84,7 +84,7 @@ class ReservationExemplaireManager extends Manager
         function getRang($idDoc, $numeroExemplaire)
         {
                 try {
-                        $q = $this->getPDO()->prepare('SELECT rang FROM reservation inner join reservationExemplaire on reservationExemplaire.idR=reservation.idR WHERE idDoc = :idDoc  AND numeroExemplaire = :numeroExemplaire');
+                        $q = $this->getPDO()->prepare('SELECT rang FROM reservationExemplaire WHERE idDoc = :idDoc  AND numeroExemplaire = :numeroExemplaire');
                         $q->bindParam(':idDoc', $idDoc, PDO::PARAM_STR);
                         $q->bindParam(':numeroExemplaire', $numeroExemplaire, PDO::PARAM_INT);
                         $q->execute();
@@ -101,7 +101,7 @@ class ReservationExemplaireManager extends Manager
         function recupMaxRang($idDoc, $numeroExemplaire)
         {
                 try {
-                        $q = $this->getPDO()->prepare('SELECT MAX(rang) FROM reservation inner join reservationExemplaire on reservationExemplaire.idR=reservation.idR WHERE idDoc = :idDoc AND numeroExemplaire = :numeroExemplaire');
+                        $q = $this->getPDO()->prepare('SELECT MAX(rang) FROM reservationExemplaire WHERE idDoc = :idDoc AND numeroExemplaire = :numeroExemplaire');
                         $q->bindParam(':idDoc', $idDoc, PDO::PARAM_STR);
                         $q->bindParam(':numeroExemplaire', $numeroExemplaire, PDO::PARAM_INT);
                         $q->execute();
@@ -118,7 +118,7 @@ class ReservationExemplaireManager extends Manager
         function UpdateRang($idDoc, $rang, $numeroExemplaire)
         {
                 try {
-                        $q = $this->getPDO()->prepare('UPDATE reservation inner join reservationExemplaire on reservationExemplaire.idR=reservation.idR set rang = rang - 1 where idDoc = :idDoc AND numeroExemplaire=:numeroExemplaire AND rang > :rang ');
+                        $q = $this->getPDO()->prepare('UPDATE reservationExemplaire set rang = rang - 1 where idDoc = :idDoc AND numeroExemplaire=:numeroExemplaire AND rang > :rang ');
                         $q->bindParam(':idDoc', $idDoc, PDO::PARAM_STR);
                         $q->bindParam(':rang', $rang, PDO::PARAM_INT);
                         $q->bindParam(':numeroExemplaire', $numeroExemplaire, PDO::PARAM_INT);
@@ -135,7 +135,7 @@ class ReservationExemplaireManager extends Manager
         {
                 try {
                         if ($rang = 1) {
-                                $q = $this->getPDO()->prepare('UPDATE reservation inner join reservationExemplaire on reservationExemplaire.idR=reservation.idR set idStatut =  1 where idDoc=:idDoc AND numeroExemplaire=:numeroExemplaire AND rang = :rang');
+                                $q = $this->getPDO()->prepare('UPDATE reservationExemplaire set idStatut =  1 where idDoc=:idDoc AND numeroExemplaire=:numeroExemplaire AND rang = :rang');
                         }
                         $q->bindParam(':idDoc', $idDoc, PDO::PARAM_STR);
                         $q->bindParam(':rang', $rang, PDO::PARAM_INT);
@@ -157,11 +157,11 @@ class ReservationExemplaireManager extends Manager
                         } else {
                                 $idStatut = 1;
                         }
-                        $q = $this->getPDO()->prepare('INSERT INTO reservation (idAbonne, rang, idStatut, dateReservation) VALUES (:idAbonne, :rang, :idStatut, CURRENT_TIMESTAMP()); INSERT INTO reservationExemplaire (idR, idDoc, numeroExemplaire) VALUES (LAST_INSERT_ID(), :idDoc, :numeroExemplaire)');
+                        $q = $this->getPDO()->prepare('INSERT INTO reservationExemplaire (idAbonne, rang, idStatut, dateReservation , idDoc , numeroExemplaire) VALUES (:idAbonne, :rang, :idStatut, CURRENT_TIMESTAMP() , :idDoc , :numeroExemplaire)');
+                        $q->bindParam(':idDoc', $idDoc, PDO::PARAM_STR);
                         $q->bindParam(':idAbonne', $idAbonne, PDO::PARAM_INT);
                         $q->bindParam(':rang', $rang, PDO::PARAM_INT);
                         $q->bindParam(':idStatut', $idStatut, PDO::PARAM_INT);
-                        $q->bindParam(':idDoc', $idDoc, PDO::PARAM_STR);
                         $q->bindParam(':numeroExemplaire', $numeroExemplaire, PDO::PARAM_INT);
                         $q->execute();
                 } catch (PDOException $e) {
@@ -176,12 +176,9 @@ class ReservationExemplaireManager extends Manager
         {
                 try {
                         $q = $this->getPDO()->prepare('DELETE FROM reservationExemplaire WHERE idR = :idR');
-                        $q1 = $this->getPDO()->prepare('DELETE FROM reservation WHERE idR = :idR');
                         $q->bindParam(':idR', $idR, PDO::PARAM_STR);
-                        $q1->bindParam(':idR', $idR, PDO::PARAM_STR);
                         $success = $q->execute();
-                        $success2 = $q1->execute();
-                        if ($success && $success2) {
+                        if ($success) {
                                 $maxRangReservation = $this->recupMaxRang($idDoc, $numeroExemplaire);
                                 if ($maxRangReservation > $rang) {
                                         $this->UpdateRang($idDoc, $rang, $numeroExemplaire);
@@ -199,7 +196,7 @@ class ReservationExemplaireManager extends Manager
         function AfficherBouton($idAbonne, $idDoc)
         {
                 try {
-                        $q = $this->getPDO()->prepare('SELECT idDoc from reservation inner join reservationExemplaire on reservationExemplaire.idR=reservation.idR where idAbonne= :idAbonne AND idDoc = :idDoc');
+                        $q = $this->getPDO()->prepare('SELECT idDoc from reservationExemplaire where idAbonne= :idAbonne AND idDoc = :idDoc');
                         $q->bindParam(':idAbonne', $idAbonne, PDO::PARAM_INT);
                         $q->bindParam(':idDoc', $idDoc, PDO::PARAM_STR);
                         $q->execute();
@@ -218,5 +215,3 @@ class ReservationExemplaireManager extends Manager
                 }
         }
 }
-
-?>

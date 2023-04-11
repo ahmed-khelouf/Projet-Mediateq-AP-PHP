@@ -14,7 +14,7 @@ class ReservationParution extends Reservation
      * @param Statut $statut
      * @param integer $rang
      * @param string $dateReservation
-     * @param Parution $numeroParution
+     * @param Parution $parution
      */
     public function __construct(int $idR, Revue $revue, Abonne $abonne , int $rang , Statut $statut, string $dateReservation , Parution $parution)
     {
@@ -44,4 +44,3 @@ class ReservationParution extends Reservation
     }
  
 }
-?>
