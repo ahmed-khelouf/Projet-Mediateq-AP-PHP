@@ -1,4 +1,5 @@
 <?php
+// Titre de la page
 $titre = "Revue - Mediateq";
 
 // Création d'un objet manager de abonne

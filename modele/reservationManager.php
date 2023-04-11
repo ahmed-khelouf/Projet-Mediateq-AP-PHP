@@ -2,7 +2,7 @@
 
 class ReservationManager extends Manager
 {
-     /**
+        /**
          * retourne le nombre de réservation pour chaque abonne
          */
         function nombreReservation($idAbonne)
@@ -18,3 +18,5 @@ class ReservationManager extends Manager
                 }
         }
 }
+
+?>

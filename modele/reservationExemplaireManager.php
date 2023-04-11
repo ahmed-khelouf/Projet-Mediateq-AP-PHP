@@ -22,7 +22,7 @@ class ReservationExemplaireManager extends Manager
                         $exemplaireManager = new ExemplaireManager();
                         $exemplaires = $exemplaireManager->getList();
 
-                        $q = $this->getPDO()->prepare('SELECT reservation.idR , idDoc , idAbonne , idStatut , rang , dateReservation , numeroExemplaire FROM reservation inner join reservationExemplaire on reservationExemplaire.idR=reservation.idR inner join exemplaire on exemplaire.idDocument=reservationExemplaire.idDoc inner join document on exemplaire.idDocument=document.id inner join livre on livre.idDocument=document.id group by reservation.idR order by dateReservation desc');
+                        $q = $this->getPDO()->prepare('SELECT * FROM reservation inner join reservationExemplaire on reservationExemplaire.idR=reservation.idR inner join exemplaire on exemplaire.idDocument=reservationExemplaire.idDoc inner join document on exemplaire.idDocument=document.id inner join livre on livre.idDocument=document.id group by reservation.idR order by dateReservation desc');
                         $q->execute();
                         //  fetchAll(PDO::FETCH_ASSOC) est une méthode de l'objet PDOStatement qui permet de récupérer le résultat d'une requête SQL sous forme de tableau associatif. Chaque ligne du résultat est représentée par un tableau associatif dont les clés correspondent aux noms des colonnes de la table et les valeurs correspondent aux valeurs des champs de chaque ligne.
                         $r1 = $q->fetchAll(PDO::FETCH_ASSOC);
@@ -60,9 +60,8 @@ class ReservationExemplaireManager extends Manager
                         $exemplaireManager = new ExemplaireManager();
                         $exemplaires = $exemplaireManager->getList();
 
-                        $q = $this->getPDO()->prepare('SELECT reservation.idR , reservationExemplaire.idDoc , reservation.idAbonne , reservation.idStatut , reservation.rang , reservation.dateReservation , reservationExemplaire.numeroExemplaire FROM reservation inner join reservationExemplaire on reservationExemplaire.idR=reservation.idR inner join exemplaire on exemplaire.idDocument=reservationExemplaire.idDoc inner join document on exemplaire.idDocument=document.id inner join dvd on dvd.idDocument=document.id group by reservation.idR desc');
+                        $q = $this->getPDO()->prepare('SELECT * FROM reservation inner join reservationExemplaire on reservationExemplaire.idR=reservation.idR inner join exemplaire on exemplaire.idDocument=reservationExemplaire.idDoc inner join document on exemplaire.idDocument=document.id inner join dvd on dvd.idDocument=document.id group by reservation.idR desc');
                         $q->execute();
-                        
                         //  fetchAll(PDO::FETCH_ASSOC) est une méthode de l'objet PDOStatement qui permet de récupérer le résultat d'une requête SQL sous forme de tableau associatif. Chaque ligne du résultat est représentée par un tableau associatif dont les clés correspondent aux noms des colonnes de la table et les valeurs correspondent aux valeurs des champs de chaque ligne.
                         $r1 = $q->fetchAll(PDO::FETCH_ASSOC);
                         $lesReservations = array();
@@ -195,7 +194,7 @@ class ReservationExemplaireManager extends Manager
         }
 
         /**
-         * Afficher le bouton seulement si l'abonné n'a pas reservé l'exemplaire du document
+         * Afficher le bouton seulement si l'abonné n'a pas reservé un exemplaire du document
          */
         function AfficherBouton($idAbonne, $idDoc)
         {
@@ -204,11 +203,11 @@ class ReservationExemplaireManager extends Manager
                         $q->bindParam(':idAbonne', $idAbonne, PDO::PARAM_INT);
                         $q->bindParam(':idDoc', $idDoc, PDO::PARAM_STR);
                         $q->execute();
-                        //  fetchAll(PDO::FETCH_COLUMN) retournera un tableau contenant tous les idRevue pour l'abonné en question 
+                        //  fetchAll(PDO::FETCH_COLUMN) retournera un tableau contenant tous les idDoc pour l'abonné en question 
                         $reservations = $q->fetchAll(PDO::FETCH_COLUMN);
 
-                        // Vérifie si l'abonné a déjà réservé la revue
-                        // in_array est une fonction PHP qui permet de vérifier si une valeur donnée se trouve dans un tableau. Elle prend deux paramètres : la valeur à rechercher ($numeroParution) et le tableau dans lequel effectuer la recherche ($reservations)
+                        // Vérifie si l'abonné a déjà réservé le document
+                        // in_array est une fonction PHP qui permet de vérifier si une valeur donnée se trouve dans un tableau. Elle prend deux paramètres : la valeur à rechercher ($idDoc) et le tableau dans lequel effectuer la recherche ($reservations)
                         if (in_array($idDoc, $reservations)) {
                                 return false;
                         } else {
@@ -219,3 +218,5 @@ class ReservationExemplaireManager extends Manager
                 }
         }
 }
+
+?>

@@ -38,7 +38,7 @@ class Reservation
     }
 
     /**
-     * Accesseur de la propriété date
+     * Accesseur de la propriété dateReservation
      *
      * @return string
      */
@@ -77,4 +77,5 @@ class Reservation
     }
  
 }
+
 ?>

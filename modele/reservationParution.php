@@ -24,7 +24,7 @@ class ReservationParution extends Reservation
     }
 
     /**
-     * Accesseur de la propriété idRevue
+     * Accesseur de la propriété revue
      *
      * @return Revue
      */
@@ -34,7 +34,7 @@ class ReservationParution extends Reservation
     }
 
     /**
-     * Accesseur de la propriété numeroParution
+     * Accesseur de la propriété parution
      *
      * @return Parution
      */

@@ -1,5 +1,5 @@
 <?php
-
+// Titre de la page
 $titre = "DVD - Mediateq";
 
 // Création d'un objet manager de abonne
@@ -25,5 +25,3 @@ $unDvd = $dvdManager->getDvdById($idDoc);
 include "$racine/vue/header.php";
 include "$racine/vue/v_dvd.php";
 include "$racine/vue/footer.php";
-
-?>

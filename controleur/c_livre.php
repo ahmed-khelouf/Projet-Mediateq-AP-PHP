@@ -1,5 +1,5 @@
 <?php
-
+//Titre de la page
 $titre = "Livre - Mediateq";
 
 // Création d'un objet manager de abonne

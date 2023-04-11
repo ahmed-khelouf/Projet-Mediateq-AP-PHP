@@ -1,6 +1,7 @@
-<div class="livredetails bg-light">
+<div class="details bg-light">
     <div class="row justify-content-center">
-    <?php foreach ($unLivre->getLesExemplaires() as $unExemplaire) { ?>
+        <!-- Boucle itérant sur chaque exemplaire d'un livre -->
+        <?php foreach ($unLivre->getLesExemplaires() as $unExemplaire) { ?>
             <div class="col-md-6 mb-4">
                 <div class="card h-100">
                     <!-- Section de l'image de couverture et du titre de la revue -->
@@ -30,8 +31,11 @@
                         <?php
                         // Si la personne est connecté
                         if ($connexionManager->isLoggedOn()) {
+                            // Récupère l'utilisateur connecté
                             $abo = $abonneManager->getUtilisateurByMailU($_SESSION['mailU']);
+                            // Vérifie si l'utilisateur a réservé cet exemplaire
                             $reservation = $reservationExemplaireManager->AfficherBouton($abo->getId(), $unLivre->getId(), $unExemplaire->getNumero());
+                            // Vérifie si l'utilisateur a réservé l'exemplaire ou non
                             if ($reservation) { ?>
                                 <!-- Bouton de réservation -->
                                 <a href="#addnew<?= $unLivre->getId() ?><?= $unExemplaire->getNumero() ?>" data-toggle="modal" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> RÉSERVER</a>
@@ -44,6 +48,7 @@
                 </div>
             </div>
             <!-- Modal pour ajouter une nouvelle réservation -->
+            <!-- Si la personne est connecté -->
             <?php if ($connexionManager->isLoggedOn()) { ?>
                 <div class="modal fade" id="addnew<?= $unLivre->getId() ?><?= $unExemplaire->getNumero() ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -65,12 +70,11 @@
                                     <div class="card-body">
                                         <p class="card-text">Auteur : <?= $unLivre->getAuteur() ?></p>
                                         <p class="card-text">Public: <?= $unLivre->getTypePublic()->getLibelle() ?></p>
-                                        <p class="card-text">Collection : <?= $unLivre->getCollection()?></p>
+                                        <p class="card-text">Collection : <?= $unLivre->getCollection() ?></p>
                                         <p class="card-text"><strong><span style="color:red;">État : <?= $unExemplaire->getEtat()->getLibelle() ?></span></strong></p>
                                         <p class="card-text">
-  <img class="img-fluid mx-auto d-block" src="images/Livres/<?= $unLivre->getImage() ?>.jpg" width="50%">
-</p>
-
+                                            <img class="img-fluid mx-auto d-block" src="images/Livres/<?= $unLivre->getImage() ?>.jpg" width="50%">
+                                        </p>
                                     </div>
                                 </div>
                                 <div class="container-fluid">
@@ -81,7 +85,7 @@
                                         ?>
                                         <!-- les champs cachés pour envoyer les données nécessaires à la ajout -->
                                         <input type="hidden" class="form-control" name="rang" value="<?= $reservations + 1 ?> ">
-                                        <input type="hidden" class="form-control" name="idDoc" value="<?=$unLivre->getId()  ?> ">
+                                        <input type="hidden" class="form-control" name="idDoc" value="<?= $unLivre->getId()  ?> ">
                                         <input type="hidden" class="form-control" name="numeroExemplaire" value="<?= $unExemplaire->getNumero() ?>">
                                         <input type="hidden" class="form-control" name="idAbonne" value="<?= $abo->getId() ?>">
                                         <div class="row justify-content-center">

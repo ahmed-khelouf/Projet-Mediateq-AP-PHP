@@ -1,5 +1,6 @@
-<div class="revuedetails bg-light">
+<div class="details bg-light">
     <div class="row justify-content-center">
+        <!-- Boucle itérant sur chaque exemplaire d'une revue -->
         <?php foreach ($uneRevue->getLesNumeros() as $unNumero) { ?>
             <div class="col-md-6 mb-4">
                 <div class="card h-100">
@@ -30,8 +31,11 @@
                         <?php
                         // Si la personne est connecté
                         if ($connexionManager->isLoggedOn()) {
+                            // Récupère l'utilisateur connecté
                             $abo = $abonneManager->getUtilisateurByMailU($_SESSION['mailU']);
+                            // Vérifie si l'utilisateur a réservé cet exemplaire
                             $reservation = $reservationManager->AfficherBouton($abo->getId(), $uneRevue->getId(), $unNumero->getNumero());
+                            // Vérifie si l'utilisateur a réservé l'exemplaire ou non
                             if ($reservation) { ?>
                                 <!-- Bouton de réservation -->
                                 <a href="#addnew<?= $uneRevue->getId() ?><?= $unNumero->getNumero() ?>" data-toggle="modal" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> RÉSERVER</a>
@@ -44,6 +48,7 @@
                 </div>
             </div>
             <!-- Modal pour ajouter une nouvelle réservation -->
+            <!-- Si la personne est connecté -->
             <?php if ($connexionManager->isLoggedOn()) { ?>
                 <div class="modal fade" id="addnew<?= $uneRevue->getId() ?><?= $unNumero->getNumero() ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">

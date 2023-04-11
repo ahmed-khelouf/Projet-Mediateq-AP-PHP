@@ -78,18 +78,11 @@ h2 {
   align-items: center;
 }
 
-/* AFFICHAGE LIVRE */
-
-.livredetails { /* bloc du livre */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
 
 /* AFFICHAGE DES PARUTION ET EXEMLAIRE */
 
-.revuedetails { /* bloc de la revue */
+.details { /* bloc de la revue */
   display: flex;
   align-items: center;
   margin: 20px;

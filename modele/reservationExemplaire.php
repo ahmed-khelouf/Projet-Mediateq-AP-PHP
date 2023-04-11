@@ -3,7 +3,7 @@
 class ReservationExemplaire extends Reservation
 {
     private $document;
-    private $numeroExemplaire;
+    private $exemplaire;
 
     /**
      * construteur de la classe Reservation
@@ -14,13 +14,13 @@ class ReservationExemplaire extends Reservation
      * @param Statut $statut
      * @param integer $rang
      * @param string $dateReservation
-     * @param Exemplaire $numeroExemplaire
+     * @param Exemplaire $exemplaire
      */
-    public function __construct(int $idR, Document $document, Abonne $abonne , int $rang , Statut $statut, string $dateReservation , Exemplaire $numeroExemplaire)
+    public function __construct(int $idR, Document $document, Abonne $abonne , int $rang , Statut $statut, string $dateReservation , Exemplaire $exemplaire)
     {
         parent::__construct($idR, $abonne, $rang, $statut, $dateReservation);
         $this->document = $document;
-        $this->numeroExemplaire = $numeroExemplaire;
+        $this->exemplaire = $exemplaire;
     }
 
     /**
@@ -34,14 +34,15 @@ class ReservationExemplaire extends Reservation
     }
 
     /**
-     * Accesseur de la propriété getNumeroExemplaire
+     * Accesseur de la propriété exemplaire
      *
      * @return Exemplaire
      */
     public function getExemplaire(): Exemplaire
     {
-        return $this->numeroExemplaire;
+        return $this->exemplaire;
     }
  
 }
+
 ?>

@@ -1,13 +1,12 @@
-
-
-<div class="livredetails bg-light">
+<div class="details bg-light">
     <div class="row justify-content-center">
-    <?php foreach ($unDvd->getLesExemplaires() as $unExemplaire) { ?>
+        <!-- Boucle itérant sur chaque exemplaire du DVD -->
+        <?php foreach ($unDvd->getLesExemplaires() as $unExemplaire) { ?>
             <div class="col-md-6 mb-4">
                 <div class="card h-100">
                     <!-- Section de l'image de couverture et du titre de la revue -->
                     <div class="card-body text-center">
-                    <img class="img-fluid mx-auto d-block" src="images/Dvd/<?= $unDvd->getImage() ?>.jpg" alt="Couverture" width="50%">
+                        <img class="img-fluid mx-auto d-block" src="images/Dvd/<?= $unDvd->getImage() ?>.jpg" alt="Couverture" width="50%">
 
                         <h5 class="card-title"><strong><?= $unDvd->getTitre() ?></strong></h5>
                     </div>
@@ -15,13 +14,13 @@
                     <div class="card-body text-center">
                         <ul>
                             <li>
-                                <p class="card-text bleu"><strong>Auteur : <?= $unDvd->getRealisateur() ?></strong></p>
+                                <p class="card-text bleu"><strong>Réalisateur : <?= $unDvd->getRealisateur() ?></strong></p>
                             </li>
                             <li>
                                 <p class="card-text vert"><strong>Public: <?= $unDvd->getTypePublic()->getLibelle() ?></strong></p>
                             </li>
                             <li>
-                                <p class="card-text orange"><strong>Durée: <?= $unDvd->getDuree()?></strong></p>
+                                <p class="card-text orange"><strong>Durée: <?= $unDvd->getDuree() ?> min</strong></p>
                             </li>
                             <li>
                                 <p class="card-text violet"><strong>Etat : <?= $unExemplaire->getEtat()->getLibelle() ?></strong></p>
@@ -33,8 +32,11 @@
                         <?php
                         // Si la personne est connecté
                         if ($connexionManager->isLoggedOn()) {
+                            // Récupère l'utilisateur connecté
                             $abo = $abonneManager->getUtilisateurByMailU($_SESSION['mailU']);
+                            // Vérifie si l'utilisateur a réservé cet exemplaire
                             $reservation = $reservationExemplaireManager->AfficherBouton($abo->getId(), $unDvd->getId(), $unExemplaire->getNumero());
+                            // Vérifie si l'utilisateur a réservé l'exemplaire ou non
                             if ($reservation) { ?>
                                 <!-- Bouton de réservation -->
                                 <a href="#addnew<?= $unDvd->getId() ?><?= $unExemplaire->getNumero() ?>" data-toggle="modal" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> RÉSERVER</a>
@@ -47,6 +49,7 @@
                 </div>
             </div>
             <!-- Modal pour ajouter une nouvelle réservation -->
+            <!-- Si la personne est connecté -->
             <?php if ($connexionManager->isLoggedOn()) { ?>
                 <div class="modal fade" id="addnew<?= $unDvd->getId() ?><?= $unExemplaire->getNumero() ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -70,7 +73,7 @@
                                         <p class="card-text">Durée : <?= $unDvd->getDuree() ?></p>
                                         <p class="card-text">Public: <?= $unDvd->getTypePublic()->getLibelle() ?></p>
                                         <p class="card-text"><strong><span style="color:red;">État : <?= $unExemplaire->getEtat()->getLibelle() ?></span></strong></p>
-                                        <p class="card-text"> <img class="img-fluid mx-auto d-block" src="images/Dvd/<?= $unDvd->getImage() ?>.jpg"alt="Couverture" width="50%">
+                                        <p class="card-text"> <img class="img-fluid mx-auto d-block" src="images/Dvd/<?= $unDvd->getImage() ?>.jpg" alt="Couverture" width="50%">
                                     </div>
                                 </div>
                                 <div class="container-fluid">
@@ -81,7 +84,7 @@
                                         ?>
                                         <!-- les champs cachés pour envoyer les données nécessaires à la ajout -->
                                         <input type="hidden" class="form-control" name="rang" value="<?= $reservations + 1 ?> ">
-                                        <input type="hidden" class="form-control" name="idDoc" value="<?=$unDvd->getId()  ?> ">
+                                        <input type="hidden" class="form-control" name="idDoc" value="<?= $unDvd->getId()  ?> ">
                                         <input type="hidden" class="form-control" name="numeroExemplaire" value="<?= $unExemplaire->getNumero() ?>">
                                         <input type="hidden" class="form-control" name="idAbonne" value="<?= $abo->getId() ?>">
                                         <div class="row justify-content-center">
