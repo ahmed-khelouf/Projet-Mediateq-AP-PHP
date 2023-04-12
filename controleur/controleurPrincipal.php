@@ -15,6 +15,7 @@ function controleurPrincipal($action) {
     $lesActions["revue"] = "c_revue.php";
     $lesActions["livre"] = "c_livre.php";
     $lesActions["dvd"] = "c_dvd.php";
+    $lesActions["historiqueReservations"] = "c_historiqueReservations.php";
 
     if (array_key_exists($action, $lesActions)) {
         return $lesActions[$action];
@@ -64,6 +65,7 @@ function chargerModeles($racine){
     require_once("$racine/modele/empruntParutionManager.php");
     require_once("$racine/modele/empruntExemplaireManager.php");
     require_once("$racine/modele/historique.php");
+    require_once("$racine/modele/historiqueManager.php");
     require_once("$racine/modele/historiqueParution.php");
     require_once("$racine/modele/historiqueParutionManager.php");
     require_once("$racine/modele/historiqueExemplaire.php");

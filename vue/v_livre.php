@@ -41,7 +41,7 @@
                                 <a href="#addnew<?= $unLivre->getId() ?><?= $unExemplaire->getNumero() ?>" data-toggle="modal" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> RÉSERVER</a>
                             <?php } else { ?>
                                 <!-- Message si l'utilisateur a déjà réservé ce document -->
-                                <span class="text-danger font-weight-bold">Vous avez déjà réservé ce document</span>
+                                <span class="text-danger font-weight-bold">Vous avez déjà réservé un exemplaire de ce document</span>
                         <?php }
                         } ?>
                     </div>

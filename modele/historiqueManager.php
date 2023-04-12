@@ -1,17 +1,17 @@
 <?php
 
-class ReservationManager extends Manager
+class HistoriqueManager extends Manager
 {
         /**
-         * retourne le nombre de réservation  en cours pour chaque abonne
+         * retourne le nombre de réservation pour chaque abonne (hisorique)
          */
-        function nombreReservation($idAbonne)
+        function nombreHistorique($idAbonne)
         {
                 try {
                         $q = $this->getPDO()->prepare('SELECT COUNT(*) FROM (
-                        SELECT idR FROM reservationExemplaire WHERE idAbonne=:idAbonne
+                        SELECT id FROM historiqueParution WHERE idAbonne=:idAbonne
                         UNION ALL
-                        SELECT idR FROM reservationParution WHERE idAbonne=:idAbonne ) AS total');
+                        SELECT id FROM historiqueExemplaire WHERE idAbonne=:idAbonne ) AS total');
                         $q->bindParam(':idAbonne', $idAbonne, PDO::PARAM_INT);
                         $q->execute();
                         return $q->fetchColumn();

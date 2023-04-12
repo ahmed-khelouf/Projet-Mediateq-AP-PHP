@@ -14,7 +14,7 @@ class HistoriqueExemplaire extends Historique
      * @param string $dateReservation
      * @param Exemplaire $exemplaire
      */
-    public function __construct(string $id, Document $document, Abonne $abonne, int $rang,  string $dateReservation, Exemplaire $exemplaire)
+    public function __construct(string $id, Document $document, Abonne $abonne,  string $dateReservation, Exemplaire $exemplaire)
     {
         parent::__construct($id, $abonne,  $dateReservation);
         $this->document = $document;

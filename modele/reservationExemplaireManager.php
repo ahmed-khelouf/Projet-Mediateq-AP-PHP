@@ -22,7 +22,7 @@ class ReservationExemplaireManager extends Manager
                         $exemplaireManager = new ExemplaireManager();
                         $exemplaires = $exemplaireManager->getList();
 
-                        $q = $this->getPDO()->prepare('SELECT * FROM reservationExemplaire inner join  exemplaire on exemplaire.idDocument=reservationExemplaire.idDoc inner join document on exemplaire.idDocument=document.id inner join livre on livre.idDocument=document.id  order by dateReservation desc');
+                        $q = $this->getPDO()->prepare('SELECT * FROM reservationExemplaire inner join  exemplaire on exemplaire.idDocument=reservationExemplaire.idDoc inner join livre on livre.idDocument=reservationExemplaire.idDoc group by reservationExemplaire.idR order by dateReservation desc');
                         $q->execute();
                         //  fetchAll(PDO::FETCH_ASSOC) est une méthode de l'objet PDOStatement qui permet de récupérer le résultat d'une requête SQL sous forme de tableau associatif. Chaque ligne du résultat est représentée par un tableau associatif dont les clés correspondent aux noms des colonnes de la table et les valeurs correspondent aux valeurs des champs de chaque ligne.
                         $r1 = $q->fetchAll(PDO::FETCH_ASSOC);
@@ -60,7 +60,7 @@ class ReservationExemplaireManager extends Manager
                         $exemplaireManager = new ExemplaireManager();
                         $exemplaires = $exemplaireManager->getList();
 
-                        $q = $this->getPDO()->prepare('SELECT * FROM reservationExemplaire inner join exemplaire on exemplaire.idDocument=reservationExemplaire.idDoc inner join document on exemplaire.idDocument=document.id inner join dvd on dvd.idDocument=document.id group by idR desc');
+                        $q = $this->getPDO()->prepare('SELECT * FROM reservationExemplaire inner join  exemplaire on exemplaire.idDocument=reservationExemplaire.idDoc inner join dvd on dvd.idDocument=reservationExemplaire.idDoc group by reservationExemplaire.idR order by dateReservation desc');
                         $q->execute();
                         //  fetchAll(PDO::FETCH_ASSOC) est une méthode de l'objet PDOStatement qui permet de récupérer le résultat d'une requête SQL sous forme de tableau associatif. Chaque ligne du résultat est représentée par un tableau associatif dont les clés correspondent aux noms des colonnes de la table et les valeurs correspondent aux valeurs des champs de chaque ligne.
                         $r1 = $q->fetchAll(PDO::FETCH_ASSOC);
