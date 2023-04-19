@@ -32,7 +32,7 @@ class ReservationParutionManager extends Manager
                                 $abonne = $abonnes[$uneReservation['idAbonne']];
                                 $statut = $statuts[$uneReservation['idStatut']];
                                 $parution = $parutions[$uneReservation['numeroParution']];
-                                $lesReservations[$uneReservation['idR']] = new ReservationParution($uneReservation['idR'], $revue, $abonne, $uneReservation['rang'], $statut, $uneReservation['dateReservation'], $parution);
+                                $lesReservations[$uneReservation['idR']] = new ReservationParution($uneReservation['idR'], $revue, $abonne, $uneReservation['rang'], $statut, $uneReservation['dateReservation'], $parution );
                         }
                         return $lesReservations;
                 } catch (PDOException $e) {
@@ -77,7 +77,7 @@ class ReservationParutionManager extends Manager
         /**
          * modifie le rang (-1) pour les reservations donc le rang est supérieur au rang renseigné selon le numero de la revue 
          */
-        function UpdateRang($idRevue, $rang, $numeroParution)
+        function UpdateRang($idRevue, $rang, $numeroParution )
         {
                 try {
                         $q = $this->getPDO()->prepare('UPDATE reservationParution set rang = rang - 1 where idRevue = :idRevue AND numeroParution=:numeroParution AND rang > :rang ');
@@ -120,7 +120,7 @@ class ReservationParutionManager extends Manager
                         } else {
                                 $idStatut = 1;
                         }
-                        $q = $this->getPDO()->prepare('INSERT INTO reservationParution (idR , idAbonne, rang, idStatut, dateReservation , idRevue , numeroParution) VALUES (:idR , :idAbonne, :rang, :idStatut, CURRENT_TIMESTAMP() , :idRevue , :numeroParution)');
+                        $q = $this->getPDO()->prepare('INSERT INTO reservationParution (idR , idAbonne, rang, idStatut, dateReservation , idRevue , numeroParution) VALUES (:idR , :idAbonne, :rang, :idStatut, CURRENT_TIMESTAMP() , :idRevue , :numeroParution )');
                         $q->bindParam(':idR', $idR, PDO::PARAM_STR);
                         $q->bindParam(':idAbonne', $idAbonne, PDO::PARAM_INT);
                         $q->bindParam(':rang', $rang, PDO::PARAM_INT);

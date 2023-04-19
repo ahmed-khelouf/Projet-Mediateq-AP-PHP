@@ -16,9 +16,9 @@ class ReservationExemplaire extends Reservation
      * @param string $dateReservation
      * @param Exemplaire $exemplaire
      */
-    public function __construct(string $idR, Document $document, Abonne $abonne, int $rang, Statut $statut, string $dateReservation, Exemplaire $exemplaire)
+    public function __construct(string $idR, Document $document, Abonne $abonne, int $rang, Statut $statut, string $dateReservation, Exemplaire $exemplaire )
     {
-        parent::__construct($idR, $abonne, $rang, $statut, $dateReservation);
+        parent::__construct($idR, $abonne, $rang, $statut, $dateReservation );
         $this->document = $document;
         $this->exemplaire = $exemplaire;
     }

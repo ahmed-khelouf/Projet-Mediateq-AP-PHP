@@ -7,6 +7,7 @@ class Reservation
     private $rang;
     private $statut;
     private $dateReservation;
+    
 
 
     /**
@@ -75,5 +76,7 @@ class Reservation
     {
         return $this->abonne;
     }
- 
+    
+    
+
 }

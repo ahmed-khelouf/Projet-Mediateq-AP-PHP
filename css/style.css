@@ -68,6 +68,7 @@ h2 {
   width: 50%;
 }
 
+
 /* AFFICHAGE DES EXEMPLAIRES ET PARUTIONS DANS LA RECHERCHE */
 
 .img-square-wrapper { /* image de la revue dans la recherche */
@@ -76,6 +77,11 @@ h2 {
   align-items: center;
 }
 
+/* taille de la card */
+.custom-card {
+  height: 700px;
+  width: 550px;
+}
 
 
 /* AFFICHAGE DES PARUTION ET EXEMLAIRE */

@@ -19,4 +19,6 @@ class ReservationManager extends Manager
                         echo ("Une erreur s'est produite : " . $e->getMessage());
                 }
         }
+
+       
 }

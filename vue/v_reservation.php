@@ -8,6 +8,7 @@ if ($connexionManager->isLoggedOn()) {
     <h3>Nombre de réservation <?= $reservation ?></h3>
     <?php
     ?>
+
     <h2>REVUES : </h2>
     <!-- Boucle pour afficher toutes les réservations de l'abonné courant -->
     <?php foreach ($reservationsParutions as $reservation) { ?>
@@ -28,7 +29,7 @@ if ($connexionManager->isLoggedOn()) {
                                     <div class="trait-horizontal"></div>
                                     <div class="rangStatut">
                                         <p> Rang : <strong><?= $reservation->getRang() ?></strong> </p>
-                                        <p> Statut : <strong><?= $reservation->getStatut()->getLibelle() ?></strong></p>
+                                        <p class="text-danger font-weight-bold"> Statut : <strong><?= $reservation->getStatut()->getLibelle() ?></strong></p>
                                     </div>
                                     <p> Date : <strong><?= $reservation->getDate() ?></strong></p>
                                     <p> Numero : <strong><?= $reservation->getParution()->getNumero() ?></strong></p>
@@ -39,7 +40,6 @@ if ($connexionManager->isLoggedOn()) {
                     </div>
                 </div>
             </tbody>
-
             <!-- Modal pour confirmer la suppression de la réservation -->
             <?php if ($connexionManager->isLoggedOn()) { ?>
                 <div class="modal fade" id="delete_<?= $reservation->getId() ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -108,7 +108,7 @@ if ($connexionManager->isLoggedOn()) {
                                         <div class="trait-horizontal"></div>
                                         <div class="rangStatut">
                                             <p> Rang : <strong><?= $reservation->getRang() ?></strong> </p>
-                                            <p> Statut : <strong><?= $reservation->getStatut()->getLibelle() ?></strong></p>
+                                            <p class="text-danger font-weight-bold"> Statut : <strong><?= $reservation->getStatut()->getLibelle() ?></strong></p>
                                         </div>
                                         <p> Date : <strong><?= $reservation->getDate() ?></strong></p>
                                         <a href='#delete_<?= $reservation->getId() ?>' class='btn btn-danger btn-sup' data-toggle='modal'><span class='glyphicon glyphicon-trash'></span> Supprimer</a>
@@ -187,7 +187,7 @@ if ($connexionManager->isLoggedOn()) {
                                             <div class="trait-horizontal"></div>
                                             <div class="rangStatut">
                                                 <p> Rang : <strong><?= $reservation->getRang() ?></strong> </p>
-                                                <p> Statut : <strong><?= $reservation->getStatut()->getLibelle() ?></strong></p>
+                                                <p class="text-danger font-weight-bold"> Statut : <strong><?= $reservation->getStatut()->getLibelle() ?></strong></p>
                                             </div>
                                             <p> Date : <strong><?= $reservation->getDate() ?></strong></p>
                                             <a href='#delete_<?= $reservation->getId() ?>' class='btn btn-danger btn-sup' data-toggle='modal'><span class='glyphicon glyphicon-trash'></span> Supprimer</a>

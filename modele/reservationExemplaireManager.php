@@ -32,7 +32,7 @@ class ReservationExemplaireManager extends Manager
                                 $abonne = $abonnes[$uneReservation['idAbonne']];
                                 $statut = $statuts[$uneReservation['idStatut']];
                                 $exemplaire = $exemplaires[$uneReservation['numeroExemplaire']];
-                                $lesReservations[$uneReservation['idR']] = new ReservationExemplaire($uneReservation['idR'], $document, $abonne, $uneReservation['rang'], $statut, $uneReservation['dateReservation'], $exemplaire);
+                                $lesReservations[$uneReservation['idR']] = new ReservationExemplaire($uneReservation['idR'], $document, $abonne, $uneReservation['rang'], $statut, $uneReservation['dateReservation'], $exemplaire );
                         }
                         return $lesReservations;
                 } catch (PDOException $e) {
@@ -70,7 +70,7 @@ class ReservationExemplaireManager extends Manager
                                 $abonne = $abonnes[$uneReservation['idAbonne']];
                                 $statut = $statuts[$uneReservation['idStatut']];
                                 $exemplaire = $exemplaires[$uneReservation['numeroExemplaire']];
-                                $lesReservations[$uneReservation['idR']] = new ReservationExemplaire($uneReservation['idR'], $document, $abonne, $uneReservation['rang'], $statut, $uneReservation['dateReservation'], $exemplaire);
+                                $lesReservations[$uneReservation['idR']] = new ReservationExemplaire($uneReservation['idR'], $document, $abonne, $uneReservation['rang'], $statut, $uneReservation['dateReservation'], $exemplaire );
                         }
                         return $lesReservations;
                 } catch (PDOException $e) {
@@ -146,6 +146,7 @@ class ReservationExemplaireManager extends Manager
                 }
         }
 
+
         /**
          * insertion d'une reservation dans la base de données
          */
@@ -158,7 +159,7 @@ class ReservationExemplaireManager extends Manager
                         } else {
                                 $idStatut = 1;
                         }
-                        $q = $this->getPDO()->prepare('INSERT INTO reservationExemplaire (idR , idAbonne, rang, idStatut, dateReservation , idDoc , numeroExemplaire) VALUES ( :idR , :idAbonne, :rang, :idStatut, CURRENT_TIMESTAMP() , :idDoc , :numeroExemplaire)');
+                        $q = $this->getPDO()->prepare('INSERT INTO reservationExemplaire (idR , idAbonne, rang, idStatut, dateReservation , idDoc , numeroExemplaire ) VALUES ( :idR , :idAbonne, :rang, :idStatut, CURRENT_TIMESTAMP() , :idDoc , :numeroExemplaire )');
                         $q->bindParam(':idR', $idR, PDO::PARAM_STR);
                         $q->bindParam(':idDoc', $idDoc, PDO::PARAM_STR);
                         $q->bindParam(':idAbonne', $idAbonne, PDO::PARAM_INT);
