@@ -9,6 +9,7 @@ class Abonne  {
     private $adresse;
     private $numTel;
     private $finAbonnement;
+    private $numeroAbo;
     private $mdpU;
     private $mailU;
     private $typeAbonnement;
@@ -24,13 +25,14 @@ class Abonne  {
      * @param string $adresse
      * @param integer $numTel
      * @param string $finAbonnement
+     * @param int $numeroAbo
      * @param string $mdpU
      * @param string $mailU
      * @param string TypeAbonnement $typeAbonnement
      */
 
 
-    public function __construct(int $id, string $nom, string $prenom , string $dateNaissance , string $adresse , string $numTel , string $finAbonnement , string $mdpU , string $mailU,TypeAbonnement $typeAbonnement)
+    public function __construct(int $id, string $nom, string $prenom , string $dateNaissance , string $adresse , string $numTel , string $finAbonnement , int $numeroAbo , string $mdpU , string $mailU,TypeAbonnement $typeAbonnement)
     {
         $this->id = $id;
         $this->nom = $nom;
@@ -39,6 +41,7 @@ class Abonne  {
         $this->adresse = $adresse;
         $this->numTel = $numTel;
         $this->finAbonnement = $finAbonnement;
+        $this->numeroAbo = $numeroAbo;
         $this->mdpU = $mdpU;
         $this->mailU = $mailU;
         $this->typeAbonnement = $typeAbonnement;
@@ -115,6 +118,15 @@ class Abonne  {
      */
     public function getFinAbonnement() : string{
         return $this->finAbonnement;
+    }
+
+    /**
+     * Accesseur de la propriété numeroAbo
+     *
+     * @return int
+     */
+    public function getNumeroAbo() : int{
+        return $this->numeroAbo;
     }
 
     /**
@@ -213,6 +225,16 @@ class Abonne  {
      */
     public function setFinAbonnement(string $finAbonnement): void {
         $this->finAbonnement = $finAbonnement;
+    }
+
+    /**
+     * Mutateur de la propriété numeroAbo
+     *
+     * @param int $numeroAbo
+     * @return void
+     */
+    public function setNumeroAbo(int $numeroAbo): void {
+        $this->numeroAbo = $numeroAbo;
     }
 
     /**

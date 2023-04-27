@@ -1,6 +1,32 @@
 html {
   
 }
+.upper-box{
+  text-align: center;
+}
+input{
+  border-radius: 10px;
+  padding : 10px;
+  width : 250px;
+  background-color: rgb(241, 241, 241);
+}
+
+input::placeholder{
+  color: rgb(62, 143, 219);
+  font-size: 20px;
+}
+
+.mail {
+  margin-bottom: 20px;
+
+}
+.border-login{
+  text-align: center;
+}
+
+.submit{
+  margin-top : 20px;
+}
 
 body {
   margin-bottom: 60px;

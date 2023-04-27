@@ -21,7 +21,7 @@ class abonneManager extends Manager
         if($q->rowCount()==1){
             $user = $q->fetch(PDO::FETCH_ASSOC);
             $type = $types[$user['typeAbonnement']];
-        $unAbonnee = new Abonne((int)$user['id'], $user['nom'] , $user['prenom'] , $user['dateNaissance'] , $user['adresse'] , $user['numTel'] , $user['finAbonnement'] , $user['mdpU'] , $user['mailU'], $type); 
+        $unAbonnee = new Abonne((int)$user['id'], $user['nom'] , $user['prenom'] , $user['dateNaissance'] , $user['adresse'] , $user['numTel'] , $user['finAbonnement'] ,(int)$user['numeroAbo'] ,$user['mdpU'] , $user['mailU'], $type); 
         
         return $unAbonnee;
         }
@@ -43,7 +43,7 @@ class abonneManager extends Manager
         foreach($r1 as $user)
         {
             $type = $types[$user['typeAbonnement']];
-            $lesAbonnees[$user['id']] = new Abonne((int)$user['id'], $user['nom'] , $user['prenom'] , $user['dateNaissance'] , $user['adresse'] , $user['numTel'] , $user['finAbonnement'] , $user['mdpU'] , $user['mailU'], $type); 
+            $lesAbonnees[$user['id']] = new Abonne((int)$user['id'], $user['nom'] , $user['prenom'] , $user['dateNaissance'] , $user['adresse'] , $user['numTel'] , $user['finAbonnement'] , (int)$user['numeroAbo'], $user['mdpU'] , $user['mailU'], $type); 
         }
         return $lesAbonnees;
         
@@ -71,8 +71,11 @@ class abonneManager extends Manager
             // Crypter le mot de passe par défaut
             $mdpCrypte = password_hash($mdpDefaut, PASSWORD_DEFAULT);
     
-            // Insérer les données de l'abonné avec le mot de passe par défaut
-            $req = $this->getPDO()->prepare('INSERT INTO abonné (nom, prenom, dateNaissance, adresse, numTel, typeAbonnement, finAbonnement, mdpU, mailU) VALUES (:nom, :prenom, :dateNaissance, :adresse, :numTel, :typeAbonnement, :finAbonnement, :mdpU, :mailU)');
+            // Générer le numéro d'abonnement aléatoire de 10 chiffres
+            $numAbo = random_int(pow(10, 9), pow(10, 10) - 1);
+    
+            // Insérer les données de l'abonné avec le mot de passe par défaut et le numéro d'abonnement aléatoire
+            $req = $this->getPDO()->prepare('INSERT INTO abonné (nom, prenom, dateNaissance, adresse, numTel, typeAbonnement, finAbonnement, numeroAbo, mdpU, mailU) VALUES (:nom, :prenom, :dateNaissance, :adresse, :numTel, :typeAbonnement, :finAbonnement, :numeroAbo, :mdpU, :mailU)');
             $req->bindParam(':nom', $nom, PDO::PARAM_STR);
             $req->bindParam(':prenom', $prenom, PDO::PARAM_STR);
             $req->bindParam(':dateNaissance', $dateNaiss, PDO::PARAM_STR);
@@ -80,6 +83,7 @@ class abonneManager extends Manager
             $req->bindParam(':numTel', $numTel, PDO::PARAM_STR);
             $req->bindParam(':typeAbonnement', $typeAbonnement, PDO::PARAM_STR);
             $req->bindParam(':finAbonnement', $finAbo, PDO::PARAM_STR);
+            $req->bindParam(':numeroAbo', $numAbo, PDO::PARAM_INT);
             $req->bindParam(':mdpU', $mdpCrypte, PDO::PARAM_STR);
             $req->bindParam(':mailU', $mailU, PDO::PARAM_STR);
             $resultat = $req->execute();
@@ -90,8 +94,6 @@ class abonneManager extends Manager
         }
     }
     
-    
-
 
     function recupid() {
 

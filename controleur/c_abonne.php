@@ -20,21 +20,27 @@ if(isset($_SESSION['mailU'])) {
 }
 
 	if(isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['dateNaissance']) && isset($_POST['adresse']) && isset($_POST['numTel']) && isset($_POST['typeAbonnement']) && isset($_POST['finAbonnement']) && isset($_POST['mailU'])) {
-		$nom = $_POST['nom'];
-		$prenom = $_POST['prenom'];
-		$dateNaiss = $_POST['dateNaissance'];
-		$adresse = $_POST['adresse'];
-		$numTel = $_POST['numTel'];
-		$finAbo = $_POST['finAbonnement'];
-		$mailU = $_POST['mailU'];
-		$typeAbonnement = $_POST['typeAbonnement'];
+	$nom = $_POST['nom'];
+	$prenom = $_POST['prenom'];
+	$dateNaiss = $_POST['dateNaissance'];
+	$adresse = $_POST['adresse'];
+	$numTel = $_POST['numTel'];
+	$finAbo = $_POST['finAbonnement'];
+	$mailU = $_POST['mailU'];
+	$typeAbonnement = $_POST['typeAbonnement'];
 
-		// Générer le mot de passe par défaut
-		$mdpDefaut = date_format(date_create($dateNaiss), "dmY") . strtoupper(substr($nom, 0, 2));
+	// Générer le mot de passe par défaut
+	$mdpDefaut = date_format(date_create($dateNaiss), "dmY") . strtoupper(substr($nom, 0, 2));
 
-		// Insérer l'abonné avec le mot de passe par défaut
-		$abonneManager->insertAbo($nom, $prenom, $dateNaiss, $adresse, $numTel, $finAbo, $mailU, $typeAbonnement);
-	}
+	// Générer le numéro d'abonnement aléatoire
+	$numAbonnement = random_int(round(pow(10, 9)), round(pow(10, 10) - 1));
+
+	// Insérer l'abonné avec le mot de passe par défaut
+	$abonneManager->insertAbo($nom, $prenom, $dateNaiss, $adresse, $numTel, $finAbo, $mailU, $typeAbonnement, $numAbonnement);
+}
+
+
+	
 
 // Inclusion de la vue
 include "$racine/vue/header.php";

@@ -22,7 +22,7 @@ class ConnexionManager extends Manager
             }
         } else {
             // l'utilisateur n'existe pas en base de données
-            echo "Utilisateur inexistant";
+            echo "Utilisateur ou mot de passe incorrect";
         }
     } catch (Exception $e) {
         echo "Erreur lors de la connexion : " . $e->getMessage();

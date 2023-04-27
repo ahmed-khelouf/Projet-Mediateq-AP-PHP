@@ -3,18 +3,22 @@ function controleurPrincipal($action) {
     $lesActions = array();
     $lesActions["rechercheSimple"] = "c_rechercheSimple.php";
     $lesActions["rechercheAvancee"] = "c_rechercheAvancee.php";
-    $lesActions["reservation"] = "reservation.php";
+    $lesActions["reservation"] = "c_reservation.php";
     $lesActions["nouveautes"] = "c_nouveautes.php";
     $lesActions["faq"] = "c_faq.php";
-    $lesActions["connexion"] = "connexion.php";
+    $lesActions["connexion"] = "c_connexion.php";
     $lesActions["monDossier"] = "c_abonne.php";
-    $lesActions["deconnexion"] = "deconnexion.php";
+    $lesActions["deconnexion"] = "c_deconnexion.php";
     $lesActions["inscription"] = "c_inscription.php";
     $lesActions["accueil"] = $lesActions["rechercheSimple"] ;
     $lesActions["defaut"] = $lesActions["accueil"];
     $lesActions["mesPretsEnCours"] = "c_mesPretsEnCours.php";
+    $lesActions["mesPretsHistorique"] = "c_mesPretsHistorique.php";
+    $lesActions["revue"] = "c_revue.php";
+    $lesActions["livre"] = "c_livre.php";
+    $lesActions["dvd"] = "c_dvd.php";
     
-
+    
     if (array_key_exists($action, $lesActions)) {
         return $lesActions[$action];
     } else {
@@ -25,7 +29,8 @@ function controleurPrincipal($action) {
 
 function chargerModeles($racine){
     require_once("$racine/modele/Manager.php");
-    require_once("$racine/modele/Document.php");
+    require_once("$racine/modele/document.php");
+    require_once("$racine/modele/documentManager.php");
     require_once("$racine/modele/Livre.php");
     require_once("$racine/modele/Dvd.php");
     require_once("$racine/modele/Exemplaire.php");
@@ -43,15 +48,24 @@ function chargerModeles($racine){
     require_once("$racine/modele/TypePublicManager.php");
     require_once("$racine/modele/reservation.php");
     require_once("$racine/modele/reservationManager.php");
+    require_once("$racine/modele/reservationExemplaire.php");
+    require_once("$racine/modele/reservationExemplaireManager.php");
+    require_once("$racine/modele/reservationParution.php");
+    require_once("$racine/modele/reservationParutionManager.php");
     require_once("$racine/modele/abonne.php");
     require_once("$racine/modele/abonneManager.php");
+    // require_once("$racine/modele/dateConnexion.php");
+    // require_once("$racine/modele/dateConnexionManager.php");
     require_once("$racine/modele/connexionManager.php");
     require_once("$racine/modele/descripteur.php");
     require_once("$racine/modele/descripteurManager.php");
     require_once("$racine/modele/statut.php");
     require_once("$racine/modele/statutManager.php");
     require_once("$racine/modele/emprunt.php");
-    require_once("$racine/modele/empruntManager.php");
+    require_once("$racine/modele/empruntExemplaire.php");
+    require_once("$racine/modele/empruntExemplaireManager.php");
+    require_once("$racine/modele/empruntParution.php");
+    require_once("$racine/modele/empruntParutionManager.php");
     require_once("$racine/modele/typeAbonnement.php");
     require_once("$racine/modele/typeAbonnementManager.php");
 

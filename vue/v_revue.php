@@ -43,6 +43,7 @@
                     </div>
                 </div>
             </div>
+            <?php if ($connexionManager->isLoggedOn()) { ?>
             <!-- Modal pour ajouter une nouvelle réservation -->
             <div class="modal fade" id="addnew<?= $uneRevue->getId() ?><?= $unNumero->getNumero() ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -95,7 +96,7 @@
                     </div>
                 </div>
             </div>
-        <?php } ?>
+        <?php } } ?>
     </div>
 </div>
 
