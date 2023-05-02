@@ -1,6 +1,7 @@
 <?php
 
 $connexionManager = new ConnexionManager();
+$dateConnexionManager = new DateConnexionManager();
 
 $abonneManager = new abonneManager();
 $abonnes = $abonneManager->getList();
@@ -11,8 +12,15 @@ if (isset($_POST["mailU"]) && isset($_POST["mdpU"])){
     $mailU=$_POST["mailU"];
     $mdpU=$_POST["mdpU"];
     $connexionManager->login($mailU,$mdpU);
-}
+    if ($connexionManager->isLoggedOn()){
+        $abo = new abonneManager();
+        $idUtilisateur = $abonneManager->getUtilisateurByMailU($mailU);
+        var_dump($idUtilisateur->getId());
 
+        $dateConnexion = date('Y-m-d H:i:s');
+        $dateConnexionManager-> historiserConnexion($idUtilisateur->getId(), $dateConnexion);
+    }
+}
 
 if(isset($_SESSION['mailU'])){
     include "$racine/vue/v_accueil.php";
@@ -30,7 +38,4 @@ if ($connexionManager->isLoggedOn()){ // si l'utilisateur est connecté on redir
         
         
     }
-
-
-
 ?>

@@ -46,6 +46,8 @@ function chargerModeles($racine){
     require_once("$racine/modele/abonne.php");
     require_once("$racine/modele/abonneManager.php");
     require_once("$racine/modele/connexionManager.php");
+    require_once("$racine/modele/dateConnexion.php");
+    require_once("$racine/modele/dateConnexionManager.php");
     require_once("$racine/modele/descripteur.php");
     require_once("$racine/modele/descripteurManager.php");
     require_once("$racine/modele/statut.php");
