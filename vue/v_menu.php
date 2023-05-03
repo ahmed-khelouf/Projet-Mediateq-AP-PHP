@@ -52,6 +52,7 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="./?action=connexion">Connexion</a>
+              <!-- <a class="dropdown-item" href="./?action=inscription">Inscription</a> -->
             </div>
           </li>
         <?php } ?>

@@ -50,18 +50,19 @@ class abonneManager extends Manager
     }
 
     function updateMdp($id, $mdpU) {
-	    try {
-		// $mdpHash = password_hash($mdpU, PASSWORD_DEFAULT);
-		$req = $this->getPDO()->prepare('UPDATE abonné SET mdpU = :mdpU WHERE id = :id');
-		$req->bindParam(':id', $id, PDO::PARAM_INT);
-		$req->bindParam(':mdpU', $mdpU, PDO::PARAM_STR);
-		$resultat = $req->execute();
-		return $resultat;
-	    } catch (PDOException $e) {
-		print "Erreur !: " . $e->getMessage();
-		die();
+        try {
+            $mdpCrypte = password_hash($mdpU, PASSWORD_DEFAULT);
+            $req = $this->getPDO()->prepare('UPDATE abonné SET mdpU = :mdpU WHERE id = :id');
+            $req->bindParam(':id', $id, PDO::PARAM_INT);
+            $req->bindParam(':mdpU', $mdpCrypte, PDO::PARAM_STR);
+            $resultat = $req->execute();
+            return $resultat;
+        } catch (PDOException $e) {
+            print "Erreur !: " . $e->getMessage();
+            die();
         }
-	}
+    }
+    
 
     function insertAbo($nom, $prenom, $dateNaiss, $adresse, $numTel, $finAbo, $mailU, $typeAbonnement) {
         try {
