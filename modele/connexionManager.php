@@ -16,6 +16,11 @@ class ConnexionManager extends Manager
                 // le mot de passe est correct
                 $_SESSION["mailU"] = $mailU;
                 $_SESSION["mdpU"] = $mdpBD;
+                // Générer un token de connexion
+                $token = bin2hex(random_bytes(32));
+                $_SESSION["token"] = $token;
+                // Retourner le token
+                return $token;
             } else {
                 // le mot de passe est incorrect
                 echo "Mot de passe ou identifiant incorrect";
