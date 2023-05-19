@@ -28,30 +28,6 @@ if(isset($_POST['id']) && isset($_POST['mdpU'])) {
     }
 }
 
-if(isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['dateNaissance']) && isset($_POST['adresse']) && isset($_POST['numTel']) && isset($_POST['typeAbonnement']) && isset($_POST['finAbonnement']) && isset($_POST['mailU'])) {
-    $nom = $_POST['nom'];
-    $prenom = $_POST['prenom'];
-    $dateNaiss = $_POST['dateNaissance'];
-    $adresse = $_POST['adresse'];
-    $numTel = $_POST['numTel'];
-    $finAbo = $_POST['finAbonnement'];
-    $mailU = $_POST['mailU'];
-    $typeAbonnement = $_POST['typeAbonnement'];
-
-    // Vérification du jeton CSRF
-    if(isset($_POST['csrf_token']) && $_POST['csrf_token'] === $_SESSION['csrf_token']) {
-
-        // Générer le mot de passe par défaut
-        $mdpDefaut = date_format(date_create($dateNaiss), "dmY") . strtoupper(substr($nom, 0, 2));
-
-        // Insérer l'abonné avec le mot de passe par défaut
-        $abonneManager->insertAbo($nom, $prenom, $dateNaiss, $adresse, $numTel, $finAbo, $mailU, $typeAbonnement);
-    } else {
-        // Si le jeton CSRF est invalide, afficher une erreur ou rediriger l'utilisateur vers une page d'erreur
-        // ...
-    }
-}
-
 // Générer un jeton CSRF unique
 $csrf_token = bin2hex(random_bytes(32));
 

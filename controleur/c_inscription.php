@@ -1,5 +1,4 @@
 <?php
-
 // Inclusion du modèle et initialisation de l'objet manager
 $abonneManager = new AbonneManager();
 
@@ -26,8 +25,18 @@ if(isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['dateNaissanc
 
         // Insérer l'abonné avec le mot de passe par défaut
         $abonneManager->insertAbo($nom, $prenom, $dateNaiss, $adresse, $numTel, $finAbo, $mailU, $typeAbonnement);
+
+        // Message de redirection
+        $message = "Inscription réussie. Vous allez être redirigé vers la page de connexion dans quelques instants.";
+
+        // Affichage du message
+        echo "<h2>$message</h2>";
+
+        // Redirection vers la page avec le message
+        header("Refresh: 3; URL=./?action=connexion");
+        exit();
     } else {
-        // Si le jeton CSRF est invalide, afficher une erreur ou rediriger l'utilisateur vers une page d'erreur
+        // Jeton CSRF invalide, affichage d'une erreur ou redirection vers une page d'erreur
         // ...
     }
 }
@@ -42,3 +51,4 @@ $_SESSION['csrf_token'] = $csrf_token;
 include "$racine/vue/header.php";
 include "$racine/vue/v_inscription.php";
 include "$racine/vue/footer.php";
+?>
