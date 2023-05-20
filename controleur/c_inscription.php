@@ -20,21 +20,30 @@ if(isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['dateNaissanc
     // Vérification du jeton CSRF
     if(isset($_POST['csrf_token']) && $_POST['csrf_token'] === $_SESSION['csrf_token']) {
 
-        // Générer le mot de passe par défaut
-        $mdpDefaut = date_format(date_create($dateNaiss), "dmY") . strtoupper(substr($nom, 0, 2));
+        // Vérifier si l'adresse e-mail existe déjà
+        $existingEmail = $abonneManager->checkExistingEmail($mailU);
 
-        // Insérer l'abonné avec le mot de passe par défaut
-        $abonneManager->insertAbo($nom, $prenom, $dateNaiss, $adresse, $numTel, $finAbo, $mailU, $typeAbonnement);
+        if ($existingEmail) {
+            // Adresse e-mail déjà utilisée, afficher un message d'erreur
+            $message = "L'adresse e-mail est déjà utilisée pour un autre compte.";
+            echo "<h2>$message</h2>";
+        } else {
+            // Générer le mot de passe par défaut
+            $mdpDefaut = date_format(date_create($dateNaiss), "dmY") . strtoupper(substr($nom, 0, 2));
 
-        // Message de redirection
-        $message = "Inscription réussie. Vous allez être redirigé vers la page de connexion dans quelques instants.";
+            // Insérer l'abonné avec le mot de passe par défaut
+            $abonneManager->insertAbo($nom, $prenom, $dateNaiss, $adresse, $numTel, $finAbo, $mailU, $typeAbonnement);
 
-        // Affichage du message
-        echo "<h2>$message</h2>";
+            // Message de redirection
+            $message = "Inscription réussie. Vous allez être redirigé vers la page de connexion dans quelques instants.";
 
-        // Redirection vers la page avec le message
-        header("Refresh: 3; URL=./?action=connexion");
-        exit();
+            // Affichage du message
+            echo "<h2>$message</h2>";
+
+            // Redirection vers la page avec le message
+            header("Refresh: 3; URL=./?action=connexion");
+            exit();
+        }
     } else {
         // Jeton CSRF invalide, affichage d'une erreur ou redirection vers une page d'erreur
         // ...
