@@ -75,40 +75,62 @@
 
         
 
-            function insertAbo($nom, $prenom, $dateNaiss, $adresse, $numTel, $finAbo, $mailU, $typeAbonnement) {
-                try {
-                    // Vérifier si l'adresse e-mail existe déjà
-                    $existingEmail = $this->checkExistingEmail($mailU);
-            
-                    if ($existingEmail) {
-                        // Adresse e-mail déjà utilisée, renvoyer une erreur
-                        throw new Exception("L'adresse e-mail est déjà utilisée pour un autre compte.");
-                    }
-            
-                    // Générer le mot de passe par défaut
-                    $mdpDefaut = date_format(date_create($dateNaiss), "dmY") . strtoupper(substr($nom, 0, 2));
-            
-                    // Crypter le mot de passe par défaut
-                    $mdpCrypte = password_hash($mdpDefaut, PASSWORD_DEFAULT);
-            
-                    // Insérer les données de l'abonné avec le mot de passe par défaut
-                    $req = $this->getPDO()->prepare('INSERT INTO abonné (nom, prenom, dateNaissance, adresse, numTel, typeAbonnement, finAbonnement, mdpU, mailU) VALUES (:nom, :prenom, :dateNaissance, :adresse, :numTel, :typeAbonnement, :finAbonnement, :mdpU, :mailU)');
-                    $req->bindParam(':nom', $nom, PDO::PARAM_STR);
-                    $req->bindParam(':prenom', $prenom, PDO::PARAM_STR);
-                    $req->bindParam(':dateNaissance', $dateNaiss, PDO::PARAM_STR);
-                    $req->bindParam(':adresse', $adresse, PDO::PARAM_STR);
-                    $req->bindParam(':numTel', $numTel, PDO::PARAM_STR);
-                    $req->bindParam(':typeAbonnement', $typeAbonnement, PDO::PARAM_STR);
-                    $req->bindParam(':finAbonnement', $finAbo, PDO::PARAM_STR);
-                    $req->bindParam(':mdpU', $mdpCrypte, PDO::PARAM_STR);
-                    $req->bindParam(':mailU', $mailU, PDO::PARAM_STR);
-                    $resultat = $req->execute();
-                    return $resultat;
-                } catch (PDOException $e) {
-                    print "Erreur !: " . $e->getMessage();
-                    die();
-                }
-            }
+            function insertAbo($nom, $prenom, $dateNaiss, $adresse, $numTel, $mailU) {
+    try {
+        // Vérifier si l'adresse e-mail existe déjà
+        $existingEmail = $this->checkExistingEmail($mailU);
+
+        if ($existingEmail) {
+            // Adresse e-mail déjà utilisée, renvoyer une erreur
+            throw new Exception("L'adresse e-mail est déjà utilisée pour un autre compte.");
+        }
+
+        // Calculer l'âge de l'utilisateur
+        $dateNaissance = new DateTime($dateNaiss);
+        $aujourdHui = new DateTime();
+        $difference = $dateNaissance->diff($aujourdHui);
+        $age = $difference->y;
+
+        // Déterminer le type d'abonnement en fonction de l'âge
+        if ($age < 18) {
+            $typeAbonnement = '1';
+        } elseif ($age >= 18 && $age <= 25) {
+            $typeAbonnement = '2';
+        } else {
+            $typeAbonnement = '3';
+        }
+
+        // Générer le mot de passe par défaut
+        $mdpDefaut = date_format($dateNaissance, "dmY") . strtoupper(substr($nom, 0, 2));
+
+        // Crypter le mot de passe par défaut
+        $mdpCrypte = password_hash($mdpDefaut, PASSWORD_DEFAULT);
+
+        $finAbo = date('Y-m-d', strtotime('+3 months'));
+
+        // Insérer les données de l'abonné avec le mot de passe par défaut
+        $sql = 'INSERT INTO abonné (nom, prenom, dateNaissance, adresse, numTel, typeAbonnement, finAbonnement, mdpU, mailU) 
+                VALUES (:nom, :prenom, :dateNaissance, :adresse, :numTel, :typeAbonnement, :finAbonnement, :mdpU, :mailU)';
+        $req = $this->getPDO()->prepare($sql);
+        $req->bindParam(':nom', $nom, PDO::PARAM_STR);
+        $req->bindParam(':prenom', $prenom, PDO::PARAM_STR);
+        $req->bindParam(':dateNaissance', $dateNaiss, PDO::PARAM_STR);
+        $req->bindParam(':adresse', $adresse, PDO::PARAM_STR);
+        $req->bindParam(':numTel', $numTel, PDO::PARAM_STR);
+        $req->bindParam(':typeAbonnement', $typeAbonnement, PDO::PARAM_STR);
+        $req->bindParam(':finAbonnement', $finAbo, PDO::PARAM_STR);
+        $req->bindParam(':mdpU', $mdpCrypte, PDO::PARAM_STR);
+        $req->bindParam(':mailU', $mailU, PDO::PARAM_STR);
+        $resultat = $req->execute();
+        
+        return $resultat;
+    } catch (PDOException $e) {
+        // Gérer les erreurs de base de données d'une manière appropriée à votre application
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    }
+
             
         
             public function checkExistingEmail($mailU) {

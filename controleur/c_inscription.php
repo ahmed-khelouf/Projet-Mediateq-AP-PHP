@@ -7,18 +7,31 @@ if(isset($_SESSION['mailU'])) {
     $unAbonne = $abonneManager->getUtilisateurByMailU($_SESSION['mailU']);
 }
 
-if(isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['dateNaissance']) && isset($_POST['adresse']) && isset($_POST['numTel']) && isset($_POST['typeAbonnement']) && isset($_POST['finAbonnement']) && isset($_POST['mailU'])) {
+if(isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['dateNaissance']) && isset($_POST['adresse']) && isset($_POST['numTel']) && isset($_POST['mailU'])) {
     $nom = $_POST['nom'];
     $prenom = $_POST['prenom'];
     $dateNaiss = $_POST['dateNaissance'];
     $adresse = $_POST['adresse'];
     $numTel = $_POST['numTel'];
-    $finAbo = $_POST['finAbonnement'];
     $mailU = $_POST['mailU'];
-    $typeAbonnement = $_POST['typeAbonnement'];
 
     // Vérification du jeton CSRF
     if(isset($_POST['csrf_token']) && $_POST['csrf_token'] === $_SESSION['csrf_token']) {
+
+        // // Calculer le type d'abonnement en fonction de l'âge
+        // $typeAbonnement = '';
+        // $dateNaissance = new DateTime($dateNaiss);
+        // $aujourdHui = new DateTime();
+        // $difference = $dateNaissance->diff($aujourdHui);
+        // $age = $difference->y;
+
+        // if ($age < 18) {
+        //     $typeAbonnement = '1';
+        // } elseif ($age >= 18 && $age <= 25) {
+        //     $typeAbonnement = '2';
+        // } else {
+        //     $typeAbonnement = '3';
+        // }
 
         // Vérifier si l'adresse e-mail existe déjà
         $existingEmail = $abonneManager->checkExistingEmail($mailU);
@@ -32,7 +45,7 @@ if(isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['dateNaissanc
             $mdpDefaut = date_format(date_create($dateNaiss), "dmY") . strtoupper(substr($nom, 0, 2));
 
             // Insérer l'abonné avec le mot de passe par défaut
-            $abonneManager->insertAbo($nom, $prenom, $dateNaiss, $adresse, $numTel, $finAbo, $mailU, $typeAbonnement);
+            $abonneManager->insertAbo($nom, $prenom, $dateNaiss, $adresse, $numTel, $mailU);
 
             // Message de redirection
             $message = "Inscription réussie. Vous allez être redirigé vers la page de connexion dans quelques instants.";
