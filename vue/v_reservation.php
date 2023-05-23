@@ -4,7 +4,7 @@ if ($connexionManager->isLoggedOn()) {
     // Récupération du nombre de réservations de l'abonné courant
     $reservation = $reservationManager->nombreReservation($unAbonne->getId());
 ?>
-    <h1>Réservation de <?= $unAbonne->getNom() ?></h1>
+    <h1>Réservation de <?= $unAbonne->getNom() ?> <?= $unAbonne->getPrenom() ?></h1>
     <h3>Nombre de réservation <?= $reservation ?></h3>
     <?php
     ?>
