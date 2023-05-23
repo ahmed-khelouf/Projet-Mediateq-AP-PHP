@@ -15,7 +15,8 @@ if (isset($_POST['rechercheAvancee'])) {
     $typeDoc3 = htmlentities($_POST['searchType3']);
     $option3 = htmlentities($_POST['searchOption3']);
     $texte3 = htmlentities($_POST['searchText3']);
-
+ 
+    
     // Construction de la chaîne de recherche
     $recherche = "Recherche des livres contenant \"" . $texte . "\"";
 
