@@ -38,23 +38,25 @@
 <h2>Inscription</h2>
 <form method="post" action="./?action=inscription">
     <label for="nom">Nom :</label>
-    <input type="text" name="nom" required>
+    <input type="text" name="nom" value="<?= isset($nom) ? htmlspecialchars($nom) : '' ?>" required>
 
     <label for="prenom">Prénom :</label>
-    <input type="text" name="prenom" required>
+    <input type="text" name="prenom" value="<?= isset($prenom) ? htmlspecialchars($prenom) : '' ?>" required>
 
     <label for="dateNaiss">Date de naissance :</label>
-    <input type="date" name="dateNaissance" required>
+    <input type="date" name="dateNaissance" value="<?= isset($dateNaiss) ? htmlspecialchars($dateNaiss) : '' ?>" required>
 
     <label for="adresse">Adresse :</label>
-    <input type="text" name="adresse" required>
+    <input type="text" name="adresse" value="<?= isset($adresse) ? htmlspecialchars($adresse) : '' ?>" required>
 
     <label for="numTel">Numéro de téléphone :</label>
-    <input type="tel" name="numTel" pattern="0[0-9]{9}" title="Le numéro de téléphone doit être composé de 10 chiffres et commencer par un 0." required>
+    <input type="tel" name="numTel" pattern="0[0-9]{9}" title="Le numéro de téléphone doit être composé de 10 chiffres et commencer par un 0." value="<?= isset($numTel) ? htmlspecialchars($numTel) : '' ?>" required>
 
     <label for="mailU">Adresse e-mail :</label>
-    <input type="email" name="mailU" required>
+    <input type="email" name="mailU" value="<?= isset($mailU) ? htmlspecialchars($mailU) : '' ?>" required>
 
-    <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
+    <p>Le type d'abonnement est défini automatiquement selon votre âge</p>
+
+    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>">
     <input type="submit" value="Valider">
 </form>
