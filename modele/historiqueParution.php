@@ -8,13 +8,13 @@ class HistoriqueParution extends Historique
     /**
      * construteur de la classe Reservation
      *
-     * @param string $id
+     * @param int $id
      * @param Revue $revue
      * @param Abonne $abonne
      * @param string $dateReservation
      * @param Parution $parution
      */
-    public function __construct(string $id, Revue $revue, Abonne $abonne ,  string $dateReservation , Parution $parution)
+    public function __construct(int $id, Revue $revue, Abonne $abonne ,  string $dateReservation , Parution $parution)
     {
         parent::__construct($id, $abonne,$dateReservation);
         $this->revue = $revue;

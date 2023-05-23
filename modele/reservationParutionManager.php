@@ -114,14 +114,13 @@ class ReservationParutionManager extends Manager
         function addReservation($idRevue, $idAbonne, $rang, $numeroParution)
         {
                 try {
-                        $idR = uniqid(); // Générer un ID unique
+   
                         if ($rang > 1) {
                                 $idStatut = 2;
                         } else {
                                 $idStatut = 1;
                         }
-                        $q = $this->getPDO()->prepare('INSERT INTO reservationParution (idR , idAbonne, rang, idStatut, dateReservation , idRevue , numeroParution) VALUES (:idR , :idAbonne, :rang, :idStatut, CURRENT_TIMESTAMP() , :idRevue , :numeroParution )');
-                        $q->bindParam(':idR', $idR, PDO::PARAM_STR);
+                        $q = $this->getPDO()->prepare('INSERT INTO reservationParution (idAbonne, rang, idStatut, dateReservation , idRevue , numeroParution) VALUES (:idR , :idAbonne, :rang, :idStatut, CURRENT_TIMESTAMP() , :idRevue , :numeroParution )');
                         $q->bindParam(':idAbonne', $idAbonne, PDO::PARAM_INT);
                         $q->bindParam(':rang', $rang, PDO::PARAM_INT);
                         $q->bindParam(':idStatut', $idStatut, PDO::PARAM_INT);
@@ -140,7 +139,7 @@ class ReservationParutionManager extends Manager
         {
                 try {
                         $q = $this->getPDO()->prepare('DELETE FROM reservationParution WHERE idR = :idR');
-                        $q->bindParam(':idR', $idR, PDO::PARAM_STR);
+                        $q->bindParam(':idR', $idR, PDO::PARAM_INT);
                         $success = $q->execute();
                         if ($success ) {
                                 $maxRangReservation = $this->recupMaxRang($idRevue, $numeroParution);

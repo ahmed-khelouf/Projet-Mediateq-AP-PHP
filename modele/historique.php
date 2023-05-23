@@ -10,11 +10,11 @@ class Historique
     /**
      * construteur de la classe Reservation
      *
-     * @param string $id
+     * @param int $id
      * @param Abonne $abonne
      * @param string $dateReservation
      */
-    public function __construct(string $id , Abonne $abonne , string $dateReservation )
+    public function __construct(int $id , Abonne $abonne , string $dateReservation )
     {
         $this->id= $id;
         $this->abonne = $abonne;
@@ -24,9 +24,9 @@ class Historique
     /**
      * Accesseur de la propriété id
      *
-     * @return string
+     * @return int
      */
-    public function getId(): string
+    public function getId(): int
     {
         return $this->id;
     }

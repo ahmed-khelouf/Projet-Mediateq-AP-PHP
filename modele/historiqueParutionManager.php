@@ -43,8 +43,7 @@ class HistoriqueParutionManager extends Manager
     function addHistorique($idAbonne, $idRevue, $numeroParution)
     {
         try {
-            $id = uniqid(); // Générer un ID unique
-            $q = $this->getPDO()->prepare('INSERT INTO historiqueParution (id , idAbonne,  dateReservation , idRevue , numeroParution) VALUES (:id ,:idAbonne, CURRENT_TIMESTAMP() , :idRevue , :numeroParution)');
+            $q = $this->getPDO()->prepare('INSERT INTO historiqueParution (idAbonne,  dateReservation , idRevue , numeroParution) VALUES (:idAbonne, CURRENT_TIMESTAMP() , :idRevue , :numeroParution)');
             $q->bindParam(':id', $id, PDO::PARAM_STR);
             $q->bindParam(':idAbonne', $idAbonne, PDO::PARAM_INT);
             $q->bindParam(':idRevue', $idRevue, PDO::PARAM_STR);

@@ -77,9 +77,7 @@ class HistoriqueExemplaireManager extends Manager
     function addHistorique($idAbonne, $idDoc, $numeroExemplaire)
     {
         try {
-            $id = uniqid(); // Générer un ID unique
-            $q = $this->getPDO()->prepare('INSERT INTO historiqueExemplaire (id ,idAbonne,  dateReservation , idDoc , numeroExemplaire) VALUES (:id ,:idAbonne,  CURRENT_TIMESTAMP() , :idDoc , :numeroExemplaire)');
-            $q->bindParam(':id', $id, PDO::PARAM_STR);
+            $q = $this->getPDO()->prepare('INSERT INTO historiqueExemplaire (idAbonne,  dateReservation , idDoc , numeroExemplaire) VALUES (:idAbonne,  CURRENT_TIMESTAMP() , :idDoc , :numeroExemplaire)');
             $q->bindParam(':idAbonne', $idAbonne, PDO::PARAM_INT);
             $q->bindParam(':idDoc', $idDoc, PDO::PARAM_STR);
             $q->bindParam(':numeroExemplaire', $numeroExemplaire, PDO::PARAM_INT);

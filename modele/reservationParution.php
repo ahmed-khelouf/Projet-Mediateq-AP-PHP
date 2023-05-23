@@ -8,7 +8,7 @@ class ReservationParution extends Reservation
     /**
      * construteur de la classe Reservation
      *
-     * @param string $id
+     * @param int $id
      * @param Revue $revue
      * @param Abonne $abonne
      * @param Statut $statut
@@ -16,7 +16,7 @@ class ReservationParution extends Reservation
      * @param string $dateReservation
      * @param Parution $parution
      */
-    public function __construct(string $idR, Revue $revue, Abonne $abonne , int $rang , Statut $statut, string $dateReservation , Parution $parution )
+    public function __construct(int $idR, Revue $revue, Abonne $abonne , int $rang , Statut $statut, string $dateReservation , Parution $parution )
     {
         parent::__construct($idR, $abonne, $rang, $statut, $dateReservation );
         $this->revue = $revue;
