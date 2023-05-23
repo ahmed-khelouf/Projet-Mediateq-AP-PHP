@@ -22,6 +22,17 @@
 
             // Rediriger l'utilisateur vers la page de connexion
             // ...
+            $connexionManager = new ConnexionManager();
+            $connexionManager->logout();
+
+            $message = "Votre mot de passe a été changé avec succès, vous serez deconecté.";
+
+            // Affichage du message
+            echo "<h2>$message</h2>";
+
+            // Redirection de l'utilisateur vers la page de connexion
+            header("Refresh: 3; URL=./?action=connexion");
+            exit();
 
         } else {
             // Si le jeton CSRF est invalide, afficher une erreur ou rediriger l'utilisateur vers une page d'erreur
