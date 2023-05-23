@@ -1,29 +1,41 @@
 <?php
-$titre = "Connexion - Mediateq";
-
 $connexionManager = new ConnexionManager();
+$dateConnexionManager = new DateConnexionManager();
 
 $abonneManager = new abonneManager();
 $abonnes = $abonneManager->getList();
 
-
-// recuperation des donnees GET, POST, et SESSION
+// Vérifier si le formulaire de connexion a été soumis
 if (isset($_POST["mailU"]) && isset($_POST["mdpU"])){
-    $mailU=$_POST["mailU"];
-    $mdpU=$_POST["mdpU"];
-    $connexionManager->login($mailU,$mdpU);
+    $mailU = $_POST["mailU"];
+    $mdpU = $_POST["mdpU"];
+    
+    // Vérifier les identifiants de connexion et récupérer le token
+    $token = $connexionManager->login($mailU, $mdpU);
+    
+    if (!is_null($token)) {
+        // Stocker le token dans une variable de session pour une utilisation ultérieure
+        $_SESSION["token"] = $token;
+        
+        // Enregistrer la date de connexion
+        if ($connexionManager->isLoggedOn()) {
+            $idUtilisateur = $abonneManager->getUtilisateurByMailU($mailU);
+            $dateConnexion = date('Y-m-d H:i:s');
+            $dateConnexionManager->historiserConnexion($idUtilisateur->getId(), $dateConnexion);
+        }
+    }
 }
 
-if(isset($_SESSION['mailU'])){
+// Vérifier si l'utilisateur est connecté et si le token est valide
+if ($connexionManager->isLoggedOn() && isset($_SESSION["token"]) && $_SESSION["token"] === $token) {
     include "$racine/vue/v_accueil.php";
-}else{
-    include_once "$racine/vue/header.php";
-    include "$racine/vue/v_connexion.php";
+} else {
+    include "$racine/vue/header.php";
+    include "$racine/vue/vueConnexion.php";
     include "$racine/vue/footer.php";
 }
 
-// ATTENDRE QUE PAGE PROFIL -> JULIEN
-if ($connexionManager->isLoggedOn()){ // si l'utilisateur est connecté on redirige vers le controleur monProfil
-    include "$racine/controleur/c_reservation.php"; 
+// Si l'utilisateur est connecté, rediriger vers le contrôleur monProfil
+if ($connexionManager->isLoggedOn() && isset($_SESSION["token"]) && $_SESSION["token"] === $token) {
+    include "$racine/controleur/c_abonne.php";
 }
-?>

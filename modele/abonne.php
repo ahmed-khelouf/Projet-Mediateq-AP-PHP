@@ -1,6 +1,6 @@
 <?php
 
-class Abonne {
+class Abonne  {
 
     private $id ; 
     private $nom;
@@ -8,10 +8,11 @@ class Abonne {
     private $dateNaissance;
     private $adresse;
     private $numTel;
-    private $typeAbonnement;
     private $finAbonnement;
     private $mdpU;
     private $mailU;
+    private $typeAbonnement;
+
 
     /**
      * Constructeur de la classe utilisateur
@@ -22,14 +23,14 @@ class Abonne {
      * @param string $dateNaissance
      * @param string $adresse
      * @param integer $numTel
-     * @param string $typeAbonnement
      * @param string $finAbonnement
      * @param string $mdpU
      * @param string $mailU
+     * @param string TypeAbonnement $typeAbonnement
      */
 
 
-    public function __construct(int $id, string $nom, string $prenom , string $dateNaissance , string $adresse , string $numTel , string $typeAbonnement , string $finAbonnement , string $mdpU , string $mailU )
+    public function __construct(int $id, string $nom, string $prenom , string $dateNaissance , string $adresse , string $numTel , string $finAbonnement , string $mdpU , string $mailU,TypeAbonnement $typeAbonnement)
     {
         $this->id = $id;
         $this->nom = $nom;
@@ -37,10 +38,11 @@ class Abonne {
         $this->dateNaissance = $dateNaissance;
         $this->adresse = $adresse;
         $this->numTel = $numTel;
-        $this->typeAbonnement = $typeAbonnement;
         $this->finAbonnement = $finAbonnement;
         $this->mdpU = $mdpU;
         $this->mailU = $mailU;
+        $this->typeAbonnement = $typeAbonnement;
+
     }
 
     /**
@@ -97,17 +99,17 @@ class Abonne {
         return $this->numTel;
     }
 
-    /**
-     * Accesseur de la propriété typeAbonnement
+     /**
+     * Accesseur de la propriété typeabonnement
      *
-     * @return string
+     * @return TypeAbonnement
      */
-    public function getTypeAbonnement() : string{
+    public function getTypeAbonnement() : TypeAbonnement {
         return $this->typeAbonnement;
     }
 
     /**
-     * Accesseur de la propriété typeAbonnement
+     * Accesseur de la propriété finAbonnement
      *
      * @return string
      */
@@ -199,10 +201,10 @@ class Abonne {
      * @param string $typeAbonnement
      * @return void
      */
-    public function setTypeAbonnement(string $typeAbonnement): void {
-        $this->typeAbonnement = $typeAbonnement;
+    public function setTypeAbonnement(TypeAbonnement $typeAbonnement): void {
+        $this->$typeAbonnement = $typeAbonnement;
     }
-    
+
     /**
      * Mutateur de la propriété finAbonnement
      *
