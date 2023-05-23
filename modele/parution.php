@@ -34,6 +34,15 @@ class Parution {
         return $this->numero;
     }
 
+        /**
+     * Accesseur de la propriété Revue
+     *
+     * @return Revue
+     */
+    public function getRevue() : Revue {
+        return $this->revue;
+    }
+
     /**
      * Accesseur de la propriété etat
      *
@@ -61,9 +70,7 @@ class Parution {
         return $this->photo;
     }
 
-    
-    // a completer getter/setter
-
+  
 
 }
 ?>

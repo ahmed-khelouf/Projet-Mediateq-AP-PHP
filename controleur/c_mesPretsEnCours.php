@@ -5,20 +5,20 @@ if(!isset($_SESSION['mailU'])){
 
 $titre = "Nouveautés - Catalogue - Mediateq";
 
-$vues = array(); // tableau des vues à appeler
-//array_push($vues, "$racine/vue/v_mesPretsEnCours.php");
-//array_push($vues, "$racine/vue/v_nouveautes.php");
-//var_dump($_SESSION);
+$vues = array(); 
+
+// Recupération de l'objet étudiant
 if(isset($_SESSION['mailU'])){
     $abonneManager = new abonneManager();
     $abonne = $abonneManager->getUtilisateurByMailU($_SESSION['mailU']);
 }
 
-$empruntManager = new EmpruntManager();
+// Récupération des objets Emprunts d'exemplaires et Emprunts de parutions (seulement les éléments non-archivés)
+$empruntManager = new EmpruntExemplaireManager();
+$emprunts = $empruntManager->getListActual();
 
-//var_dump($empruntManager);
-$emprunts = $empruntManager->getEmprunts();
-//var_dump($emprunts);
+$empruntParutionManager = new EmpruntParutionManager();
+$empruntsParution = $empruntParutionManager->getListActual();
 
 array_push($vues, "$racine/vue/v_mesPretsEnCours.php");
 
