@@ -1,5 +1,3 @@
-
-
 <?php
 
 $titre = "Recherche - Catalogue - Mediateq";
