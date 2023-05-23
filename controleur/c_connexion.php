@@ -31,7 +31,7 @@ if ($connexionManager->isLoggedOn() && isset($_SESSION["token"]) && $_SESSION["t
     include "$racine/vue/v_accueil.php";
 } else {
     include "$racine/vue/header.php";
-    include "$racine/vue/vueConnexion.php";
+    include "$racine/vue/v_connexion.php";
     include "$racine/vue/footer.php";
 }
 

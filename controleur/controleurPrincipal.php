@@ -16,7 +16,10 @@ function controleurPrincipal($action) {
     $lesActions["livre"] = "c_livre.php";
     $lesActions["dvd"] = "c_dvd.php";
     $lesActions["historiqueReservations"] = "c_historiqueReservations.php";
-
+    $lesActions["monDossier"] = "c_abonne.php";
+    $lesActions["inscription"] = "c_inscription.php";
+    $lesActions["accueil"] = $lesActions["rechercheSimple"] ;
+    
     if (array_key_exists($action, $lesActions)) {
         return $lesActions[$action];
     } else {
@@ -70,6 +73,10 @@ function chargerModeles($racine){
     require_once("$racine/modele/historiqueParutionManager.php");
     require_once("$racine/modele/historiqueExemplaire.php");
     require_once("$racine/modele/historiqueExemplaireManager.php");
+    require_once("$racine/modele/dateConnexion.php");
+    require_once("$racine/modele/dateConnexionManager.php");
+    require_once("$racine/modele/typeAbonnement.php");
+    require_once("$racine/modele/typeAbonnementManager.php");
 }
 ?>
 

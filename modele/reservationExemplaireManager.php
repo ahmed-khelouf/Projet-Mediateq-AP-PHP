@@ -153,13 +153,12 @@ class ReservationExemplaireManager extends Manager
         function addReservation($idDoc, $idAbonne, $rang, $numeroExemplaire)
         {
                 try {
-         
                         if ($rang > 1) {
                                 $idStatut = 2;
                         } else {
                                 $idStatut = 1;
                         }
-                        $q = $this->getPDO()->prepare('INSERT INTO reservationExemplaire ( idAbonne, rang, idStatut, dateReservation , idDoc , numeroExemplaire ) VALUES ( :idAbonne, :rang, :idStatut, CURRENT_TIMESTAMP() , :idDoc , :numeroExemplaire )');
+                        $q = $this->getPDO()->prepare('INSERT INTO reservationExemplaire ( idAbonne, rang, idStatut, dateReservation , idDoc , numeroExemplaire ) VALUES (:idAbonne, :rang, :idStatut, CURRENT_TIMESTAMP() , :idDoc , :numeroExemplaire )');
                         $q->bindParam(':idDoc', $idDoc, PDO::PARAM_STR);
                         $q->bindParam(':idAbonne', $idAbonne, PDO::PARAM_INT);
                         $q->bindParam(':rang', $rang, PDO::PARAM_INT);
