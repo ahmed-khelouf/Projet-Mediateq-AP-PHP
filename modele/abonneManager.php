@@ -50,19 +50,35 @@
                 
             }
 
-                function updateMdp($id, $mdpU) {
+            function updateMdp($id, $mdpActuel, $nouveauMdp, $confirmationMdp) {
                 try {
-                    // Vérifier les conditions du mot de passe : 1 Majuscule, 1 miniscule, 1 chiffre, 1 caractère spécial, 12 caractères minimum.
-                    if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,}$/', $mdpU)) {
-                        return "Le mot de passe ne respecte pas les critères requis.";
+                    // Vérifier les conditions du mot de passe : 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial, 12 caractères minimum.
+                    if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,}$/', $nouveauMdp)) {
+                        return "Le nouveau mot de passe ne respecte pas les critères requis.";
                     }
-                    
-                    $mdpCrypte = password_hash($mdpU, PASSWORD_DEFAULT);
+            
+                    // Vérifier si le mot de passe actuel correspond à celui de l'utilisateur
+                    $req = $this->getPDO()->prepare('SELECT mdpU FROM abonné WHERE id = :id');
+                    $req->bindParam(':id', $id, PDO::PARAM_INT);
+                    $req->execute();
+                    $resultat = $req->fetch(PDO::FETCH_ASSOC);
+                    $mdpActuelHash = $resultat['mdpU'];
+            
+                    if (!password_verify($mdpActuel, $mdpActuelHash)) {
+                        return "Le mot de passe actuel est incorrect.";
+                    }
+            
+                    // Vérifier si la confirmation du nouveau mot de passe correspond au nouveau mot de passe
+                    if ($nouveauMdp !== $confirmationMdp) {
+                        return "La confirmation du mot de passe ne correspond pas au nouveau mot de passe.";
+                    }
+            
+                    $nouveauMdpCrypte = password_hash($nouveauMdp, PASSWORD_DEFAULT);
                     $req = $this->getPDO()->prepare('UPDATE abonné SET mdpU = :mdpU WHERE id = :id');
                     $req->bindParam(':id', $id, PDO::PARAM_INT);
-                    $req->bindParam(':mdpU', $mdpCrypte, PDO::PARAM_STR);
+                    $req->bindParam(':mdpU', $nouveauMdpCrypte, PDO::PARAM_STR);
                     $resultat = $req->execute();
-                    
+            
                     if ($resultat) {
                         return "Le mot de passe a été mis à jour avec succès.";
                     } else {
@@ -71,7 +87,8 @@
                 } catch (PDOException $e) {
                     return "Erreur !: " . $e->getMessage();
                 }
-                }
+            }
+            
 
             
 

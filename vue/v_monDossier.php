@@ -84,15 +84,23 @@
 				</tbody>
 			</table>
 
-		<h1>Modifier le mot de passe</h1>
+			<h1>Modifier le mot de passe</h1>
 
-		<form method="post" action="./?action=monDossier">
-			<label for="mdp">Nouveau mot de passe :</label>
-			<input type="password" id="mdp" name="mdpU" required>
-			<input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>">
-			<input type="hidden" name="id" value="<?= htmlspecialchars($unAbonne->getId()) ?>">
-			<input type="submit" value="Modifier mon mot de passe">
-		</form>
+	<form method="post" action="./?action=monDossier">
+		<label for="mdpActuel">Mot de passe actuel :</label>
+		<input type="password" id="mdpActuel" name="mdpActuel" required><br>
+
+		<label for="nouveauMdp">Nouveau mot de passe :</label>
+		<input type="password" id="nouveauMdp" name="nouveauMdp" required><br>
+
+		<label for="confirmationMdp">Confirmer le nouveau mot de passe :</label>
+		<input type="password" id="confirmationMdp" name="confirmationMdp" required><br>
+
+		<input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>">
+		<input type="hidden" name="id" value="<?= htmlspecialchars($unAbonne->getId()) ?>">
+		<input type="submit" value="Modifier mon mot de passe">
+	</form>
+
 
 	<?php
 

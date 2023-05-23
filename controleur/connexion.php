@@ -6,23 +6,21 @@ $abonneManager = new abonneManager();
 $abonnes = $abonneManager->getList();
 
 // Vérifier si le formulaire de connexion a été soumis
-if (isset($_POST["mailU"]) && isset($_POST["mdpU"])){
+if (isset($_POST["mailU"]) && isset($_POST["mdpU"])) {
     $mailU = $_POST["mailU"];
     $mdpU = $_POST["mdpU"];
-    
+
     // Vérifier les identifiants de connexion et récupérer le token
     $token = $connexionManager->login($mailU, $mdpU);
-    
+
     if (!is_null($token)) {
         // Stocker le token dans une variable de session pour une utilisation ultérieure
         $_SESSION["token"] = $token;
-        
+
         // Enregistrer la date de connexion
-        if ($connexionManager->isLoggedOn()) {
-            $idUtilisateur = $abonneManager->getUtilisateurByMailU($mailU);
-            $dateConnexion = date('Y-m-d H:i:s');
-            $dateConnexionManager->historiserConnexion($idUtilisateur->getId(), $dateConnexion);
-        }
+        $idUtilisateur = $abonneManager->getUtilisateurByMailU($mailU);
+        $dateConnexion = date('Y-m-d H:i:s');
+        $dateConnexionManager->historiserConnexion($idUtilisateur->getId(), $dateConnexion);
     }
 }
 

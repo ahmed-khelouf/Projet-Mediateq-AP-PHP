@@ -4,43 +4,36 @@
     $abonneManager = new AbonneManager();
 
     // Si l'utilisateur est connecté, récupérez ses informations à partir de la session
-    if(isset($_SESSION['mailU'])) {
+    if (isset($_SESSION['mailU'])) {
         $unAbonne = $abonneManager->getUtilisateurByMailU($_SESSION['mailU']);
     }
 
-    // Si le formulaire de modification de mot de passe est soumis
-    if(isset($_POST['id']) && isset($_POST['mdpU'])) {
-
-        // Vérification du jeton CSRF
-        if(isset($_POST['csrf_token']) && $_POST['csrf_token'] === $_SESSION['csrf_token']) {
-
+    if (isset($_POST['id']) && isset($_POST['mdpActuel']) && isset($_POST['nouveauMdp']) && isset($_POST['confirmationMdp'])) {
+        if (isset($_POST['csrf_token']) && $_POST['csrf_token'] === $_SESSION['csrf_token']) {
             $id = $_POST['id'];
-            $mdpU = $_POST['mdpU'];
-
+            $mdpActuel = $_POST['mdpActuel'];
+            $nouveauMdp = $_POST['nouveauMdp'];
+            $confirmationMdp = $_POST['confirmationMdp'];
+    
             // Mettre à jour le mot de passe de l'utilisateur
-            $abonneManager->updateMdp($id, $mdpU);
-
-            // Rediriger l'utilisateur vers la page de connexion
-            // ...
-            $connexionManager = new ConnexionManager();
-            $connexionManager->logout();
-
-            $message = "Votre mot de passe a été changé avec succès, vous serez deconecté.";
-
-            // Affichage du message
-            echo "<h2>$message</h2>";
-
-            // Redirection de l'utilisateur vers la page de connexion
-            header("Refresh: 3; URL=./?action=connexion");
-            exit();
-
+            $resultat = $abonneManager->updateMdp($id, $mdpActuel, $nouveauMdp, $confirmationMdp);
+    
+            // Affichage du message de résultat
+            echo "<h2>$resultat</h2>";
+    
+            if ($resultat === "Le mot de passe a été mis à jour avec succès.") {
+                // Redirection de l'utilisateur vers la page de connexion après 3 secondes
+                header("Refresh: 3; URL=./?action=connexion");
+                exit();
+            }
         } else {
-            // Si le jeton CSRF est invalide, afficher une erreur ou rediriger l'utilisateur vers une page d'erreur
-            // ...
+            // Si le jeton CSRF est invalide, afficher une erreur
             echo "<h2>Erreur ! Le jeton CSRF est invalide.</h2>";
-            exit(); // Terminer le script pour éviter toute autre exécution
         }
     }
+    
+    // Reste du code pour afficher la vue, etc.
+    
 
     // Vérifier si le jeton CSRF existe déjà dans la session
     if (!isset($_SESSION['csrf_token'])) {
