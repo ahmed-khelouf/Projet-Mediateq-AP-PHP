@@ -19,6 +19,7 @@ function controleurPrincipal($action) {
     $lesActions["monDossier"] = "c_abonne.php";
     $lesActions["inscription"] = "c_inscription.php";
     $lesActions["accueil"] = $lesActions["rechercheSimple"] ;
+    $lesActions["historiqueRechercheAvancee"] = "c_historiqueRechercheAvancee.php" ;
     
     if (array_key_exists($action, $lesActions)) {
         return $lesActions[$action];
@@ -77,6 +78,8 @@ function chargerModeles($racine){
     require_once("$racine/modele/dateConnexionManager.php");
     require_once("$racine/modele/typeAbonnement.php");
     require_once("$racine/modele/typeAbonnementManager.php");
+    require_once("$racine/modele/rechercheAvancee.php");
+    require_once("$racine/modele/rechercheAvanceeManager.php");
 }
 ?>
 

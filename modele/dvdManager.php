@@ -115,7 +115,7 @@ class DvdManager extends Manager
     }
 
     /**
-     * Undocumented function
+     *  Effectue une recherche avancée des DVD en fonction des critères spécifiés
      *
      * @param string $texte
      * @param string $critere
@@ -142,10 +142,8 @@ class DvdManager extends Manager
                 $conditions[] = 'dvd.réalisateur LIKE :texte'; // Recherche par auteur
                 break;
             default:
-                return []; // Critère invalide, retourne un tableau vide
+                $conditions[] = 'null LIKE :texte'; // Critère invalide, retourne un tableau vide
         }
-
-     
 
         // Vérifie l'option choisie et ajoute la deuxième condition de recherche si nécessaire
         if ($option2 === 'et' && $texte2 !== null) {
@@ -157,7 +155,7 @@ class DvdManager extends Manager
                     $conditions[] = 'AND dvd.réalisateur LIKE :texte2'; // Recherche par auteur
                     break;
                 default:
-                    return []; // Critère invalide, retourne un tableau vide
+                    $conditions[] = 'AND null LIKE :texte2'; // Critère invalide, retourne un tableau vide
             }
         } elseif ($option2 === 'ou' && $texte2 !== null) {
             switch ($critere2) {
@@ -168,7 +166,7 @@ class DvdManager extends Manager
                     $conditions[] = 'OR dvd.réalisateur LIKE :texte2'; // Recherche par auteur
                     break;
                 default:
-                    return []; // Critère invalide, retourne un tableau vide
+                    $conditions[] = 'OR null LIKE :texte2'; // Critère invalide, retourne un tableau vide
             }
         } elseif ($option2 === 'sauf' && $texte2 !== null) {
             switch ($critere2) {
@@ -179,7 +177,7 @@ class DvdManager extends Manager
                     $conditions[] = 'AND dvd.réalisateur NOT LIKE :texte2'; // Exclusion par auteur
                     break;
                 default:
-                    return []; // Critère invalide, retourne un tableau vide
+                    $conditions[] = 'AND null NOT LIKE :texte2'; // Critère invalide, retourne un tableau vide
             }
         }
 
@@ -193,7 +191,7 @@ class DvdManager extends Manager
                     $conditions[] = 'AND dvd.réalisateur LIKE :texte3'; // Recherche par auteur
                     break;
                 default:
-                    return []; // Critère invalide, retourne un tableau vide
+                    $conditions[] = 'AND null LIKE :texte3'; // Critère invalide, retourne un tableau vide
             }
         } elseif ($option3 === 'ou' && $texte3 !== null) {
             switch ($critere3) {
@@ -204,7 +202,7 @@ class DvdManager extends Manager
                     $conditions[] = 'OR dvd.réalisateur LIKE :texte3'; // Recherche par auteur
                     break;
                 default:
-                    return []; // Critère invalide, retourne un tableau vide
+                    $conditions[] = 'OR null LIKE :texte3'; // Critère invalide, retourne un tableau vide
             }
         } elseif ($option3 === 'sauf' && $texte3 !== null) {
             switch ($critere3) {
@@ -215,7 +213,7 @@ class DvdManager extends Manager
                     $conditions[] = 'AND dvd.réalisateur NOT LIKE :texte3'; // Exclusion par auteur
                     break;
                 default:
-                    return []; // Critère invalide, retourne un tableau vide
+                    $conditions[] = 'AND null NOT LIKE :texte3'; // Critère invalide, retourne un tableau vide
             }
         }
 
@@ -242,6 +240,7 @@ class DvdManager extends Manager
         foreach($r as $dvd){
             array_push($lesId, $dvd['idDocument']);
         }
+
         return $this->getDvdByListId($lesId);
     }
 

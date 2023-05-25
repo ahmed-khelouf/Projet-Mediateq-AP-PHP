@@ -130,7 +130,7 @@ class LivreManager extends Manager
                 $conditions[] = 'livre.ISBN LIKE :texte'; // Recherche par ISBN
                 break;
             default:
-                return []; // Critère invalide, retourne un tableau vide
+                $conditions[] = 'null LIKE :texte'; // Critère invalide, retourne un tableau vide
         }
 
      
@@ -151,7 +151,7 @@ class LivreManager extends Manager
                     $conditions[] = 'AND livre.ISBN LIKE :texte2'; // Recherche par ISBN
                     break;
                 default:
-                    return []; // Critère invalide, retourne un tableau vide
+                    $conditions[] = 'AND null LIKE :texte2'; // Critère invalide, retourne un tableau vide
             }
         } elseif ($option2 === 'ou' && $texte2 !== null) {
             switch ($critere2) {
@@ -168,7 +168,7 @@ class LivreManager extends Manager
                     $conditions[] = 'OR livre.ISBN LIKE :texte2'; // Recherche par ISBN
                     break;
                 default:
-                    return []; // Critère invalide, retourne un tableau vide
+                    $conditions[] = 'OR null LIKE :texte2'; // Critère invalide, retourne un tableau vide
             }
         } elseif ($option2 === 'sauf' && $texte2 !== null) {
             switch ($critere2) {
@@ -185,7 +185,7 @@ class LivreManager extends Manager
                     $conditions[] = 'AND livre.ISBN NOT LIKE :texte2'; // Exclusion par ISBN
                     break;
                 default:
-                    return []; // Critère invalide, retourne un tableau vide
+                    $conditions[] = 'AND null NOT LIKE :texte2'; // Critère invalide, retourne un tableau vide
             }
         }
 
@@ -205,7 +205,7 @@ class LivreManager extends Manager
                     $conditions[] = 'AND livre.ISBN LIKE :texte3'; // Recherche par ISBN
                     break;
                 default:
-                    return []; // Critère invalide, retourne un tableau vide
+                    $conditions[] = 'AND null LIKE :texte3'; // Critère invalide, retourne un tableau vide
             }
         } elseif ($option3 === 'ou' && $texte3 !== null) {
             switch ($critere3) {
@@ -222,7 +222,7 @@ class LivreManager extends Manager
                     $conditions[] = 'OR livre.ISBN LIKE :texte3'; // Recherche par ISBN
                     break;
                 default:
-                    return []; // Critère invalide, retourne un tableau vide
+                    $conditions[] = 'OR null LIKE :texte3'; // Critère invalide, retourne un tableau vide
             }
         } elseif ($option3 === 'sauf' && $texte3 !== null) {
             switch ($critere3) {
@@ -239,7 +239,7 @@ class LivreManager extends Manager
                     $conditions[] = 'AND livre.ISBN NOT LIKE :texte3'; // Exclusion par ISBN
                     break;
                 default:
-                    return []; // Critère invalide, retourne un tableau vide
+                    $conditions[] = 'AND null NOT LIKE :texte3'; // Critère invalide, retourne un tableau vide
             }
         }
 
@@ -269,8 +269,6 @@ class LivreManager extends Manager
 
         return $this->getLivresByListId($lesId);
     }
-
-
 
     /**
      * Renvoie un tableau associatif contenant l'ensemble des objets Livre dont la date d'achat date de moins de $nbJours jours

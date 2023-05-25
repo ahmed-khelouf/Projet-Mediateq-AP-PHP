@@ -4,7 +4,7 @@ if ($connexionManager->isLoggedOn()) {
     // Récupération du nombre de réservations de l'abonné courant
     $nbHistorique = $HistoriqueManager->nombreHistorique($unAbonne->getId());
 ?>
-    <h1>Réservation de <?= $unAbonne->getNom() ?></h1>
+    <h1>Réservation de <?= $unAbonne->getNom() ?> <?= $unAbonne->getPrenom() ?></h1>
     <h3>Historique des réservations <?= $nbHistorique ?></h3>
     
     <h2>REVUES : </h2>
