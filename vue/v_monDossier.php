@@ -12,8 +12,8 @@
 		$empruntManager = new empruntExemplaireManager();
 		$empruntParution = new empruntParutionManager();
 
-		$fraisRetard = $empruntManager->getFraisDeRetard();
-		$fraisRetard += $empruntParution->getFraisDeRetard();
+		$fraisRetard = $empruntManager->getFraisDeRetard($unAbonne->getId());
+		$fraisRetard += $empruntParution->getFraisDeRetard($unAbonne->getId());
 
 	?>
 	<h1> Mon Dossier <h1>

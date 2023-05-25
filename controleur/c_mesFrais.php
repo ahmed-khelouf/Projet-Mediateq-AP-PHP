@@ -20,8 +20,8 @@ $emprunts = $empruntManager->getListOverdue();
 $empruntParutionManager = new EmpruntParutionManager();
 $empruntsParution = $empruntParutionManager->getListOverdue();
 
-$frais_retard = $empruntManager->getFraisDeRetard();
-$frais_retard += $empruntParutionManager->getFraisDeRetard();
+$frais_retard = $empruntManager->getFraisDeRetard($abonne->getId());
+$frais_retard += $empruntParutionManager->getFraisDeRetard($abonne->getId());
 
 array_push($vues, "$racine/vue/v_mesFrais.php");
 array_push($vues, "$racine/vue/v_mesPretsEnCours.php");

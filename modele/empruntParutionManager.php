@@ -71,9 +71,10 @@ class EmpruntParutionManager extends Manager
         $q->execute();
     }
 
-    public function getFraisDeRetard(): int
+    public function getFraisDeRetard($idUtilisateur): int
     {
-        $q = $this->getPDO()->prepare('SELECT SUM(frais_retard) AS f_r FROM emprunt_parution WHERE archive = 0');
+        $q = $this->getPDO()->prepare('SELECT SUM(frais_retard) AS f_r FROM emprunt_parution WHERE archive = 0 AND idAbonne = :id_utilisateur');
+        $q->bindParam(':id_utilisateur', $idUtilisateur, PDO::PARAM_INT);
         $q->execute();
         $r1 = $q->fetchAll(PDO::FETCH_ASSOC);
 
