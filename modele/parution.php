@@ -70,5 +70,7 @@ class Parution {
         return $this->photo;
     }
 
+  
+
 }
 ?>

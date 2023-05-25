@@ -34,12 +34,13 @@
               <?= $abo->getPrenom() ?>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Mon dossier</a>
+            <a class="dropdown-item" href="./?action=monDossier">Mon dossier</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="./?action=mesPretsEnCours">Mes prêts en cours</a>
               <a class="dropdown-item" href="./?action=reservation">Mes réservations</a>
               <a class="dropdown-item" href="./?action=mesFrais">Mes frais</a>
               <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="./?action=historiqueReservations">Historique réservations</a>
               <a class="dropdown-item" href="./?action=mesPretsHistorique">Historique des prêts</a>
               <a class="dropdown-item" href="#">Historique de recherche</a>
               <div class="dropdown-divider"></div>
@@ -52,6 +53,7 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="./?action=connexion">Connexion</a>
+              <a class="dropdown-item" href="./?action=inscription">Inscription</a>
             </div>
           </li>
         <?php } ?>

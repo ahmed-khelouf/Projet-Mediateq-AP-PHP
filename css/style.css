@@ -32,7 +32,7 @@ footer {
 
 div.card{
     position : relative;
-    background-color : cornsilk;
+    background-color : #f7f7f7;
     box-shadow: 1px 1px 4px #bbb;
 }
 
@@ -60,54 +60,78 @@ div.img-square-wrapper>img{
   padding: 1.25rem;
 }
 
-
-
 h2 {
   color: rgb(16, 214, 26);
 }
 
-
-/*  VUE RESERVATION*/
-.row .title{
-  margin-top:6px;
-  color: rgb(27, 176, 218);
-  padding-left: 12em;
-}
-
-.row .btn  {
-  margin-top:6px;
-  margin-left: 45em;
-}
-
-.row .trait-horizontal{
-order: none;
-border-top: 1px solid black;
-margin: 10px 0;
+.img-small {
+  width: 50%;
 }
 
 
-.row .rangStatut {
-  padding-top: 1em;
-  padding-bottom: 30px;
-  display: inline;
+/* AFFICHAGE DES EXEMPLAIRES ET PARUTIONS DANS LA RECHERCHE */
+
+.img-square-wrapper { /* image de la revue dans la recherche */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.row .rangStatut p:nth-child(1){
-  color: rgb(24, 197, 53);
+/* taille de la card */
+.custom-card {
+  height: 700px;
+  width: 550px;
 }
 
-.row .rangStatut p:nth-child(2){
-  color: rgb(200, 32, 32);
+
+/* AFFICHAGE DES PARUTION ET EXEMLAIRE */
+
+.details { /* bloc de la revue */
+  display: flex;
+  align-items: center;
+  margin: 20px;
 }
 
-/* .rowR{
- 
-  padding-left: 45em;
+.revuedetails img { /* image de la revue */
+  width: 150px;
+  margin-right: 20px;
+}
 
-} */
+.card-body img { /* image de la revue */
+  margin-bottom: 10px;
+}
 
-.trait-vertical{
-    border-left: 2px solid black;
-    height: auto;
+.card-title strong { /* titre de la revue */
+  text-decoration: underline;
+}
+
+
+.card-body ul li { /* liste  */
+  line-height: 2em;
+}
+
+
+.card-text.bleu {
+  color: #3366CC; /* bleu */
+  text-shadow: 1px 1px #B3C7E7; /* surbrillance bleue */
+  border: 1px solid #B3C7E7; /* bordure bleue */
+}
+
+.card-text.vert {
+  color: #8BC34A; /* vert */
+  text-shadow: 1px 1px #D4EDDA; /* surbrillance verte */
+  border: 1px solid #D4EDDA; /* bordure verte */
+}
+
+.card-text.orange {
+  color: #FF9800; /* orange */
+  text-shadow: 1px 1px #FFE5B4; /* surbrillance orange */
+  border: 1px solid #FFE5B4; /* bordure orange */
+}
+
+.card-text.violet {
+  color: #9C27B0; /* violet */
+  text-shadow: 1px 1px #E8C2E7; /* surbrillance violette */
+  border: 1px solid #E8C2E7; /* bordure violette */
 }
 

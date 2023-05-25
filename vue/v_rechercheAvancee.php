@@ -1,82 +1,96 @@
+<h1>Recherche avancée dans le catalogue</h1>
+<br />
+
 <div class="card">
     <div class="card-body">
-        <form method="POST" action="?action=rechercheSimple">
+        <form method="POST" action="?action=rechercheAvancee" id="searchForm">
             <div class="form-row">
-                <div class="form-group col-md-2">
-                    <select class="form-control" name="searchType" id="searchType" required >
-                        <option value="tout" selected>Titre</option>
-                        <option value="livre" >Auteur</option>
-                        <option value="dvd" >Sujet</option>
-                        <option value="revue" >Collection</option>
-                        <option value="dvd" >Editeur</option>
-                    </select>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <select class="form-control" name="searchType" id="searchType">
+                            <option value="titre">Titre</option>
+                            <option value="auteur">Auteur / Réalisateur</option>
+                            <option value="isbn">ISBN (livre)</option>
+                            <option value="descripteur">Descripteur (Revue)</option>
+                            <option value="collection">Collection (Livre)</option>
+                            <option value="periodicite">Périodicité (Revue)</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="form-group col-md-2">
-                    <select class="form-control" name="searchType" id="searchType" required >
-                        <option value="tout" selected>Tout les mots</option>
-                        <option value="livre" >Inclus</option>
-                    </select>
+                <div class="col-md-7">
+                    <div class="form-group">
+                        <input type="" class="form-control" name="searchText" id="searchText" placeholder="Entrez les mots-clés">
+                    </div>
                 </div>
-                <div class="form-group col-md-7">
-                    <input id="searchText" name="searchText" class="form-control" placeholder="Saisissez les termes de votre recherche." type="text">
+            </div>
+            <div class="form-row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <select class="form-control" name="searchOption2" id="searchOption">
+                            <option value="et">ET</option>
+                            <option value="ou">OU</option>
+                            <option value="sauf">SAUF</option>
+                        </select>
+                    </div>
                 </div>
-
-                <div class="form-group col-md-2">
-                    <select class="form-control" name="searchType" id="searchType" required >
-                        <option value="tout" selected>ET</option>
-                        <option value="livre" >OU</option>
-                        <option value="dvd" >SAUF</option>
-                    </select>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <select class="form-control" name="searchType2" id="searchType2">
+                            <option value="titre">Titre</option>
+                            <option value="auteur">Auteur / Réalisateur</option>
+                            <option value="isbn">ISBN (livre)</option>
+                            <option value="descripteur">Descripteur(Revue)</option>
+                            <option value="collection">Collection (Livre)</option>
+                            <option value="periodicite">Périodicité (Revue)</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="form-group col-md-2">
-                    <select class="form-control" name="searchType" id="searchType" required >
-                    <option value="tout" selected>Titre</option>
-                        <option value="livre" >Auteur</option>
-                        <option value="dvd" >Sujet</option>
-                        <option value="revue" >Collection</option>
-                        <option value="dvd" >Editeur</option>
-                    </select>
+                <div class="col-md-7">
+                    <div class="form-group">
+                        <input type="" class="form-control" name="searchText2" id="searchText2" placeholder="Entrez les mots-clés">
+                    </div>
                 </div>
-                <div class="form-group col-md-2">
-                    <select class="form-control" name="searchType" id="searchType" required >
-                        <option value="tout" selected>Tout les mots</option>
-                        <option value="livre" >Inclus</option>
-                    </select>
+            </div>
+            <div class="form-row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <select class="form-control" name="searchOption3" id="searchOption2">
+                            <option value="et">ET</option>
+                            <option value="ou">OU</option>
+                            <option value="sauf">SAUF</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="form-group col-md-7">
-                    <input id="searchText" name="searchText" class="form-control" placeholder="Saisissez les termes de votre recherche." type="text">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <select class="form-control" name="searchType3" id="searchType3">
+                            <option value="titre">Titre</option>
+                            <option value="auteur">Auteur / Réalisateur</option>
+                            <option value="isbn">ISBN (livre)</option>
+                            <option value="descripteur">Descripteur (Revue)</option>
+                            <option value="collection">Collection (Livre)</option>
+                            <option value="periodicite">Périodicité (Revue)</option>
+                        </select>
+                    </div>
                 </div>
-            
-                <div class="form-group col-md-2">
-                    <select class="form-control" name="searchType" id="searchType" required >
-                        <option value="tout" selected>ET</option>
-                        <option value="livre" >OU</option>
-                        <option value="dvd" >SAUF</option>
-                    </select>
+                <div class="col-md-7">
+                    <div class="form-group">
+                        <input type="" class="form-control" name="searchText3" id="searchText2" placeholder="Entrez les mots-clés">
+                    </div>
                 </div>
-                <div class="form-group col-md-2">
-                    <select class="form-control" name="searchType" id="searchType" required >
-                    <option value="tout" selected>Titre</option>
-                        <option value="livre" >Auteur</option>
-                        <option value="dvd" >Sujet</option>
-                        <option value="revue" >Collection</option>
-                        <option value="dvd" >Editeur</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-2">
-                    <select class="form-control" name="searchType" id="searchType" required >
-                        <option value="tout" selected>Tout les mots</option>
-                        <option value="livre" >Inclus</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-7">
-                    <input id="searchText" name="searchText" class="form-control" placeholder="Saisissez les termes de votre recherche." type="text">
-                </div>
-
-                <div class="form-group col-md-3">
-                    <button type="submit" name="recherche" class="btn btn-primary col-md-12"><span class="glyphicon glyphicon-floppy-disk"></span> Lancer la recherche</a>
+            </div>
+            <div class="d-flex justify-content-center">
+                <div class="row">
+                    <div class="col-md-8 text-center">
+                        <button type="submit" name="rechercheAvancee" class="btn btn-primary col-md-12"><span class="glyphicon glyphicon-floppy-disk"></span> Rechercher</button>
+                    </div>
+                    <div class="col-md-4 text-md-right">
+                        <button type="reset" name="clear" form="searchForm" class="btn btn-secondary">Effacer</button>
+                    </div>
                 </div>
             </div>
         </form>
     </div>
 </div>
+
+

@@ -87,5 +87,3 @@ class EmpruntParutionManager extends Manager
     }
     
 }
-
-?>

@@ -3,7 +3,7 @@ if(!isset($_SESSION['mailU'])){
     header('location: ?action=defaut');
 }
 
-$titre = "Prets Historique - Mediateq";
+$titre = "Nouveautés - Catalogue - Mediateq";
 
 $vues = array(); 
 
