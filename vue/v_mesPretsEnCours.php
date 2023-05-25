@@ -1,6 +1,10 @@
 <h2>Emprunts en cours pour l'abonné <?php echo $abonne->getNom()?>: </h2>
 <div class="container-fluid">
-<?php
+<?php  
+    if(empty($emprunts[$abonne->getId()])){
+        ?> Vous n'avez aucun emprunt en cours <?php
+    }
+    else{
     // Pour chaque emprunt dans la liste, créer un affichage correspondant
     foreach($emprunts[$abonne->getId()] as $unEmprunt){
         ?>
@@ -26,7 +30,7 @@
                                     echo "Non Prolongable";
                                 }?>
                             </p>
-                            <p class="card-text">Etat: <?= $unEmprunt->getExemplaire()->getEtat()->getTitre()?></p>
+                            <p class="card-text">Etat: <?= $unEmprunt->getExemplaire()->getEtat()->getLibelle()?></p>
                         </div>
                     </div>
                 </div>
@@ -35,8 +39,12 @@
 
 
     <?php
-    }
+    }}
     // Pour chaque parution dans la liste, créer un affichage correspondant
+    if(empty($empruntsParution[$abonne->getId()])){
+        ?> Vous n'avez aucun emprunt en cours <?php
+    }
+    else{
     foreach($empruntsParution[$abonne->getId()] as $unEmprunt){
         ?>
         <div class="row">
@@ -61,7 +69,7 @@
                                     echo "Non Prolongable";
                                 }?>
                             </p>
-                            <p class="card-text">Etat: <?= $unEmprunt->getParution()->getEtat()->getTitre()?></p>
+                            <p class="card-text">Etat: <?= $unEmprunt->getParution()->getEtat()->getLibelle()?></p>
                         </div>
                     </div>
                 </div>
@@ -70,7 +78,7 @@
 
 
     <?php
-    }
+    }}
 ?>
 
 </div>

@@ -5,6 +5,9 @@ $connexionManager = new ConnexionManager();
 $abonneManager = new abonneManager();
 $abonnes = $abonneManager->getList();
 
+$empruntManager = new EmpruntExemplaireManager();
+$empruntParutionManager = new EmpruntParutionManager();
+
 
 // recuperation des donnees GET, POST, et SESSION
 if (isset($_POST["mailU"]) && isset($_POST["mdpU"])){
@@ -25,6 +28,9 @@ if(isset($_SESSION['mailU'])){
 
 // ATTENDRE QUE PAGE PROFIL -> JULIEN
 if ($connexionManager->isLoggedOn()){ // si l'utilisateur est connecté on redirige vers le controleur monProfil
+    
+    $empruntManager->updateFraisDeRetard();
+    $empruntParutionManager->updateFraisDeRetard();
     
     include "$racine/controleur/reservation.php"; 
         

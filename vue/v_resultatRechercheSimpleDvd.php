@@ -9,13 +9,12 @@
                 <div class="card">
                     <div class="card-horizontal">
                         <div class="img-square-wrapper">
-                            <img class="" src="<?= $unDvd->getImage() ?>" alt="<?= $unDvd->getTitre() ?>">
+                            <img class="" src="Images/Livres/<?= $unDvd->getImage() ?>.jpg" alt="<?= $unDvd->getTitre() ?>">
                         </div>
                         <div class="card-body">
                             <h4 class="card-title"><?= $unDvd->getSynopsis() ?></h4>
-                            <p class="card-text"><?= $unLivre->getRealisateur() ?></p>
-                            <p class="card-text"><?= $unLivre->getDuree() ?></p>
-                            <p class="card-text"><?= $unLivre->getCollection() ?></p>
+                            <p class="card-text"><?= $unDvd->getRealisateur() ?></p>
+                            <p class="card-text"><?= $unDvd->getDuree() ?></p>
                         </div>
                     </div>
                     <div class="card-footer">
@@ -25,7 +24,6 @@
                         $nbExemplaires = count($unDvd->getLesExemplaires()); 
                         if ($nbExemplaires>0){
                             $txtRayons = "Rayon";
-                            $txtExemplaires = $nbExemplaires . " exemplaire";
                             $finTxt = " : ";
                             if ($nbExemplaires > 1){
                                 $finTxt = "s : ";

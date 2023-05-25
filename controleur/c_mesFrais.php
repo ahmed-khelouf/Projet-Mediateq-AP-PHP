@@ -3,7 +3,7 @@ if(!isset($_SESSION['mailU'])){
     header('location: ?action=defaut');
 }
 
-$titre = "Prets Historique - Mediateq";
+$titre = "Frais - Mediateq";
 
 $vues = array(); 
 
@@ -13,14 +13,18 @@ if(isset($_SESSION['mailU'])){
     $abonne = $abonneManager->getUtilisateurByMailU($_SESSION['mailU']);
 }
 
-// Récupération des objets Emprunts d'exemplaires et Emprunts de parutions
+// Récupération des objets Emprunts d'exemplaires et Emprunts de parutions (seulement les éléments non-archivés)
 $empruntManager = new EmpruntExemplaireManager();
-$emprunts = $empruntManager->getList();
+$emprunts = $empruntManager->getListOverdue();
 
 $empruntParutionManager = new EmpruntParutionManager();
-$empruntsParution = $empruntParutionManager->getList();
+$empruntsParution = $empruntParutionManager->getListOverdue();
 
-array_push($vues, "$racine/vue/v_mesPretsHistorique.php");
+$frais_retard = $empruntManager->getFraisDeRetard();
+$frais_retard += $empruntParutionManager->getFraisDeRetard();
+
+array_push($vues, "$racine/vue/v_mesFrais.php");
+array_push($vues, "$racine/vue/v_mesPretsEnCours.php");
 
 // appel du script de vue qui permet de gerer l'affichage des donnees
 include "$racine/vue/header.php";

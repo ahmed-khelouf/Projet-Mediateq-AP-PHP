@@ -6,6 +6,7 @@ class Emprunt {
     private $dateDebut;
     private $dateFin;
     private $prolongable;
+    private $fraisRetard;
     
     /**
      * Constructeur de la classe Emprunt
@@ -14,15 +15,17 @@ class Emprunt {
      * @param int $abonne
      * @param string $dateDebut
      * @param string $dateFin
-     * @param bool $prolongable
+     * @param int $prolongable
+     * @param int $fraisRetard
      */
-    public function __construct(int $id, int $abonne, string $dateDebut, string $dateFin, int $prolongable)
+    public function __construct(int $id, int $abonne, string $dateDebut, string $dateFin, int $prolongable, int $fraisRetard)
     {
         $this->id = $id;
         $this->abonne = $abonne;
         $this->dateDebut = $dateDebut;
         $this->dateFin = $dateFin;
         $this->prolongable = $prolongable;
+        $this->fraisRetard = $fraisRetard;
     }
 
     /**
@@ -69,6 +72,15 @@ class Emprunt {
      */
     public function peutProlonger() : int {
         return $this->prolongable;
+    }
+
+                /**
+     * Accesseur de la propriété fraisRetard
+     *
+     * @return string
+     */
+    public function getFraisRetard() : int {
+        return $this->fraisRetard;
     }
 }
 ?>

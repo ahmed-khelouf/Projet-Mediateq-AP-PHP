@@ -12,6 +12,7 @@ function controleurPrincipal($action) {
     $lesActions["defaut"] = $lesActions["accueil"];
     $lesActions["mesPretsEnCours"] = "c_mesPretsEnCours.php";
     $lesActions["mesPretsHistorique"] = "c_mesPretsHistorique.php";
+    $lesActions["mesFrais"] = "c_mesFrais.php";
     
 
     if (array_key_exists($action, $lesActions)) {
@@ -55,8 +56,6 @@ function chargerModeles($racine){
     require_once("$racine/modele/empruntParution.php");
     require_once("$racine/modele/empruntParutionManager.php");
     require_once("$racine/modele/documentManager.php");
-    require_once("$racine/modele/parutionManager.php");
-
 }
 ?>
 
