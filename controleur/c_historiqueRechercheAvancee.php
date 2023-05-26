@@ -9,9 +9,7 @@ $connexionManager = new ConnexionManager;
 $vues = array(); // tableau des vues à appeler
 
 
-
-
-
+// Appel à la méthode de recherche avancée de livres
 $rechercheManager = new RechercheAvanceeManager;
 $rechercheAvancee= $rechercheManager->getListRechercheAvancee();
 
@@ -25,6 +23,7 @@ if ($connexionManager->isLoggedOn()) {
     $unAbonne = $abonneManager->getUtilisateurByMailU($_SESSION['mailU']);
 }
 
+$nbHistoriqueRechercheAvancee = $rechercheManager->nbHistoriqueRechercheAvancee($unAbonne->getId());
 
 //Permet d'ajouter une nouvelle réservation d'exemplaire
 if (isset($_POST['historiqueRechercheAvancee'])) {
@@ -74,6 +73,19 @@ if (isset($_POST['historiqueRechercheAvancee'])) {
 }else{
     array_push ($vues , "$racine/vue/v_historiqueRechercheAvancee.php");
 }
+
+if (isset($_POST['supr'])) {
+    $id = $_POST['id'];
+    $rechercheManager->supHistoriqueRechercheAvancee($id);
+    header('Location: ?action=historiqueRechercheAvancee');
+}
+
+if (isset($_POST['suprAll'])) {
+    $idAbonne = $_POST['idAbonne'];
+    $rechercheManager->supHistoriqueRechercheAvanceeAll($unAbonne->getId());
+    header('Location: ?action=historiqueRechercheAvancee');
+}
+
 
 // inclure la vue en lui transmettant les données nécessaires
 include "$racine/vue/header.php";

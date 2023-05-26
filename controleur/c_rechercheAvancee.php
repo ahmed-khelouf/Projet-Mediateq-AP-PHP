@@ -7,6 +7,7 @@ $vues = array(); // tableau des vues à appeler
 // Création d'un objet manager de connexion
 $connexionManager = new ConnexionManager;
 
+$message = "";
 if (isset($_POST['rechercheAvancee'])) {
     // Récupération des valeurs des champs de recherche
     $texte = htmlspecialchars($_POST['searchText']); // htmlspecialchars permet de sécuriser les données rentrées par l'utilisateur (évite les injections de code)
@@ -54,6 +55,11 @@ if (isset($_POST['rechercheAvancee'])) {
 
     $nbRecherche = count($livres) + count($disques) + count($revues);
 
+    // Vérifier si aucun résultat n'a été trouvé
+if ($nbRecherche == 0) {
+    $message = "Aucun résultat trouvé vérifier l'orthographe ou la combinaison de la recherche.";
+}
+
     //Création d'un objet manager de abonne
     $abonneManager = new abonneManager;
 
@@ -77,6 +83,3 @@ foreach ($vues as $vue) {
 
 
 include "$racine/vue/footer.php";
-
-
-?>

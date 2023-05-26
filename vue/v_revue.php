@@ -106,16 +106,3 @@
     </div>
 </div>
 
-
-<!-- <script>
-        $(document).ready(function() {
-            // Sélectionner le bouton de confirmation de la première modal
-            var confirmationBtn = $('#addnew<?= $uneRevue->getId() ?><?= $unNumero->getNumero() ?>').find('[name="addRevue"]');
-            // Ajouter un écouteur d'événement pour le clic sur le bouton de confirmation
-            confirmationBtn.on('click', function() {
-                // Sélectionner la deuxième modal et l'ouvrir
-                var deuxiemeModal = $('#deuxiemeModal');
-                deuxiemeModal.modal('show');
-            });
-        });
-    </script> -->
