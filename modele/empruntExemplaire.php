@@ -12,10 +12,11 @@ class EmpruntExemplaire extends Emprunt {
      * @param string $dateDebut
      * @param string $dateFin
      * @param bool $prolongable
+     * @param int $fraisRetard
      */
-    public function __construct(int $id, int $abonne, Exemplaire $exemplaire, string $dateDebut, string $dateFin, int $prolongable)
+    public function __construct(int $id, int $abonne, Exemplaire $exemplaire, string $dateDebut, string $dateFin, int $prolongable, int $fraisRetard)
     {
-        parent::__construct($id, $abonne, $dateDebut, $dateFin, $prolongable);
+        parent::__construct($id, $abonne, $dateDebut, $dateFin, $prolongable, $fraisRetard);
         $this->exemplaire = $exemplaire;
 
     }
