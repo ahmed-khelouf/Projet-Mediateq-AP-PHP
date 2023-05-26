@@ -1,5 +1,7 @@
 <?php
 
+$titre = "Mon dossier - Mediateq";
+
     // Inclusion du modèle et initialisation de l'objet manager
     $abonneManager = new AbonneManager();
 

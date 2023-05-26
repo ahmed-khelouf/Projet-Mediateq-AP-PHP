@@ -1,6 +1,8 @@
 <?php
 		// Appel de la fonction verifierFinAbonnement() pour obtenir le message d'expiration
 		$abonneManager = new AbonneManager();
+		$reservationManager = new ReservationManager();
+		$reservation = $reservationManager->nombreReservation($unAbonne->getId());
 
 		$messageExpiration = $abonneManager-> verifierFinAbonnement($unAbonne);
 
@@ -78,11 +80,16 @@
 		<div class="">
 			<table  id="myTable" class="table table-bordered table-striped">
 				<thead>
-					<th>Reservations</th>
+					<th>Nombre de reservations</th>
 				</thead>
 				<tbody>
+					<tr>
+						<td><?= $reservation ?></td>
+					</tr>
 				</tbody>
 			</table>
+
+			
 
 			<h1>Modifier le mot de passe</h1>
 

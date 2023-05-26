@@ -55,6 +55,9 @@
     <label for="mailU">Adresse e-mail :</label>
     <input type="email" name="mailU" value="<?= isset($mailU) ? htmlspecialchars($mailU) : '' ?>" required>
 
+    <label for="educateur">Je suis éducateur :</label>
+    <input type="checkbox" name="educateur">
+
     <p>Le type d'abonnement est défini automatiquement selon votre âge</p>
 
     <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>">

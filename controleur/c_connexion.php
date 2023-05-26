@@ -1,9 +1,14 @@
 <?php
+
+$titre = "Connexion - Mediateq";
+
 $connexionManager = new ConnexionManager();
 $dateConnexionManager = new DateConnexionManager();
 
 $abonneManager = new abonneManager();
 $abonnes = $abonneManager->getList();
+
+$token = null;
 
 // Vérifier si le formulaire de connexion a été soumis
 if (isset($_POST["mailU"]) && isset($_POST["mdpU"])) {
@@ -17,12 +22,16 @@ if (isset($_POST["mailU"]) && isset($_POST["mdpU"])) {
         // Stocker le token dans une variable de session pour une utilisation ultérieure
         $_SESSION["token"] = $token;
 
-        // Enregistrer la date de connexion
+        // Récupérer le navigateur de l'utilisateur
+        $navigateur = $_SERVER['HTTP_USER_AGENT'];
+
+        // Enregistrer la date de connexion avec le navigateur
         $idUtilisateur = $abonneManager->getUtilisateurByMailU($mailU);
         $dateConnexion = date('Y-m-d H:i:s');
-        $dateConnexionManager->historiserConnexion($idUtilisateur->getId(), $dateConnexion);
+        $dateConnexionManager->historiserConnexion($idUtilisateur->getId(), $dateConnexion, $navigateur);
     }
 }
+
 
 // Vérifier si l'utilisateur est connecté et si le token est valide
 if ($connexionManager->isLoggedOn() && isset($_SESSION["token"]) && $_SESSION["token"] === $token) {

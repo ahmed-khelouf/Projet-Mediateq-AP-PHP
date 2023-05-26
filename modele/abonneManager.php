@@ -108,14 +108,20 @@
             $difference = $dateNaissance->diff($aujourdHui);
             $age = $difference->y;
 
-            // Déterminer le type d'abonnement en fonction de l'âge
-            if ($age < 18) {
-                $typeAbonnement = '1';
-            } elseif ($age >= 18 && $age <= 25) {
-                $typeAbonnement = '2';
+            // Vérifier si l'utilisateur est éducateur
+            if (isset($_POST['educateur']) && $_POST['educateur'] === 'on') {
+                $typeAbonnement = '4'; // Mettre à jour le type d'abonnement à 4
             } else {
-                $typeAbonnement = '3';
+                // Déterminer le type d'abonnement en fonction de l'âge
+                if ($age < 18) {
+                    $typeAbonnement = '1';
+                } elseif ($age >= 18 && $age <= 25) {
+                    $typeAbonnement = '2';
+                } else {
+                    $typeAbonnement = '3';
+                }
             }
+
 
             // Générer le mot de passe par défaut
             $mdpDefaut = date_format($dateNaissance, "dmY") . strtoupper(substr($nom, 0, 2));

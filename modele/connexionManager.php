@@ -3,36 +3,38 @@
 class ConnexionManager extends Manager
 {
     function login($mailU, $mdpU)
-{
-    if (!isset($_SESSION)) {
-        session_start();
-    }
-    try {
-        $abonneManager = new abonneManager();
-        $util = $abonneManager->getUtilisateurByMailU($mailU);
-        if (!is_null($util)) {
-            $mdpBD = $util->getMdpU();
-            if (password_verify($mdpU, $mdpBD)) {
-                // le mot de passe est correct
-                $_SESSION["mailU"] = $mailU;
-                $_SESSION["mdpU"] = $mdpBD;
-                // Générer un token de connexion
-                $token = bin2hex(random_bytes(32));
-                $_SESSION["token"] = $token;
-                // Retourner le token
+    {
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+        try {
+            $abonneManager = new AbonneManager();
+            $util = $abonneManager->getUtilisateurByMailU($mailU);
+            if (!is_null($util)) {
+                $mdpBD = $util->getMdpU();
+                $token = null; // Déclaration et initialisation du token à null
+                if (password_verify($mdpU, $mdpBD)) {
+                    // le mot de passe est correct
+                    $_SESSION["mailU"] = $mailU;
+                    $_SESSION["mdpU"] = $mdpBD;
+                    // Générer un token de connexion
+                    $token = bin2hex(random_bytes(32));
+                    $_SESSION["token"] = $token;
+                } else {
+                    // le mot de passe est incorrect
+                    echo "Mot de passe ou identifiant incorrect";
+                }
+                // Retourner le token (même si sa valeur est null)
                 return $token;
             } else {
-                // le mot de passe est incorrect
-                echo "Mot de passe ou identifiant incorrect";
+                // l'utilisateur n'existe pas en base de données
+                echo "Utilisateur inexistant";
             }
-        } else {
-            // l'utilisateur n'existe pas en base de données
-            echo "Utilisateur inexistant";
+        } catch (Exception $e) {
+            echo "Erreur lors de la connexion : " . $e->getMessage();
         }
-    } catch (Exception $e) {
-        echo "Erreur lors de la connexion : " . $e->getMessage();
     }
-}
+    
 
 
     function comparePassword($mailU, $mdpU) {
