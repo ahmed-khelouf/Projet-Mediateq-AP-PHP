@@ -1,6 +1,10 @@
 <h2>Historique des documents empruntés par l'abonné <?php echo $abonne->getNom()?>: </h2>
 <div class="container-fluid">
 <?php
+    if(empty($emprunts[$abonne->getId()])){
+        ?> Vous n'avez aucun emprunt archivé <?php
+    }
+    else{
     // Pour chaque emprunt dans la liste, créer un affichage correspondant
     foreach($emprunts[$abonne->getId()] as $unEmprunt){
         ?>
@@ -26,18 +30,22 @@
                                     echo "En cours";
                                 }?>
                             </p>
-                            <p class="card-text">Etat: <?= $unEmprunt->getExemplaire()->getEtat()->getTitre()?></p>
+                            <p class="card-text">Etat: <?= $unEmprunt->getExemplaire()->getEtat()->getLibelle()?></p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     <?php
-    }?>
+    }}?>
 </div>
 <h2>Historique des revues empruntées par l'abonné <?php echo $abonne->getNom()?>: </h2>
 <div class="container-fluid">
 <?php
+    if(empty($empruntsParution[$abonne->getId()])){
+        ?> Vous n'avez aucun emprunt archivé <?php
+    }
+    else{
     // Pour chaque parution dans la liste, créer un affichage correspondant
     foreach($empruntsParution[$abonne->getId()] as $unEmprunt){
         ?>
@@ -63,7 +71,7 @@
                                     echo "En cours";
                                 }?>
                             </p>
-                            <p class="card-text">Etat: <?= $unEmprunt->getParution()->getEtat()->getTitre()?></p>
+                            <p class="card-text">Etat: <?= $unEmprunt->getParution()->getEtat()->getLibelle()?></p>
                         </div>
                     </div>
                 </div>
@@ -72,7 +80,7 @@
 
 
     <?php
-    }
+    }}
 ?>
 
 </div>

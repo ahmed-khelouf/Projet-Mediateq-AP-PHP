@@ -36,10 +36,10 @@
                             // Vérifie si l'utilisateur a réservé cet exemplaire
                             $reservation = $reservationParutionManager->AfficherBouton($abo->getId(), $uneRevue->getId(), $unNumero->getNumero());
                             // Récupère le nombre de réservation de l'utilisateur
-                            $nbreservation = $reservationManager->nombreReservationAutorise($abo->getId());
-                            var_dump($nbreservation);
+                            //Recupération du nombre de réservation de l'utilisateur sous 3 semaine
+                            $nbReservation = $reservationManager->nombreReservationAutorise($abo->getId());
                             // Vérifie si l'utilisateur a réservé le nombre max de réservation
-                            if ($nbreservation >= 20 && $abo->getTypeAbonnement()->getId() <= 3) { ?>
+                            if ($nbReservation >= 20 && $abo->getTypeAbonnement()->getId() <= 3) { ?>
                                 <span class="text-danger font-weight-bold">Tu as déja reservé le nombre max de reservation</span>
                                 <?php } else {
                                 // Vérifie si l'utilisateur a réservé l'exemplaire ou non
@@ -86,7 +86,7 @@
                                     <form method="POST" action="?action=reservation">
                                         <?php
                                         // Récupérer le rangMax de l'utilisateur dans la liste des abonnés qui a réservé ce document (revue + numéro) 
-                                        $reservations = $reservationManager->recupMaxRang($uneRevue->getId(), $unNumero->getNumero());
+                                        $reservations = $reservationParutionManager->recupMaxRang($uneRevue->getId(), $unNumero->getNumero());
                                         ?>
                                         <!-- les champs cachés pour envoyer les données nécessaires à la ajout -->
                                         <input type="hidden" class="form-control" name="rang" value="<?= $reservations + 1 ?> ">
