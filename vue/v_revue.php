@@ -39,7 +39,7 @@
                             $nbreservation = $reservationManager->nombreReservationAutorise($abo->getId());
                             var_dump($nbreservation);
                             // Vérifie si l'utilisateur a réservé le nombre max de réservation
-                            if ($nbreservation >= 2 && $abo->getTypeAbonnement()->getId() <= 3) { ?>
+                            if ($nbreservation >= 20 && $abo->getTypeAbonnement()->getId() <= 3) { ?>
                                 <span class="text-danger font-weight-bold">Tu as déja reservé le nombre max de reservation</span>
                                 <?php } else {
                                 // Vérifie si l'utilisateur a réservé l'exemplaire ou non
