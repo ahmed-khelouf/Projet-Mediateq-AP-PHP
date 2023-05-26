@@ -5,6 +5,8 @@ $dateConnexionManager = new DateConnexionManager();
 $abonneManager = new abonneManager();
 $abonnes = $abonneManager->getList();
 
+
+$tokken = null;
 // Vérifier si le formulaire de connexion a été soumis
 if (isset($_POST["mailU"]) && isset($_POST["mdpU"])) {
     $mailU = $_POST["mailU"];

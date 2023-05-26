@@ -12,6 +12,9 @@ $reservationExemplaireManager = new ReservationExemplaireManager;
 // Création d'un objet manager de connexion
 $connexionManager = new ConnexionManager;
 
+// Création d'un objet manager de reservation
+$reservationManager = new ReservationManager();
+
 // Récupérer l'ID du document à afficher à partir de la variable $_GET
 $idDoc = $_GET['id'];
 

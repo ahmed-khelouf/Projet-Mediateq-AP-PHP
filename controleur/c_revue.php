@@ -7,7 +7,10 @@ $abonneManager = new abonneManager;
 $abo = $abonneManager->getList();
 
 // Création d'un objet manager de reservation
-$reservationManager = new ReservationParutionManager;
+$reservationParutionManager = new ReservationParutionManager;
+
+// Création d'un objet manager de reservation
+$reservationManager = new ReservationManager();
 
 // Création d'un objet manager de connexion
 $connexionManager = new ConnexionManager;
