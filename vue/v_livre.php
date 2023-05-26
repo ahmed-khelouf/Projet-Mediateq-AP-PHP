@@ -35,14 +35,21 @@
                             $abo = $abonneManager->getUtilisateurByMailU($_SESSION['mailU']);
                             // Vérifie si l'utilisateur a réservé cet exemplaire
                             $reservation = $reservationExemplaireManager->AfficherBouton($abo->getId(), $unLivre->getId(), $unExemplaire->getNumero());
-                            // Vérifie si l'utilisateur a réservé l'exemplaire ou non
-                            if ($reservation) { ?>
-                                <!-- Bouton de réservation -->
-                                <a href="#addnew<?= $unLivre->getId() ?><?= $unExemplaire->getNumero() ?>" data-toggle="modal" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> RÉSERVER</a>
-                            <?php } else { ?>
-                                <!-- Message si l'utilisateur a déjà réservé ce document -->
-                                <span class="text-danger font-weight-bold">Vous avez déjà réservé un exemplaire de ce document</span>
+                            //Recupération du nombre de réservation de l'utilisateur sous 3 semaine
+                            $nbReservation = $reservationManager->nombreReservationAutorise($abo->getId());
+                            // Vérifie si l'utilisateur a réservé le nombre max de réservation
+                            if ($nbReservation >= 20 && $abo->getTypeAbonnement()->getId() <= 3) { ?>
+                                <span class="text-danger font-weight-bold">Tu as déja reservé le nombre max de reservation</span>
+                                <?php } else {
+                                // Vérifie si l'utilisateur a réservé l'exemplaire ou non
+                                if ($reservation) { ?>
+                                    <!-- Bouton de réservation -->
+                                    <a href="#addnew<?= $unLivre->getId() ?><?= $unExemplaire->getNumero() ?>" data-toggle="modal" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> RÉSERVER</a>
+                                <?php } else { ?>
+                                    <!-- Message si l'utilisateur a déjà réservé ce document -->
+                                    <span class="text-danger font-weight-bold">Vous avez déjà réservé un exemplaire de ce document</span>
                         <?php }
+                            }
                         } ?>
                     </div>
                 </div>

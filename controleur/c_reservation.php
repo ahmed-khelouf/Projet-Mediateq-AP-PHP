@@ -11,8 +11,7 @@ $reservationsExemplairesDVD = $reservationExemplaireManager->getListDVD();
 $reservationParutionManager = new ReservationParutionManager();
 $reservationsParutions = $reservationParutionManager->getList();
 
-// Création d'un objet manager de reservation
-$reservationManager = new ReservationManager();
+
 
 //Création d'un objet manager de livre
 $livreManager = new LivreManager();
@@ -43,6 +42,10 @@ $historiqueExemplaireManager = new HistoriqueExemplaireManager();
 if ($connexionManager->isLoggedOn()) {
     $unAbonne = $abonneManager->getUtilisateurByMailU($_SESSION['mailU']);
 }
+
+// Création d'un objet manager de reservation
+$reservationManager = new ReservationManager();
+$reservation = $reservationManager->nombreReservation($unAbonne->getId());
 
 //Permet d'ajouter une nouvelle réservation d'exemplaire
 if (isset($_POST['add'])) {
