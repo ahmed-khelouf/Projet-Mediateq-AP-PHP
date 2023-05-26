@@ -7,7 +7,9 @@ $vues = array(); // tableau des vues à appeler
 // Création d'un objet manager de connexion
 $connexionManager = new ConnexionManager;
 
+// variable message à vide 
 $message = "";
+
 if (isset($_POST['rechercheAvancee'])) {
     // Récupération des valeurs des champs de recherche
     $texte = htmlspecialchars($_POST['searchText']); // htmlspecialchars permet de sécuriser les données rentrées par l'utilisateur (évite les injections de code)
@@ -19,7 +21,7 @@ if (isset($_POST['rechercheAvancee'])) {
     $option3 = htmlentities($_POST['searchOption3']);
     $texte3 = htmlspecialchars($_POST['searchText3']);
 
-    array_push($vues, "$racine/vue/v_resultatRechercheSimple.php");
+    array_push($vues, "$racine/vue/v_resultatRechercheAvancee.php");
 
     // affichage message de recherche
     if ($texte != null && $texte2 == null && $texte3 == null) {
@@ -66,9 +68,11 @@ if ($nbRecherche == 0) {
     //Vérifie si un utilisateur est connecté et récupère les informations de l'utilisateur connecté
     if ($connexionManager->isLoggedOn()) {
         $unAbonne = $abonneManager->getUtilisateurByMailU($_SESSION['mailU']);
+        $rechercheAvanceeManager = new RechercheAvanceeManager();
+        $rechercheAvanceeManager->addHistoriqueRechercheAvancee($nbRecherche, $unAbonne->getId(), $typeDoc, $texte, $option2, $typeDoc2, $texte2, $option3, $typeDoc3, $texte3);
     }
-    $rechercheAvanceeManager = new RechercheAvanceeManager();
-    $rechercheAvanceeManager->addHistoriqueRechercheAvancee($nbRecherche, $unAbonne->getId(), $typeDoc, $texte, $option2, $typeDoc2, $texte2, $option3, $typeDoc3, $texte3);
+
+   
 } else {
     // Ajout de la vue de recherche avancée à la liste des vues
     array_push($vues, "$racine/vue/v_rechercheAvancee.php");

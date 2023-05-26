@@ -16,6 +16,7 @@ $historiqueParutionManager = new HistoriqueParutionManager;
 $historiqueParution = $historiqueParutionManager->getList();
 
 
+
 //Création d'un objet manager de abonne
 $abonneManager = new abonneManager;
 

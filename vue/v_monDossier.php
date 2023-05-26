@@ -1,12 +1,12 @@
 <?php
-	// Appel de la fonction verifierFinAbonnement() pour obtenir le message d'expiration
-	$abonneManager = new AbonneManager();
-	$messageExpiration = $abonneManager->verifierFinAbonnement($unAbonne);
+// Appel de la fonction verifierFinAbonnement() pour obtenir le message d'expiration
+$abonneManager = new AbonneManager();
+$messageExpiration = $abonneManager->verifierFinAbonnement($unAbonne);
 
-	// Affichage du message si la date d'expiration est proche
-	if ($messageExpiration !== null) {
-		echo '<div class="alert alert-warning">' . $messageExpiration . '</div>';
-	}
+// Affichage du message si la date d'expiration est proche
+if ($messageExpiration !== null) {
+	echo '<div class="alert alert-warning">' . $messageExpiration . '</div>';
+}
 ?>
 
 <div class="card">
@@ -85,13 +85,13 @@
 				<h2 class="card-title">Frais</h2>
 				<div class="table-responsive">
 					<table class="table table-bordered table-striped">
-							<thead>
-								<th>Frais total</th>
-							</thead>
-							<tbody>
-								<!-- Ajoutez les lignes pour afficher les détails des frais -->
-							</tbody>
-						</table>
+						<thead>
+							<th>Frais total</th>
+						</thead>
+						<tbody>
+							<!-- Ajoutez les lignes pour afficher les détails des frais -->
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>
@@ -112,21 +112,24 @@
 			</div>
 		</div>
 
-		<h1>Modifier le mot de passe</h1>
+		<div class="card">
+			<div class="card-body">
+				<h2 class="card-title">Modifier le mot de passe</h2>
+				<form method="post" action="./?action=monDossier">
+					<label for="mdpActuel">Mot de passe actuel :</label>
+					<input type="password" id="mdpActuel" name="mdpActuel" required><br>
 
-		<form method="post" action="./?action=monDossier">
-			<label for="mdpActuel">Mot de passe actuel :</label>
-			<input type="password" id="mdpActuel" name="mdpActuel" required><br>
+					<label for="nouveauMdp">Nouveau mot de passe :</label>
+					<input type="password" id="nouveauMdp" name="nouveauMdp" required><br>
 
-			<label for="nouveauMdp">Nouveau mot de passe :</label>
-			<input type="password" id="nouveauMdp" name="nouveauMdp" required><br>
+					<label for="confirmationMdp">Confirmer le nouveau mot de passe :</label>
+					<input type="password" id="confirmationMdp" name="confirmationMdp" required><br>
 
-			<label for="confirmationMdp">Confirmer le nouveau mot de passe :</label>
-			<input type="password" id="confirmationMdp" name="confirmationMdp" required><br>
-
-			<input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>">
-			<input type="hidden" name="id" value="<?= htmlspecialchars($unAbonne->getId()) ?>">
-			<input type="submit" value="Modifier mon mot de passe">
-		</form>
+					<input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>">
+					<input type="hidden" name="id" value="<?= htmlspecialchars($unAbonne->getId()) ?>">
+					<input type="submit" value="Modifier mon mot de passe">
+				</form>
+			</div>
+		</div>
 	</div>
 </div>
