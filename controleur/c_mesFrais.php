@@ -24,7 +24,7 @@ $frais_retard = $empruntManager->getFraisDeRetard($abonne->getId());
 $frais_retard += $empruntParutionManager->getFraisDeRetard($abonne->getId());
 
 array_push($vues, "$racine/vue/v_mesFrais.php");
-array_push($vues, "$racine/vue/v_mesPretsEnCours.php");
+array_push($vues, "$racine/vue/v_mesPrets.php");
 
 // appel du script de vue qui permet de gerer l'affichage des donnees
 include "$racine/vue/header.php";

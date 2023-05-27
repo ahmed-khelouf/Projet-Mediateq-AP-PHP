@@ -65,7 +65,5 @@ class Exemplaire {
         return $this->etat;
     }
 
-    
-
 }
 ?>

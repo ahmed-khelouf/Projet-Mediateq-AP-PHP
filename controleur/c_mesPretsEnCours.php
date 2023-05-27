@@ -15,12 +15,35 @@ if(isset($_SESSION['mailU'])){
 
 // Récupération des objets Emprunts d'exemplaires et Emprunts de parutions (seulement les éléments non-archivés)
 $empruntManager = new EmpruntExemplaireManager();
-$emprunts = $empruntManager->getListActual();
-
 $empruntParutionManager = new EmpruntParutionManager();
+
+if (isset($_POST['prolong_doc'])) {
+    $idEmprunt = $_POST['idEmprunt'];
+
+    $empruntManager->prolongerEmprunt($idEmprunt);
+    header('location: index.php?action=mesPretsEnCours');
+}
+
+if (isset($_POST['prolong_paru'])) {
+    $idEmprunt = $_POST['idEmprunt'];
+
+    $empruntParutionManager->prolongerEmprunt($idEmprunt);
+    header('location: index.php?action=mesPretsEnCours');
+}
+
+if (isset($_POST['prolong_all'])) {
+
+    $empruntManager->prolongerToutEmprunt();
+    $empruntParutionManager->prolongerToutEmprunt();
+    header('location: index.php?action=mesPretsEnCours');
+}
+
+$emprunts = $empruntManager->getListActual();
 $empruntsParution = $empruntParutionManager->getListActual();
 
+
 array_push($vues, "$racine/vue/v_mesPretsEnCours.php");
+array_push($vues, "$racine/vue/v_mesPrets.php");
 
 // appel du script de vue qui permet de gerer l'affichage des donnees
 include "$racine/vue/header.php";

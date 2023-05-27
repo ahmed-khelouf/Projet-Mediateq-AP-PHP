@@ -69,8 +69,5 @@ class Parution {
     public function getPhoto() : string {
         return $this->photo;
     }
-
-  
-
 }
 ?>

@@ -1,4 +1,12 @@
 <?php
+$empruntManager = new empruntExemplaireManager();
+$empruntParutionManager = new EmpruntParutionManager();
+
+$empruntManager->updateFraisDeRetard();
+$empruntManager->updateProlongeable();
+$empruntParutionManager->updateFraisDeRetard();
+$empruntParutionManager->updateProlongeable();
+
 $connexionManager = new ConnexionManager();
 $dateConnexionManager = new DateConnexionManager();
 

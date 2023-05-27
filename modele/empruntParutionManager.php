@@ -67,7 +67,13 @@ class EmpruntParutionManager extends Manager
 
     public function updateFraisDeRetard(): void 
     {
-        $q = $this->getPDO()->prepare('UPDATE emprunt_parution SET frais_retard = CASE WHEN DATEDIFF(NOW(), dateFin) >= 14 THEN 5.0WHEN DATEDIFF(NOW(), dateFin) >= 7 THEN 2.0 ELSE 0.0 END WHERE archive = 0;');
+        $q = $this->getPDO()->prepare('UPDATE emprunt_parution SET frais_retard = CASE WHEN DATEDIFF(NOW(), dateFin) >= 14 THEN 5.0 WHEN DATEDIFF(NOW(), dateFin) >= 7 THEN 2.0 ELSE 0.0 END WHERE archive = 0;');
+        $q->execute();
+    }
+
+    public function updateProlongeable(): void 
+    {
+        $q = $this->getPDO()->prepare('UPDATE emprunt_parution SET prolongable = CASE WHEN DATEDIFF(NOW(), dateFin) >= 0 THEN 0 ELSE prolongable END WHERE archive = 0;');
         $q->execute();
     }
 
@@ -86,5 +92,17 @@ class EmpruntParutionManager extends Manager
 
         return $nombre;
     }
-    
+
+    public function prolongerEmprunt($idEmprunt): void
+    {
+        $q = $this->getPDO()->prepare('UPDATE emprunt_parution SET dateFin = DATE_ADD(dateFin, INTERVAL 7 DAY), prolongable = 0 WHERE id = :id_emprunt;');
+        $q->bindParam(':id_emprunt', $idEmprunt, PDO::PARAM_INT);
+        $q->execute();
+    }
+
+    public function prolongerToutEmprunt(): void
+    {
+        $q = $this->getPDO()->prepare('UPDATE emprunt_parution SET dateFin = DATE_ADD(dateFin, INTERVAL 7 DAY), prolongable = 0 WHERE prolongable = 1 AND archive = 0;');
+        $q->execute();
+    }
 }
