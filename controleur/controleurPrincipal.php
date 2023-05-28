@@ -11,6 +11,7 @@ function controleurPrincipal($action) {
     $lesActions["accueil"] = $lesActions["rechercheSimple"] ;
     $lesActions["defaut"] = $lesActions["accueil"];
     $lesActions["mesPretsEnCours"] = "c_mesPretsEnCours.php";
+    $lesActions["mesFrais"] = "c_mesFrais.php";
     $lesActions["mesPretsHistorique"] = "c_mesPretsHistorique.php";
     $lesActions["revue"] = "c_revue.php";
     $lesActions["livre"] = "c_livre.php";
