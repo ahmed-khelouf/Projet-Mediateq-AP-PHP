@@ -221,9 +221,10 @@
             }
 
             function payerFrais($abonne){ 
-                $req = $this->getPDO()->prepare('UPDATE abonné SET frais = 0 WHERE id = :idAbonne');
-                $req->bindParam(':idAbonne', $abonne->getId(), PDO::PARAM_INT);
-                $req->execute();
+                //Renitialise les frais de l'abonné passé en paramètre
+                    $req = $this->getPDO()->prepare('UPDATE abonné SET frais = 0 WHERE id = :idAbonne');
+                    $req->bindParam(':idAbonne', $abonne->getId(), PDO::PARAM_INT);
+                    $req->execute();
             }
 
         }

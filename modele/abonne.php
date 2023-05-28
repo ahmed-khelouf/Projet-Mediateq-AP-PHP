@@ -138,6 +138,15 @@ class Abonne  {
         return $this->mailU;
     }
 
+     /**
+     * Accesseur de la propriété frais
+     *
+     * @return int $frais
+     */
+    public function getFrais() : int{
+        return $this->frais;
+    }
+
     /**
      * Mutateur de la propriété id
      *
@@ -238,16 +247,7 @@ class Abonne  {
         $this->mailU = $mailU;
     }
 
-         /**
-     * Accesseur de la propriété frais
-     *
-     * @return int $frais
-     */
-    public function getFrais() : int{
-        return $this->frais;
-    }
-
-        /**
+    /**
      * Mutateur de la propriété frais
      *
      * @param int $frais

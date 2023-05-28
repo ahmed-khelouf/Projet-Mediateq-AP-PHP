@@ -77,22 +77,6 @@ class EmpruntParutionManager extends Manager
         $q->execute();
     }
 
-    public function getFraisDeRetard($idUtilisateur): int
-    {
-        $q = $this->getPDO()->prepare('SELECT SUM(frais_retard) AS f_r FROM emprunt_parution WHERE archive = 0 AND idAbonne = :id_utilisateur');
-        $q->bindParam(':id_utilisateur', $idUtilisateur, PDO::PARAM_INT);
-        $q->execute();
-        $r1 = $q->fetchAll(PDO::FETCH_ASSOC);
-
-        foreach($r1 as $fraisRetard){
-            $nombre = $fraisRetard['f_r'];
-        }
-
-        $nombre = intval($nombre);
-
-        return $nombre;
-    }
-
     public function prolongerEmprunt($idEmprunt): void
     {
         $q = $this->getPDO()->prepare('UPDATE emprunt_parution SET dateFin = DATE_ADD(dateFin, INTERVAL 7 DAY), prolongable = 0 WHERE id = :id_emprunt;');

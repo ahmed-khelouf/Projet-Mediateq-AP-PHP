@@ -31,7 +31,7 @@ class Emprunt {
     /**
      * Accesseur de la propriété Id
      *
-     * @return string
+     * @return int
      */
     public function getId() : int {
         return $this->id;
@@ -40,7 +40,7 @@ class Emprunt {
     /**
      * Accesseur de la propriété Abonné
      *
-     * @return string
+     * @return int
      */
     public function getAbonne() : int {
         return $this->abonne;
@@ -68,7 +68,7 @@ class Emprunt {
             /**
      * Accesseur de la propriété estProlongable
      *
-     * @return string
+     * @return int
      */
     public function peutProlonger() : int {
         return $this->prolongable;
@@ -77,7 +77,7 @@ class Emprunt {
                 /**
      * Accesseur de la propriété fraisRetard
      *
-     * @return string
+     * @return int
      */
     public function getFraisRetard() : int {
         return $this->fraisRetard;

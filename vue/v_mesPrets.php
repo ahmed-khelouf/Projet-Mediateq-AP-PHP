@@ -14,7 +14,7 @@
                             <img class="" src="images/Livres/<?=$unEmprunt->getExemplaire()->getDocument()->getImage()?>.jpg" alt="<?= $unEmprunt->getExemplaire()->getDocument()->getTitre() ?>">
                         </div>
                         <div class="card-body">
-                            <h4 class="card-text">Document n°<?= $unEmprunt->getId()?>, Exemplaire n°<?= $unEmprunt->getExemplaire()->getNumero() ?></h4>
+                            <h4 class="card-text">Document n°<?= $unEmprunt->getExemplaire()->getDocument()->getId()?>, Exemplaire n°<?= $unEmprunt->getExemplaire()->getNumero() ?></h4>
                             <p class="card-text">Date de début: <?= $unEmprunt->getDateDebut() ?></p>
                             <p class="card-text">Date de fin: <?= $unEmprunt->getDateFin() ?></p>
                             <p class="card-text">Etat: <?= $unEmprunt->getExemplaire()->getEtat()->getLibelle()?></p>
@@ -40,7 +40,7 @@
                                                                 <img class="" src="images/Livres/<?=$unEmprunt->getExemplaire()->getDocument()->getImage()?>.jpg" alt="<?= $unEmprunt->getExemplaire()->getDocument()->getTitre() ?>">
                                                             </div>
                                                             <div class="card-body">
-                                                                <h4 class="card-text">Document n°<?= $unEmprunt->getId()?>, Exemplaire n°<?= $unEmprunt->getExemplaire()->getNumero() ?></h4>
+                                                                <h4 class="card-text">Document n°<?= $unEmprunt->getExemplaire()->getDocument()->getId()?>, Exemplaire n°<?= $unEmprunt->getExemplaire()->getNumero() ?></h4>
                                                                     <p class="card-text">Date de début: <?= $unEmprunt->getDateDebut() ?></p>
                                                                     <p class="card-text">Date de fin: <?= $unEmprunt->getDateFin() ?></p>
                                                                     <p class="card-text">Etat: <?= $unEmprunt->getExemplaire()->getEtat()->getLibelle()?></p>
@@ -90,7 +90,7 @@
                             <img class="" src="images/Revues/<?=$unEmprunt->getParution()->getPhoto()?>.jpg" alt="<?= $unEmprunt->getParution()->getRevue()->getTitre() ?>">
                         </div>
                         <div class="card-body">
-                            <h4 class="card-text">Revue n°<?= $unEmprunt->getId()?>, Parution n°<?= $unEmprunt->getParution()->getNumero() ?></h4>
+                            <h4 class="card-text">Revue n°<?= $unEmprunt->getParution()->getRevue()->getId()?>, Parution n°<?= $unEmprunt->getParution()->getNumero() ?></h4>
                             <p class="card-text">Date de début: <?= $unEmprunt->getDateDebut() ?></p>
                             <p class="card-text">Date de fin: <?= $unEmprunt->getDateFin() ?></p>
                             <p class="card-text">Etat: <?= $unEmprunt->getParution()->getEtat()->getLibelle()?></p>
@@ -116,7 +116,7 @@
                                                                 <img class="" src="images/Revues/<?=$unEmprunt->getParution()->getPhoto()?>.jpg" alt="<?= $unEmprunt->getParution()->getRevue()->getTitre() ?>">
                                                             </div>
                                                             <div class="card-body">
-                                                                <h4 class="card-text">Revue n°<?= $unEmprunt->getId()?>, Parution n°<?= $unEmprunt->getParution()->getNumero() ?></h4>
+                                                                <h4 class="card-text">Revue n°<?= $unEmprunt->getParution()->getRevue()->getId()?>, Parution n°<?= $unEmprunt->getParution()->getNumero() ?></h4>
                                                                     <p class="card-text">Date de début: <?= $unEmprunt->getDateDebut() ?></p>
                                                                     <p class="card-text">Date de fin: <?= $unEmprunt->getDateFin() ?></p>
                                                                     <p class="card-text">Etat: <?= $unEmprunt->getParution()->getEtat()->getLibelle()?></p>
