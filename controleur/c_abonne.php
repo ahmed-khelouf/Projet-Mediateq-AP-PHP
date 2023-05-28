@@ -56,12 +56,13 @@
             $typeAboObj = $unAbonne->getTypeAbonnement();
             $finAbo = $unAbonne->getFinAbonnement();
             $mdpU = $unAbonne->getMdpU();
+            $frais = $unAbonne->getFrais();
 
             // Création de l'objet TypeAbonnement
             $typeAbo = new TypeAbonnement($typeAboObj->getId(), $typeAboObj->getLibelle());
 
             // Création de l'objet Abonne avec les nouvelles informations
-            $abonne = new Abonne($id, $nom, $prenom, $dateNaiss, $adresse, $numTel, $finAbo, $mdpU, $mailU, $typeAbo);
+            $abonne = new Abonne($id, $nom, $prenom, $dateNaiss, $adresse, $numTel, $finAbo, $mdpU, $mailU, $typeAbo, $frais);
 
             // Mettre à jour les informations personnelles de l'abonné
             $resultat = $abonneManager->updateAbonne($abonne);
