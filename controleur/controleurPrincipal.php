@@ -76,6 +76,8 @@ function chargerModeles($racine){
     require_once("$racine/modele/historiqueExemplaireManager.php");
     require_once("$racine/modele/dateConnexion.php");
     require_once("$racine/modele/dateConnexionManager.php");
+    require_once("$racine/modele/logs.php");
+    require_once("$racine/modele/logsManager.php");
     require_once("$racine/modele/typeAbonnement.php");
     require_once("$racine/modele/typeAbonnementManager.php");
     require_once("$racine/modele/rechercheAvancee.php");

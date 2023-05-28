@@ -177,6 +177,31 @@
                     $count = $req->fetchColumn();
                     return ($count > 0);
                 }
+        
+        
+                public function updateAbonne($abonne)
+                {
+                    try {
+                        // Mettre à jour les informations personnelles de l'abonné à l'exception de l'id, du type d'abonnement et de la date d'expiration
+                        $sql = 'UPDATE abonné SET nom = :nom, prenom = :prenom, dateNaissance = :dateNaissance, adresse = :adresse, numTel = :numTel WHERE mailU = :mailU';
+                        $q = $this->getPDO()->prepare($sql);
+                        $q->bindValue(':nom', $abonne->getNom(), PDO::PARAM_STR);
+                        $q->bindValue(':prenom', $abonne->getPrenom(), PDO::PARAM_STR);
+                        $q->bindValue(':dateNaissance', $abonne->getDateNaissance(), PDO::PARAM_STR);
+                        $q->bindValue(':adresse', $abonne->getAdresse(), PDO::PARAM_STR);
+                        $q->bindValue(':numTel', $abonne->getNumTel(), PDO::PARAM_STR);
+                        $q->bindValue(':mailU', $abonne->getMailU(), PDO::PARAM_STR);
+                        $result = $q->execute();
+                
+                        if ($result) {
+                            return "Les informations personnelles ont été mises à jour avec succès.";
+                        } else {
+                            return "Une erreur est survenue lors de la mise à jour des informations personnelles.";
+                        }
+                    } catch (PDOException $e) {
+                        return "Erreur !: " . $e->getMessage();
+                    }
+                }
                 
 
 

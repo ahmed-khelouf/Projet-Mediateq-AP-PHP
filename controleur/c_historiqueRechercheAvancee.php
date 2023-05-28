@@ -1,10 +1,15 @@
 <?php
+//incluson du fichier
+include 'config.php';
 
 // Titre de la page
 $titre = "Historique de recherche avancée- Mediateq";
 
 // Création d'un objet manager de connexion
 $connexionManager = new ConnexionManager;
+
+//Création d'un objet manager de logs
+$logsManager = new LogsManager();
 
 $vues = array(); // tableau des vues à appeler
 
@@ -21,6 +26,14 @@ $abonneManager = new abonneManager;
 //Vérifie si un utilisateur est connecté et récupère les informations de l'utilisateur connecté
 if ($connexionManager->isLoggedOn()) {
     $unAbonne = $abonneManager->getUtilisateurByMailU($_SESSION['mailU']);
+}
+
+//appel de la fonction qui logs en bdd
+if (defined('LOGS_ENABLED') && LOGS_ENABLED && isset($_SESSION['mailU'])) {
+    $idAbonne = $unAbonne->getId();
+    $pageConsultee = $titre; // Utilisez la variable $titre actuelle pour obtenir le nom de la page consultée
+    $dateConsultation = date('Y-m-d H:i:s');
+    $logsManager->logPageConsultee($idAbonne, $pageConsultee, $dateConsultation);
 }
 
 $nbHistoriqueRechercheAvancee = $rechercheManager->nbHistoriqueRechercheAvancee($unAbonne->getId());
