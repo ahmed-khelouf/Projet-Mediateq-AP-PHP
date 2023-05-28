@@ -65,5 +65,20 @@ class Exemplaire {
         return $this->etat;
     }
 
+            /**
+     *
+     *
+     * @return bool
+     */
+    public function estReserve($lesReservations) : bool{
+        $booleen = false;
+
+        foreach($lesReservations as $uneReservation){
+            if ($uneReservation->getExemplaire()->getNumero() == $this->getNumero()){
+                $booleen = true;
+            }
+        }
+        return $booleen;
+    }
 }
 ?>

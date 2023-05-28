@@ -69,5 +69,21 @@ class Parution {
     public function getPhoto() : string {
         return $this->photo;
     }
+
+                /**
+     *
+     *
+     * @return bool
+     */
+    public function estReserve($lesReservations) : bool{
+        $booleen = false;
+
+        foreach($lesReservations as $uneReservation){
+            if ($uneReservation->getParution()->getNumero() == $this->getNumero()){
+                $booleen = true;
+            }
+        }
+        return $booleen;
+    }
 }
 ?>

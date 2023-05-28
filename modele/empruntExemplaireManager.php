@@ -130,9 +130,10 @@ class EmpruntExemplaireManager extends Manager
         $q->execute();
     }
 
-    public function prolongerToutEmprunt(): void
+    public function prolongerToutEmprunt($abonne): void
     {
-        $q = $this->getPDO()->prepare('UPDATE emprunt SET dateFin = DATE_ADD(dateFin, INTERVAL 7 DAY), prolongable = 0 WHERE prolongable = 1 AND archive = 0;');
+        $q = $this->getPDO()->prepare('UPDATE emprunt SET dateFin = DATE_ADD(dateFin, INTERVAL 7 DAY), prolongable = 0 WHERE prolongable = 1 AND archive = 0 AND numero NOT IN (SELECT numeroExemplaire FROM reservationexemplaire) AND idAbonne = :id_abonne ;');
+        $q->bindParam(':id_abonne', $abonne->getId(), PDO::PARAM_INT);
         $q->execute();
     }
     

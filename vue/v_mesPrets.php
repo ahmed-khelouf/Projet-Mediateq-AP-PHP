@@ -21,7 +21,7 @@
                             <p class="card-text">
                             Status:
                             <?php
-                                if($unEmprunt->peutProlonger() == 1){
+                                if($unEmprunt->peutProlonger() == 1 && !$unEmprunt->getExemplaire()->estReserve($reservationsExemplaires)){
                                     ?><a href="#prolonger<?= $unEmprunt->getId() ?>" data-toggle="modal" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> PROLONGER</a>
                                         <div class="modal fade" id="prolonger<?= $unEmprunt->getId() ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -36,6 +36,9 @@
                                                         <p class="text-center">Êtes-vous sûr de vouloir prolonger l'emprunt suivant d'une semaine ?</p>
                                                         <div class="card mb-3">
                                                             <div class="card-header text-center"><strong><?= $unEmprunt->getExemplaire()->getDocument()->getTitre() ?></strong></div>
+                                                            <div class="img-square-wrapper">
+                                                                <img class="" src="images/Livres/<?=$unEmprunt->getExemplaire()->getDocument()->getImage()?>.jpg" alt="<?= $unEmprunt->getExemplaire()->getDocument()->getTitre() ?>">
+                                                            </div>
                                                             <div class="card-body">
                                                                 <h4 class="card-text">Document n°<?= $unEmprunt->getId()?>, Exemplaire n°<?= $unEmprunt->getExemplaire()->getNumero() ?></h4>
                                                                     <p class="card-text">Date de début: <?= $unEmprunt->getDateDebut() ?></p>
@@ -94,7 +97,7 @@
                             <p class="card-text">
                             Status:
                             <?php
-                                if($unEmprunt->peutProlonger() == 1){
+                                if($unEmprunt->peutProlonger() == 1 && !$unEmprunt->getParution()->estReserve($reservationsParutions)){
                                     ?><a href="#prolonger_paru<?= $unEmprunt->getId() ?>" data-toggle="modal" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> PROLONGER</a>
                                         <div class="modal fade" id="prolonger_paru<?= $unEmprunt->getId() ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -109,6 +112,9 @@
                                                         <p class="text-center">Êtes-vous sûr de vouloir prolonger l'emprunt suivant d'une semaine ?</p>
                                                         <div class="card mb-3">
                                                             <div class="card-header text-center"><strong><?= $unEmprunt->getParution()->getRevue()->getTitre() ?></strong></div>
+                                                            <div class="img-square-wrapper">
+                                                                <img class="" src="images/Revues/<?=$unEmprunt->getParution()->getPhoto()?>.jpg" alt="<?= $unEmprunt->getParution()->getRevue()->getTitre() ?>">
+                                                            </div>
                                                             <div class="card-body">
                                                                 <h4 class="card-text">Revue n°<?= $unEmprunt->getId()?>, Parution n°<?= $unEmprunt->getParution()->getNumero() ?></h4>
                                                                     <p class="card-text">Date de début: <?= $unEmprunt->getDateDebut() ?></p>

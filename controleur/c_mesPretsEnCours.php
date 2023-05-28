@@ -17,6 +17,12 @@ if(isset($_SESSION['mailU'])){
 $empruntManager = new EmpruntExemplaireManager();
 $empruntParutionManager = new EmpruntParutionManager();
 
+$reservationManager = new reservationExemplaireManager();
+$reservationParutionManager = new reservationParutionManager();
+
+$reservationsExemplaires = array_merge($reservationManager->getListLivres(), $reservationManager->getListDVD());
+$reservationsParutions = $reservationParutionManager->getList();
+
 if (isset($_POST['prolong_doc'])) {
     $idEmprunt = $_POST['idEmprunt'];
 
@@ -33,8 +39,8 @@ if (isset($_POST['prolong_paru'])) {
 
 if (isset($_POST['prolong_all'])) {
 
-    $empruntManager->prolongerToutEmprunt();
-    $empruntParutionManager->prolongerToutEmprunt();
+    $empruntManager->prolongerToutEmprunt($abonne);
+    $empruntParutionManager->prolongerToutEmprunt($abonne);
     header('location: index.php?action=mesPretsEnCours');
 }
 

@@ -21,7 +21,7 @@
                 if($q->rowCount()==1){
                     $user = $q->fetch(PDO::FETCH_ASSOC);
                     $type = $types[$user['typeAbonnement']];
-                $unAbonnee = new Abonne((int)$user['id'], $user['nom'] , $user['prenom'] , $user['dateNaissance'] , $user['adresse'] , $user['numTel'] , $user['finAbonnement'] , $user['mdpU'] , $user['mailU'], $type); 
+                $unAbonnee = new Abonne((int)$user['id'], $user['nom'] , $user['prenom'] , $user['dateNaissance'] , $user['adresse'] , $user['numTel'] , $user['finAbonnement'] , $user['mdpU'] , $user['mailU'], $type, $user['frais']); 
                 
                 return $unAbonnee;
                 }
@@ -44,7 +44,7 @@
                 foreach($r1 as $user)
                 {
                     $type = $types[$user['typeAbonnement']];
-                    $lesAbonnees[$user['id']] = new Abonne((int)$user['id'], $user['nom'] , $user['prenom'] , $user['dateNaissance'] , $user['adresse'] , $user['numTel'] , $user['finAbonnement'] , $user['mdpU'] , $user['mailU'], $type); 
+                    $lesAbonnees[$user['id']] = new Abonne((int)$user['id'], $user['nom'] , $user['prenom'] , $user['dateNaissance'] , $user['adresse'] , $user['numTel'] , $user['finAbonnement'] , $user['mdpU'] , $user['mailU'], $type, $user['frais']); 
                 }
                 return $lesAbonnees;
                 
@@ -187,6 +187,12 @@
                     }
                 }
                 return $ret;
+            }
+
+            function payerFrais($abonne){ 
+                $req = $this->getPDO()->prepare('UPDATE abonné SET frais = 0 WHERE id = :idAbonne');
+                $req->bindParam(':idAbonne', $abonne->getId(), PDO::PARAM_INT);
+                $req->execute();
             }
 
         }

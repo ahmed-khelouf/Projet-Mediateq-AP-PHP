@@ -20,8 +20,16 @@ $emprunts = $empruntManager->getListOverdue();
 $empruntParutionManager = new EmpruntParutionManager();
 $empruntsParution = $empruntParutionManager->getListOverdue();
 
-$frais_retard = $empruntManager->getFraisDeRetard($abonne->getId());
-$frais_retard += $empruntParutionManager->getFraisDeRetard($abonne->getId());
+$reservationsExemplaires = [];
+$reservationsParutions = [];
+
+if (isset($_POST['payer_frais'])) {
+
+    $abonneManager->payerFrais($abonne);
+    header('location: index.php?action=mesFrais');
+}
+
+$frais_retard = $abonne->getFrais();
 
 array_push($vues, "$racine/vue/v_mesFrais.php");
 array_push($vues, "$racine/vue/v_mesPrets.php");

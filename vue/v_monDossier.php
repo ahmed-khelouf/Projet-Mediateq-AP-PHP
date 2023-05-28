@@ -9,12 +9,6 @@
 			echo '<div class="alert alert-warning">' . $messageExpiration . '</div>';
 		}
 
-		$empruntManager = new empruntExemplaireManager();
-		$empruntParution = new empruntParutionManager();
-
-		$fraisRetard = $empruntManager->getFraisDeRetard($unAbonne->getId());
-		$fraisRetard += $empruntParution->getFraisDeRetard($unAbonne->getId());
-
 	?>
 	<h1> Mon Dossier <h1>
 
@@ -78,7 +72,7 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td><?= $fraisRetard ?>.00 €</td>
+						<td><?= $unAbonne->getFrais()?>.00 €</td>
 						
 					</tr>
 				</tbody>
