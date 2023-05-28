@@ -34,15 +34,23 @@
                             // Récupère l'utilisateur connecté
                             $abo = $abonneManager->getUtilisateurByMailU($_SESSION['mailU']);
                             // Vérifie si l'utilisateur a réservé cet exemplaire
-                            $reservation = $reservationManager->AfficherBouton($abo->getId(), $uneRevue->getId(), $unNumero->getNumero());
-                            // Vérifie si l'utilisateur a réservé l'exemplaire ou non
-                            if ($reservation) { ?>
-                                <!-- Bouton de réservation -->
-                                <a href="#addnew<?= $uneRevue->getId() ?><?= $unNumero->getNumero() ?>" data-toggle="modal" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> RÉSERVER</a>
-                            <?php } else { ?>
-                                <!-- Message si l'utilisateur a déjà réservé ce document -->
-                                <span class="text-danger font-weight-bold">Vous avez déjà réservé ce document</span>
+                            $reservation = $reservationParutionManager->AfficherBouton($abo->getId(), $uneRevue->getId(), $unNumero->getNumero());
+                            // Récupère le nombre de réservation de l'utilisateur
+                            //Recupération du nombre de réservation de l'utilisateur sous 3 semaine
+                            $nbReservation = $reservationManager->nombreReservationAutorise($abo->getId());
+                            // Vérifie si l'utilisateur a réservé le nombre max de réservation
+                            if ($nbReservation >= 20 && $abo->getTypeAbonnement()->getId() <= 3) { ?>
+                                <span class="text-danger font-weight-bold">Tu as déja reservé le nombre max de reservation</span>
+                                <?php } else {
+                                // Vérifie si l'utilisateur a réservé l'exemplaire ou non
+                                if ($reservation) { ?>
+                                    <!-- Bouton de réservation -->
+                                    <a href="#addnew<?= $uneRevue->getId() ?><?= $unNumero->getNumero() ?>" data-toggle="modal" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> RÉSERVER</a>
+                                <?php } else { ?>
+                                    <!-- Message si l'utilisateur a déjà réservé ce document -->
+                                    <span class="text-danger font-weight-bold">Vous avez déjà réservé ce document</span>
                         <?php }
+                            }
                         } ?>
                     </div>
                 </div>
@@ -78,7 +86,7 @@
                                     <form method="POST" action="?action=reservation">
                                         <?php
                                         // Récupérer le rangMax de l'utilisateur dans la liste des abonnés qui a réservé ce document (revue + numéro) 
-                                        $reservations = $reservationManager->recupMaxRang($uneRevue->getId(), $unNumero->getNumero());
+                                        $reservations = $reservationParutionManager->recupMaxRang($uneRevue->getId(), $unNumero->getNumero());
                                         ?>
                                         <!-- les champs cachés pour envoyer les données nécessaires à la ajout -->
                                         <input type="hidden" class="form-control" name="rang" value="<?= $reservations + 1 ?> ">
@@ -105,17 +113,3 @@
         } ?>
     </div>
 </div>
-
-
-<!-- <script>
-        $(document).ready(function() {
-            // Sélectionner le bouton de confirmation de la première modal
-            var confirmationBtn = $('#addnew<?= $uneRevue->getId() ?><?= $unNumero->getNumero() ?>').find('[name="addRevue"]');
-            // Ajouter un écouteur d'événement pour le clic sur le bouton de confirmation
-            confirmationBtn.on('click', function() {
-                // Sélectionner la deuxième modal et l'ouvrir
-                var deuxiemeModal = $('#deuxiemeModal');
-                deuxiemeModal.modal('show');
-            });
-        });
-    </script> -->

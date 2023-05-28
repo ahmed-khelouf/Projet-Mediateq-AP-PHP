@@ -10,12 +10,12 @@ $historiqueExemplaireManager = new HistoriqueExemplaireManager;
 $historiqueDVD = $historiqueExemplaireManager->getListDVD();
 $historiqueLivre = $historiqueExemplaireManager->getListLivres();
 
+
 // Création d'un objet manager de HistoriqueParution
 $historiqueParutionManager = new HistoriqueParutionManager;
 $historiqueParution = $historiqueParutionManager->getList();
 
-// Création d'un objet manager de historique
-$HistoriqueManager = new HistoriqueManager();
+
 
 //Création d'un objet manager de abonne
 $abonneManager = new abonneManager;
@@ -24,6 +24,11 @@ $abonneManager = new abonneManager;
 if ($connexionManager->isLoggedOn()) {
     $unAbonne = $abonneManager->getUtilisateurByMailU($_SESSION['mailU']);
 }
+
+// Création d'un objet manager de historique
+$HistoriqueManager = new HistoriqueManager();
+$nbHistorique = $HistoriqueManager->nombreHistorique($unAbonne->getId());
+
 
 // inclure la vue en lui transmettant les données nécessaires
 include "$racine/vue/header.php";

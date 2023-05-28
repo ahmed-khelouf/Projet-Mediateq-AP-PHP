@@ -9,7 +9,7 @@ body {
   font-size : 14px;
   line-height : 1.3;
   /*scroll-behavior: smooth;*/
-  background: #f9f9f9 url(page-bg-1.jpg);
+  background-color: whitesmoke;
 }
 
 .bandeau img {

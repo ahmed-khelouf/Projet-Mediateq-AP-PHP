@@ -2,9 +2,10 @@
 // Vérification de la connexion de l'utilisateurs 
 if ($connexionManager->isLoggedOn()) {
     // Récupération du nombre de réservations de l'abonné courant
-    $nbHistorique = $HistoriqueManager->nombreHistorique($unAbonne->getId());
+    $nbHistorique ;
 ?>
-    <h1>Réservation de <?= $unAbonne->getNom() ?></h1>
+    <h1>Réservation de <?= $unAbonne->getPrenom() ?> <?= $unAbonne->getNom() ?> </h1>
+    <!-- Affichage du nombre de réservations de l'abonné courant -->
     <h3>Historique des réservations <?= $nbHistorique ?></h3>
     
     <h2>REVUES : </h2>

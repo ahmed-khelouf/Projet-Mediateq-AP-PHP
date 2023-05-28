@@ -110,7 +110,7 @@ class LivreManager extends Manager
      * @return array
      */
     public function getLivreCritereAvancee(string $texte, string $critere, string $option2, string $texte2, string $critere2, string $option3, string $texte3, string $critere3): array
-    {   
+    {
         $sql = 'SELECT DISTINCT * FROM livre INNER JOIN document ON document.id = livre.idDocument WHERE ';
 
         $conditions = []; // Tableau pour stocker les conditions de recherche
@@ -269,8 +269,6 @@ class LivreManager extends Manager
 
         return $this->getLivresByListId($lesId);
     }
-
-
 
     /**
      * Renvoie un tableau associatif contenant l'ensemble des objets Livre dont la date d'achat date de moins de $nbJours jours

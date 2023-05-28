@@ -144,13 +144,13 @@ class RevueManager extends Manager
                 $conditions[] = 'revue.titre LIKE :texte'; // Recherche par titre
                 break;
             case 'descripteur':
-                $conditions[] = 'descripteur.libelle LIKE :texte'; // Recherche par collection
+                $conditions[] = 'descripteur.libelle LIKE :texte'; // Recherche par descripteur
                 break;
             case 'periodicite':
-                $conditions[] = 'revue.periodicite LIKE :texte'; // Recherche par ISBN
+                $conditions[] = 'revue.periodicite LIKE :texte'; // Recherche par periodicite
                 break;
             default:
-                return []; // Critère invalide, retourne un tableau vide
+            $conditions[] = 'null LIKE :texte'; // Critère invalide, retourne un tableau vide
         }
 
      
@@ -162,13 +162,13 @@ class RevueManager extends Manager
                     $conditions[] = 'AND revue.titre LIKE :texte2'; // Recherche par titre
                     break;
                 case 'descripteur':
-                    $conditions[] = 'AND descripteur.libelle LIKE :texte2'; // Recherche par auteur
+                    $conditions[] = 'AND descripteur.libelle LIKE :texte2'; // Recherche par descripteur
                     break;
                 case 'periodicite':
-                    $conditions[] = 'AND revue.periodicite LIKE :texte2'; // Recherche par collection
+                    $conditions[] = 'AND revue.periodicite LIKE :texte2'; // Recherche par periodicite
                     break;
                 default:
-                    return []; // Critère invalide, retourne un tableau vide
+                $conditions[] = 'AND null LIKE :texte2';// Critère invalide, retourne un tableau vide
             }
         } elseif ($option2 === 'ou' && $texte2 !== null) {
             switch ($critere2) {
@@ -176,13 +176,13 @@ class RevueManager extends Manager
                     $conditions[] = 'OR revue.titre LIKE :texte2'; // Recherche par titre
                     break;
                 case 'descripteur':
-                    $conditions[] = 'OR descripteur.libelle LIKE :texte2'; // Recherche par auteur
+                    $conditions[] = 'OR descripteur.libelle LIKE :texte2'; // Recherche par descripteur
                     break;
                 case 'periodicite':
-                    $conditions[] = 'OR revue.periodicite LIKE :texte2'; // Recherche par collection
+                    $conditions[] = 'OR revue.periodicite LIKE :texte2'; // Recherche par periodicite
                     break;
                 default:
-                    return []; // Critère invalide, retourne un tableau vide
+                $conditions[] = 'OR null LIKE :texte2'; // Critère invalide, retourne un tableau vide
             }
         } elseif ($option2 === 'sauf' && $texte2 !== null) {
             switch ($critere2) {
@@ -190,13 +190,13 @@ class RevueManager extends Manager
                     $conditions[] = 'AND revue.titre NOT LIKE :texte2'; // Exclusion par titre
                     break;
                 case 'descripteur':
-                    $conditions[] = 'AND descripteur.libelle NOT LIKE :texte2'; // Exclusion par auteur
+                    $conditions[] = 'AND descripteur.libelle NOT LIKE :texte2'; // Exclusion par descripteur
                     break;
                 case 'periodicite':
-                    $conditions[] = 'AND revue.periodicite NOT LIKE :texte2'; // Exclusion par collection
+                    $conditions[] = 'AND revue.periodicite NOT LIKE :texte2'; // Exclusion par periodicite
                     break;
                 default:
-                    return []; // Critère invalide, retourne un tableau vide
+                $conditions[] = 'AND null NOT LIKE :texte2';// Critère invalide, retourne un tableau vide
             }
         }
 
@@ -207,13 +207,13 @@ class RevueManager extends Manager
                     $conditions[] = 'AND revue.titre LIKE :texte3'; // Recherche par titre
                     break;
                 case 'descripteur':
-                    $conditions[] = 'AND descripteur.libelle LIKE :texte3'; // Recherche par auteur
+                    $conditions[] = 'AND descripteur.libelle LIKE :texte3'; // Recherche par descripteur
                     break;
                 case 'periodicite':
-                    $conditions[] = 'AND revue.periodicite LIKE :texte3'; // Recherche par collection
+                    $conditions[] = 'AND revue.periodicite LIKE :texte3'; // Recherche par periodicite
                     break;
                 default:
-                    return []; // Critère invalide, retourne un tableau vide
+                $conditions[] = 'AND null LIKE :texte3'; // Critère invalide, retourne un tableau vide
             }
         } elseif ($option3 === 'ou' && $texte3 !== null) {
             switch ($critere3) {
@@ -221,13 +221,13 @@ class RevueManager extends Manager
                     $conditions[] = 'OR revue.titre LIKE :texte3'; // Recherche par titre
                     break;
                 case 'descripteur':
-                    $conditions[] = 'OR descripteur.libelle LIKE :texte3'; // Recherche par auteur
+                    $conditions[] = 'OR descripteur.libelle LIKE :texte3'; // Recherche par descirpteur
                     break;
                 case 'periodicite':
-                    $conditions[] = 'OR revue.periodicite LIKE :texte3'; // Recherche par collection
+                    $conditions[] = 'OR revue.periodicite LIKE :texte3'; // Recherche par periodicite
                     break;
                 default:
-                    return []; // Critère invalide, retourne un tableau vide
+                $conditions[] = 'OR null LIKE :texte3'; // Critère invalide, retourne un tableau vide
             }
         } elseif ($option3 === 'sauf' && $texte3 !== null) {
             switch ($critere3) {
@@ -235,13 +235,13 @@ class RevueManager extends Manager
                     $conditions[] = 'AND revue.titre NOT LIKE :texte3'; // Exclusion par titre
                     break;
                 case 'descripteur':
-                    $conditions[] = 'AND descripteur.libelle NOT LIKE :texte3'; // Exclusion par auteur
+                    $conditions[] = 'AND descripteur.libelle NOT LIKE :texte3'; // Exclusion par descirpteur
                     break;
                 case 'periodicite':
-                    $conditions[] = 'AND revue.periodicite NOT LIKE :texte3'; // Exclusion par collection
+                    $conditions[] = 'AND revue.periodicite NOT LIKE :texte3'; // Exclusion par periodicite
                     break;
                 default:
-                    return []; // Critère invalide, retourne un tableau vide
+                $conditions[] = 'AND null NOT LIKE :texte3'; // Critère invalide, retourne un tableau vide
             }
         }
 

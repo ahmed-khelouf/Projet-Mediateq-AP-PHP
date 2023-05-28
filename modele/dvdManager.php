@@ -115,7 +115,7 @@ class DvdManager extends Manager
     }
 
     /**
-     * Undocumented function
+     *  Effectue une recherche avancée des DVD en fonction des critères spécifiés
      *
      * @param string $texte
      * @param string $critere

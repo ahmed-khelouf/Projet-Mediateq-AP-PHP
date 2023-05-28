@@ -2,17 +2,12 @@
 <html>
 <head>
   <title>Connexion</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+ 
   <style>
-    body {
-      padding-top: 80px;
-      padding-bottom: 80px;
-      background-color: #f5f5f5;
-    }
+ 
     
-    .form-signin {
+    .card {
       max-width: 800px;
-      padding: 40px;
       margin: 0 auto;
       background-color: #fff;
       border: 1px solid rgba(0, 0, 0, 0.1);
@@ -35,7 +30,7 @@
     
     .form-fields {
       flex: 1;
-      padding-left: 40px;
+      padding: 40px;
     }
     
     .form-fields .form-group {
@@ -82,24 +77,25 @@
 </head>
 <body>
   <div class="container">
-    <form class="form-signin" action="./?action=connexion" method="POST">
+    <div class="card">
       <div class="form-image">
         <img src="https://pnganime.com/web/images/l/luffy-gear-5-colored.png" alt="Luffy Gear 5" />
       </div>
       <div class="form-fields">
-        <h2 class="h3 mb-3 font-weight-normal">Connexion</h2>
-        <div class="form-group">
-          <label for="inputMail" class="sr-only">Email de connexion</label>
-          <input type="text" id="inputMail" name="mailU" class="form-control" placeholder="Email de connexion" required autofocus>
-        </div>
-        <div>
-        <label for="inputPassword" class="sr-only">Mot de passe</label>
-          <input type="password" id="inputPassword" name="mdpU" class="form-control" placeholder="Mot de passe" required>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Se connecter</button>
+        <form class="form-signin" action="./?action=connexion" method="POST">
+          <h2 class="h3 mb-3 font-weight-normal">Connexion</h2>
+          <div class="form-group">
+            <label for="inputMail" class="sr-only">Email de connexion</label>
+            <input type="text" id="inputMail" name="mailU" class="form-control" placeholder="Email de connexion" required autofocus>
+          </div>
+          <div>
+            <label for="inputPassword" class="sr-only">Mot de passe</label>
+            <input type="password" id="inputPassword" name="mdpU" class="form-control" placeholder="Mot de passe" required>
+          </div>
+          <button class="btn btn-lg btn-primary btn-block" type="submit">Se connecter</button>
+        </form>
       </div>
-    </form>
+    </div>
   </div>
 </body>
 </html>
-

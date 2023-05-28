@@ -42,7 +42,7 @@
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="./?action=historiqueReservations">Historique réservations</a>
               <a class="dropdown-item" href="./?action=mesPretsHistorique">Historique des prêts</a>
-              <a class="dropdown-item" href="#">Historique de recherche</a>
+              <a class="dropdown-item" href="./?action=historiqueRechercheAvancee">Historique de recherche</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="./?action=deconnexion">Deconnexion</a>
             </div>
