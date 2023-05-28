@@ -1,13 +1,12 @@
 <h2>Frais en cours pour l'abonné <?php echo $abonne->getNom()?>: </h2>
 <div class="container-fluid">
 <?php
-    $total = 0;
-    if(empty($emprunts[$abonne->getId()]) && empty($empruntsParution[$abonne->getId()])){
-        ?><h3> Vous n'avez aucun emprunt en retard. </h3><?php
+    if((empty($emprunts[$abonne->getId()]) && empty($empruntsParution[$abonne->getId()]) || $frais_retard == 0)){
+        ?><h3> Vous n'avez aucun frais à régler.</h3>
+        <h4>Si des emprunts figurent toujours dans la liste ci-dessous, veuillez à les raporter au plus vite.  </h4><?php
     }
     else{
-        $total = $frais_retard;
-        print('<h3>'.$total.'.00€ de frais de retard. </h3>');
+        print('<h3>'.$frais_retard.'.00€ de frais de retard. </h3>');
     }
 ?>
 </div>

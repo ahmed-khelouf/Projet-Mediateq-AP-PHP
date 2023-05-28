@@ -1,3 +1,4 @@
+<?php if(!empty($emprunts[$abonne->getId()])){?>
 <div>
     <a href="#prolonger_all" data-toggle="modal" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> PROLONGER TOUT LES EMPRUNTS</a>
                                         <div class="modal fade" id="prolonger_all" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -24,3 +25,4 @@
                                             </div>
                                         </div>
 </div>
+<?php } ?>

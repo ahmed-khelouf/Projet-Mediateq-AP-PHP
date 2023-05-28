@@ -151,6 +151,9 @@
 
     <?php
     }}
+    if (empty($emprunts[$abonne->getId()]) && empty($empruntsParution[$abonne->getId()])){?>
+    <h3>Vous n'avez aucun emprunt figurant dans cette catégorie</h3>
+    <?php }
 ?>
 
 </div>
