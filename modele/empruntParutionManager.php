@@ -67,24 +67,27 @@ class EmpruntParutionManager extends Manager
 
     public function updateFraisDeRetard(): void 
     {
-        $q = $this->getPDO()->prepare('UPDATE emprunt_parution SET frais_retard = CASE WHEN DATEDIFF(NOW(), dateFin) >= 14 THEN 5.0WHEN DATEDIFF(NOW(), dateFin) >= 7 THEN 2.0 ELSE 0.0 END WHERE archive = 0;');
+        $q = $this->getPDO()->prepare('UPDATE emprunt_parution SET frais_retard = CASE WHEN DATEDIFF(NOW(), dateFin) >= 14 THEN 5.0 WHEN DATEDIFF(NOW(), dateFin) >= 7 THEN 2.0 ELSE 0.0 END WHERE archive = 0;');
         $q->execute();
     }
 
-    public function getFraisDeRetard($idUtilisateur): int
+    public function updateProlongeable(): void 
     {
-        $q = $this->getPDO()->prepare('SELECT SUM(frais_retard) AS f_r FROM emprunt_parution WHERE archive = 0 AND idAbonne = :id_utilisateur');
-        $q->bindParam(':id_utilisateur', $idUtilisateur, PDO::PARAM_INT);
+        $q = $this->getPDO()->prepare('UPDATE emprunt_parution SET prolongable = CASE WHEN DATEDIFF(NOW(), dateFin) >= 0 THEN 0 ELSE prolongable END WHERE archive = 0;');
         $q->execute();
-        $r1 = $q->fetchAll(PDO::FETCH_ASSOC);
-
-        foreach($r1 as $fraisRetard){
-            $nombre = $fraisRetard['f_r'];
-        }
-
-        $nombre = intval($nombre);
-
-        return $nombre;
     }
-    
+
+    public function prolongerEmprunt($idEmprunt): void
+    {
+        $q = $this->getPDO()->prepare('UPDATE emprunt_parution SET dateFin = DATE_ADD(dateFin, INTERVAL 7 DAY), prolongable = 0 WHERE id = :id_emprunt;');
+        $q->bindParam(':id_emprunt', $idEmprunt, PDO::PARAM_INT);
+        $q->execute();
+    }
+
+    public function prolongerToutEmprunt($abonne): void
+    {
+        $q = $this->getPDO()->prepare('UPDATE emprunt_parution SET dateFin = DATE_ADD(dateFin, INTERVAL 7 DAY), prolongable = 0 WHERE prolongable = 1 AND archive = 0 AND idParution NOT IN (SELECT numeroParution FROM reservationparution) AND idAbonne = :id_abonne ;');
+        $q->bindParam(':id_abonne', $abonne->getId(), PDO::PARAM_INT);
+        $q->execute();
+    }
 }

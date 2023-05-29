@@ -24,7 +24,7 @@ class EmpruntExemplaire extends Emprunt {
     /**
      * Accesseur de la propriété Exemplaire
      *
-     * @return string
+     * @return Exemplaire
      */
     public function getExemplaire() : Exemplaire {
         return $this->exemplaire;

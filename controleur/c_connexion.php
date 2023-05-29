@@ -2,6 +2,16 @@
 
 $titre = "Connexion - Mediateq";
 
+// Mise à jour des frais de retard sur la base de donnée à chaque connexion
+// Mise à jour de la colonne 'prolongaeble' sur la base de donnée à chaque connexion
+$empruntManager = new empruntExemplaireManager();
+$empruntParutionManager = new EmpruntParutionManager();
+
+$empruntManager->updateFraisDeRetard();
+$empruntManager->updateProlongeable();
+$empruntParutionManager->updateFraisDeRetard();
+$empruntParutionManager->updateProlongeable();
+
 $connexionManager = new ConnexionManager();
 $dateConnexionManager = new DateConnexionManager();
 

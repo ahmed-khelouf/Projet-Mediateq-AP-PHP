@@ -74,14 +74,18 @@ if ($messageExpiration !== null) {
 </div>
 
 <h2>Frais</h2>
-<div class="">
-    <table id="myTable" class="table table-bordered table-striped">
-        <thead>
-            <th>Frais total</th>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+		<div class="">
+			<table  id="myTable" class="table table-bordered table-striped">
+				<thead>
+					<th>Frais total</th>
+				</thead>
+				<tbody>
+					<tr>
+						<td><?= $unAbonne->getFrais()?>.00 €</td>
+						
+					</tr>
+				</tbody>
+			</table>
 </div>
 
 <h2>Réservations</h2>
