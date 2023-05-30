@@ -2,7 +2,11 @@
 
 class TypeAbonnementManager extends Manager
 {
-
+    /**
+     * Renvoie un tableau associatif
+     *
+     * @return array
+     */
     public function getList() : array 
     {
 

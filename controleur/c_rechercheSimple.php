@@ -1,6 +1,21 @@
 <?php
+include 'config.php';
 
 $titre = "Recherche - Catalogue - Mediateq";
+
+$logsManager = new LogsManager();
+$abonneManager = new AbonneManager();
+
+if (isset($_SESSION['mailU'])) {
+    $unAbonne = $abonneManager->getUtilisateurByMailU($_SESSION['mailU']);
+}
+
+if (defined('LOGS_ENABLED') && LOGS_ENABLED && isset($_SESSION['mailU'])) {
+    $idAbonne = $unAbonne->getId();
+    $pageConsultee = $titre; // Utilisez la variable $titre actuelle pour obtenir le nom de la page consultée
+    $dateConsultation = date('Y-m-d H:i:s');
+    $logsManager->logPageConsultee($idAbonne, $pageConsultee, $dateConsultation);
+}
 
 $vues = array(); // tableau des vues à appeler
 

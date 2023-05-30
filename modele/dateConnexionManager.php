@@ -23,6 +23,14 @@ class DateConnexionManager extends Manager {
         }
     }
 
+    /**
+     * envoie les infos de connexion de l'utilisateur
+     *
+     * @param [type] $idUtilisateur
+     * @param [type] $dateConnexion
+     * @param [type] $navigateur
+     * @return boolean
+     */
     public function historiserConnexion($idUtilisateur, $dateConnexion, $navigateur) {
         try {
             $dateConnexionObj = DateTime::createFromFormat('Y-m-d H:i:s', $dateConnexion);

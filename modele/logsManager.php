@@ -3,6 +3,14 @@
 class logsManager extends Manager 
 {
 
+    /**
+     * Ajoute la page consulté par l'abonné dans la table logs
+     *
+     * @param [type] $idAbonne
+     * @param [type] $pageConsultee
+     * @param [type] $dateConsultation
+     * @return boolean
+     */
     public function logPageConsultee($idAbonne, $pageConsultee, $dateConsultation) {
         try {
             $dateConnexionObj = DateTime::createFromFormat('Y-m-d H:i:s', $dateConsultation);

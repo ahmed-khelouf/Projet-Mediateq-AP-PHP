@@ -30,6 +30,11 @@
                 }
             }
             
+         /**
+          * renvoie une liste d'abonné
+          *
+          * @return array
+          */
             public function getList() : array 
             {
 
@@ -50,6 +55,15 @@
                 
             }
 
+            /**
+             * permet à l'abonné de changer son mot de passe 
+             *
+             * @param [type] $id
+             * @param [type] $mdpActuel
+             * @param [type] $nouveauMdp
+             * @param [type] $confirmationMdp
+             * @return void
+             */
             function updateMdp($id, $mdpActuel, $nouveauMdp, $confirmationMdp) {
                 try {
                     // Vérifier les conditions du mot de passe : 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial, 12 caractères minimum.
@@ -91,7 +105,17 @@
             
 
             
-
+            /**
+             * insère un abonné en base de données
+             *
+             * @param [type] $nom
+             * @param [type] $prenom
+             * @param [type] $dateNaiss
+             * @param [type] $adresse
+             * @param [type] $numTel
+             * @param [type] $mailU
+             * @return boolean
+             */
                 function insertAbo($nom, $prenom, $dateNaiss, $adresse, $numTel, $mailU) {
         try {
             // Vérifier si l'adresse e-mail existe déjà
@@ -154,6 +178,12 @@
         }
         }
 
+        /**
+         * compte le nombre de jours avant la fin de l'abonnement de l'abonné
+         *
+         * @param [type] $abonne
+         * @return string
+         */
         public function verifierFinAbonnement($abonne) {
             $finAbonnement = new DateTime($abonne->getFinAbonnement());
             $aujourdHui = new DateTime();
@@ -175,7 +205,12 @@
         }
         
         
-        
+        /**
+         * vérifie si le mail existe déjà en base de données
+         *
+         * @param [type] $mailU
+         * @return boolean
+         */
                 public function checkExistingEmail($mailU) {
                     $req = $this->getPDO()->prepare('SELECT COUNT(*) FROM abonné WHERE mailU = :mailU');
                     $req->bindParam(':mailU', $mailU, PDO::PARAM_STR);
@@ -184,7 +219,12 @@
                     return ($count > 0);
                 }
         
-        
+        /**
+         * met à jour les infos de l'abonné
+         *
+         * @param [type] $abonne
+         * @return string
+         */
                 public function updateAbonne($abonne)
                 {
                     try {
@@ -210,7 +250,11 @@
                 }
                 
 
-
+                /**
+                 * Undocumented function
+                 *
+                 * @return void
+                 */
             function recupid() {
 
                 $ret = false;
@@ -226,8 +270,14 @@
                 return $ret;
             }
 
+            /**
+             * Renitialise les frais de l'abonné passé en paramètre
+             *
+             * @param [type] $abonne
+             * @return void
+             */
             function payerFrais($abonne){ 
-                //Renitialise les frais de l'abonné passé en paramètre
+                ///Renitialise les frais de l'abonné passé en paramètre
                     $req = $this->getPDO()->prepare('UPDATE abonné SET frais = 0 WHERE id = :idAbonne');
                     $req->bindParam(':idAbonne', $abonne->getId(), PDO::PARAM_INT);
                     $req->execute();

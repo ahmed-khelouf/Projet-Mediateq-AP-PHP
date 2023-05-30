@@ -1,6 +1,10 @@
 <?php
+include 'config.php';
+
 // Titre de la page
 $titre = "Historique des réservations - Mediateq";
+
+$logsManager = new LogsManager();
 
 // Création d'un objet manager de connexion
 $connexionManager = new ConnexionManager;
@@ -23,6 +27,13 @@ $abonneManager = new abonneManager;
 //Vérifie si un utilisateur est connecté et récupère les informations de l'utilisateur connecté
 if ($connexionManager->isLoggedOn()) {
     $unAbonne = $abonneManager->getUtilisateurByMailU($_SESSION['mailU']);
+}
+
+if (defined('LOGS_ENABLED') && LOGS_ENABLED && isset($_SESSION['mailU'])) {
+    $idAbonne = $unAbonne->getId();
+    $pageConsultee = $titre; // Utilisez la variable $titre actuelle pour obtenir le nom de la page consultée
+    $dateConsultation = date('Y-m-d H:i:s');
+    $logsManager->logPageConsultee($idAbonne, $pageConsultee, $dateConsultation);
 }
 
 // Création d'un objet manager de historique
