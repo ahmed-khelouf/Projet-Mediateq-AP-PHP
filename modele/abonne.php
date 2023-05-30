@@ -12,6 +12,7 @@ class Abonne  {
     private $mdpU;
     private $mailU;
     private $typeAbonnement;
+    private $frais;
 
 
     /**
@@ -27,10 +28,11 @@ class Abonne  {
      * @param string $mdpU
      * @param string $mailU
      * @param string TypeAbonnement $typeAbonnement
+     * @param integer frais;
      */
 
 
-    public function __construct(int $id, string $nom, string $prenom , string $dateNaissance , string $adresse , string $numTel , string $finAbonnement , string $mdpU , string $mailU,TypeAbonnement $typeAbonnement)
+    public function __construct(int $id, string $nom, string $prenom , string $dateNaissance , string $adresse , string $numTel , string $finAbonnement , string $mdpU , string $mailU,TypeAbonnement $typeAbonnement, $frais)
     {
         $this->id = $id;
         $this->nom = $nom;
@@ -42,6 +44,7 @@ class Abonne  {
         $this->mdpU = $mdpU;
         $this->mailU = $mailU;
         $this->typeAbonnement = $typeAbonnement;
+        $this->frais = $frais;
 
     }
 
@@ -133,6 +136,15 @@ class Abonne  {
      */
     public function getMailU() : string{
         return $this->mailU;
+    }
+
+     /**
+     * Accesseur de la propriété frais
+     *
+     * @return int $frais
+     */
+    public function getFrais() : int{
+        return $this->frais;
     }
 
     /**
@@ -234,5 +246,16 @@ class Abonne  {
     public function setMailU(string $mailU): void {
         $this->mailU = $mailU;
     }
+
+    /**
+     * Mutateur de la propriété frais
+     *
+     * @param int $frais
+     * @return void
+     */
+    public function setFrais(int $frais): void {
+        $this->frais = $frais;
+    }
+
 
 }

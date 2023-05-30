@@ -21,7 +21,7 @@
                 if($q->rowCount()==1){
                     $user = $q->fetch(PDO::FETCH_ASSOC);
                     $type = $types[$user['typeAbonnement']];
-                $unAbonnee = new Abonne((int)$user['id'], $user['nom'] , $user['prenom'] , $user['dateNaissance'] , $user['adresse'] , $user['numTel'] , $user['finAbonnement'] , $user['mdpU'] , $user['mailU'], $type); 
+                $unAbonnee = new Abonne((int)$user['id'], $user['nom'] , $user['prenom'] , $user['dateNaissance'] , $user['adresse'] , $user['numTel'] , $user['finAbonnement'] , $user['mdpU'] , $user['mailU'], $type, $user['frais']); 
                 
                 return $unAbonnee;
                 }
@@ -44,7 +44,7 @@
                 foreach($r1 as $user)
                 {
                     $type = $types[$user['typeAbonnement']];
-                    $lesAbonnees[$user['id']] = new Abonne((int)$user['id'], $user['nom'] , $user['prenom'] , $user['dateNaissance'] , $user['adresse'] , $user['numTel'] , $user['finAbonnement'] , $user['mdpU'] , $user['mailU'], $type); 
+                    $lesAbonnees[$user['id']] = new Abonne((int)$user['id'], $user['nom'] , $user['prenom'] , $user['dateNaissance'] , $user['adresse'] , $user['numTel'] , $user['finAbonnement'] , $user['mdpU'] , $user['mailU'], $type, $user['frais']); 
                 }
                 return $lesAbonnees;
                 
@@ -108,14 +108,20 @@
             $difference = $dateNaissance->diff($aujourdHui);
             $age = $difference->y;
 
-            // Déterminer le type d'abonnement en fonction de l'âge
-            if ($age < 18) {
-                $typeAbonnement = '1';
-            } elseif ($age >= 18 && $age <= 25) {
-                $typeAbonnement = '2';
+            // Vérifier si l'utilisateur est éducateur
+            if (isset($_POST['educateur']) && $_POST['educateur'] === 'on') {
+                $typeAbonnement = '4'; // Mettre à jour le type d'abonnement à 4
             } else {
-                $typeAbonnement = '3';
+                // Déterminer le type d'abonnement en fonction de l'âge
+                if ($age < 18) {
+                    $typeAbonnement = '1';
+                } elseif ($age >= 18 && $age <= 25) {
+                    $typeAbonnement = '2';
+                } else {
+                    $typeAbonnement = '3';
+                }
             }
+
 
             // Générer le mot de passe par défaut
             $mdpDefaut = date_format($dateNaissance, "dmY") . strtoupper(substr($nom, 0, 2));
@@ -171,6 +177,31 @@
                     $count = $req->fetchColumn();
                     return ($count > 0);
                 }
+        
+        
+                public function updateAbonne($abonne)
+                {
+                    try {
+                        // Mettre à jour les informations personnelles de l'abonné à l'exception de l'id, du type d'abonnement et de la date d'expiration
+                        $sql = 'UPDATE abonné SET nom = :nom, prenom = :prenom, dateNaissance = :dateNaissance, adresse = :adresse, numTel = :numTel WHERE mailU = :mailU';
+                        $q = $this->getPDO()->prepare($sql);
+                        $q->bindValue(':nom', $abonne->getNom(), PDO::PARAM_STR);
+                        $q->bindValue(':prenom', $abonne->getPrenom(), PDO::PARAM_STR);
+                        $q->bindValue(':dateNaissance', $abonne->getDateNaissance(), PDO::PARAM_STR);
+                        $q->bindValue(':adresse', $abonne->getAdresse(), PDO::PARAM_STR);
+                        $q->bindValue(':numTel', $abonne->getNumTel(), PDO::PARAM_STR);
+                        $q->bindValue(':mailU', $abonne->getMailU(), PDO::PARAM_STR);
+                        $result = $q->execute();
+                
+                        if ($result) {
+                            return "Les informations personnelles ont été mises à jour avec succès.";
+                        } else {
+                            return "Une erreur est survenue lors de la mise à jour des informations personnelles.";
+                        }
+                    } catch (PDOException $e) {
+                        return "Erreur !: " . $e->getMessage();
+                    }
+                }
                 
 
 
@@ -187,6 +218,13 @@
                     }
                 }
                 return $ret;
+            }
+
+            function payerFrais($abonne){ 
+                //Renitialise les frais de l'abonné passé en paramètre
+                    $req = $this->getPDO()->prepare('UPDATE abonné SET frais = 0 WHERE id = :idAbonne');
+                    $req->bindParam(':idAbonne', $abonne->getId(), PDO::PARAM_INT);
+                    $req->execute();
             }
 
         }

@@ -23,12 +23,13 @@ class DateConnexionManager extends Manager {
         }
     }
 
-    public function historiserConnexion($idUtilisateur, $dateConnexion) {
+    public function historiserConnexion($idUtilisateur, $dateConnexion, $navigateur) {
         try {
             $dateConnexionObj = DateTime::createFromFormat('Y-m-d H:i:s', $dateConnexion);
-            $req = $this->getPDO()->prepare ('INSERT INTO date_connexion (	utilisateur_id, date_connexion) VALUES (:id_utilisateur, :date_connexion)');
+            $req = $this->getPDO()->prepare ('INSERT INTO date_connexion (utilisateur_id, date_connexion, navigateur) VALUES (:id_utilisateur, :date_connexion, :navigateur)');
             $req->bindParam(':id_utilisateur', $idUtilisateur, PDO::PARAM_INT);
             $req->bindParam(':date_connexion', $dateConnexion, PDO::PARAM_STR);
+            $req->bindParam(':navigateur', $navigateur, PDO::PARAM_STR);
             $resultat = $req->execute();
             return $resultat;
         } catch (PDOException $e) {
@@ -36,5 +37,6 @@ class DateConnexionManager extends Manager {
             die();
         }
     }
+    
     
 }

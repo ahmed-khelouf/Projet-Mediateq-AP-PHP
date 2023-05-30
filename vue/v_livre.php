@@ -37,8 +37,11 @@
                             $reservation = $reservationExemplaireManager->AfficherBouton($abo->getId(), $unLivre->getId(), $unExemplaire->getNumero());
                             //Recupération du nombre de réservation de l'utilisateur sous 3 semaine
                             $nbReservation = $reservationManager->nombreReservationAutorise($abo->getId());
+                            if ($abo->getFrais() > 0){ ?>
+                                <span class="text-danger font-weight-bold">Vous ne pouvez pas réserver avant d'avoir réglé vos frais de retard.</span>
+                        <?php } else {
                             // Vérifie si l'utilisateur a réservé le nombre max de réservation
-                            if ($nbReservation >= 20 && $abo->getTypeAbonnement()->getId() <= 3) { ?>
+                            if ($nbReservation >= 2 && $abo->getTypeAbonnement()->getId() <= 3) { ?>
                                 <span class="text-danger font-weight-bold">Tu as déja reservé le nombre max de reservation</span>
                                 <?php } else {
                                 // Vérifie si l'utilisateur a réservé l'exemplaire ou non
@@ -50,7 +53,7 @@
                                     <span class="text-danger font-weight-bold">Vous avez déjà réservé un exemplaire de ce document</span>
                         <?php }
                             }
-                        } ?>
+                        }} ?>
                     </div>
                 </div>
             </div>
