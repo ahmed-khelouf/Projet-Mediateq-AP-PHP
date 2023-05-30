@@ -63,10 +63,14 @@
         <label for="numTel">Numéro de téléphone :</label>
         <input type="tel" name="numTel" pattern="0[0-9]{9}" title="Le numéro de téléphone doit être composé de 10 chiffres et commencer par un 0." value="<?= isset($numTel) ? htmlspecialchars($numTel) : '' ?>" required>
 
+        <label for="educateur">Je suis éducateur :</label>
+         <input type="checkbox" name="educateur">
+
         <label for="mailU">Adresse e-mail :</label>
         <input type="email" name="mailU" value="<?= isset($mailU) ? htmlspecialchars($mailU) : '' ?>" required>
 
         <p>Le type d'abonnement est défini automatiquement selon votre âge</p>
+        <p> Votre mot de passe est défini au format jjmmaaaa ainsi que vos 2 premières lettre de votre nom en majuscule<p>
 
         <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>">
         <input type="submit" value="Valider">

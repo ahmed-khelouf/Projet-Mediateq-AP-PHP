@@ -21,14 +21,19 @@
             $mdpActuel = $_POST['mdpActuel'];
             $nouveauMdp = $_POST['nouveauMdp'];
             $confirmationMdp = $_POST['confirmationMdp'];
-
+    
             // Mettre à jour le mot de passe de l'utilisateur
             $resultat = $abonneManager->updateMdp($id, $mdpActuel, $nouveauMdp, $confirmationMdp);
-
+    
             // Affichage du message de résultat
             echo "<h2>$resultat</h2>";
-
+    
             if ($resultat === "Le mot de passe a été mis à jour avec succès.") {
+                // Enregistrer le changement de mot de passe dans la table des logs
+                $logsManager = new LogsMdpManager(); // Instanciation du gestionnaire de logs
+                $dateChangementMdp = date('Y-m-d H:i:s'); // Récupération de la date et heure actuelles
+                $logsManager->logChangementMdp($id, $dateChangementMdp); // Appel de la fonction logChangementMdp
+                
                 // Redirection de l'utilisateur vers la page de connexion après 3 secondes
                 header("Refresh: 3; URL=./?action=connexion");
                 exit();
@@ -38,6 +43,7 @@
             echo "<h2>Erreur ! Le jeton CSRF est invalide.</h2>";
         }
     }
+    
 
             // Vérification de la soumission du formulaire
     if (isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['dateNaissance']) && isset($_POST['adresse']) && isset($_POST['numTel']) && isset($_POST['mailU'])) {

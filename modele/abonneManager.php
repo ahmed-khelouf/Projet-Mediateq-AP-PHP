@@ -160,15 +160,21 @@
             $difference = $aujourdHui->diff($finAbonnement);
             $joursRestants = $difference->days;
         
-            if ($joursRestants <= 7) {
+            if ($joursRestants <= 0) {
+                $message = 'Votre abonnement a expiré ! Veuillez renouveler votre abonnement pour continuer à profiter de nos services.';
+                // Retourne le message
+                return $message;
+            } elseif ($joursRestants <= 7) {
                 $message = 'Votre abonnement expire dans moins d\'une semaine ! Pensez à le renouveler.';
                 // Retourne le message
                 return $message;
             }
         
-            // Retourne null si aucun message à afficher
+            // Aucun message à retourner si l'abonnement n'expire pas dans moins d'une semaine
             return null;
         }
+        
+        
         
                 public function checkExistingEmail($mailU) {
                     $req = $this->getPDO()->prepare('SELECT COUNT(*) FROM abonné WHERE mailU = :mailU');
