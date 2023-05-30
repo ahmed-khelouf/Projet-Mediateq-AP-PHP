@@ -6,6 +6,9 @@ $reservation = $reservationManager->nombreReservation($unAbonne->getId());
 
 $messageExpiration = $abonneManager->verifierFinAbonnement($unAbonne);
 
+$nbemprunt = new empruntManager();
+$emprunt = $nbemprunt->nombreEmprunt($unAbonne->getId());
+
 // Affichage du message si la date d'expiration est proche
 if ($messageExpiration !== null) {
     echo '<div class="alert alert-warning">' . $messageExpiration . '</div>';
@@ -67,6 +70,9 @@ if ($messageExpiration !== null) {
     <table id="myTable" class="table table-bordered table-striped">
         <thead>
             <th>Nombre d'emprunts</th>
+            <tr>
+                <td><?= $emprunt ?></td>
+            </tr>
         </thead>
         <tbody>
         </tbody>

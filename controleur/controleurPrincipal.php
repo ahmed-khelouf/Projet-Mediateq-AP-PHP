@@ -59,6 +59,7 @@ function chargerModeles($racine){
     require_once("$racine/modele/reservationExemplaireManager.php");
     require_once("$racine/modele/abonne.php");
     require_once("$racine/modele/abonneManager.php");
+    require_once("$racine/modele/empruntManager.php");
     require_once("$racine/modele/connexionManager.php");
     require_once("$racine/modele/descripteur.php");
     require_once("$racine/modele/descripteurManager.php");
@@ -79,6 +80,8 @@ function chargerModeles($racine){
     require_once("$racine/modele/dateConnexionManager.php");
     require_once("$racine/modele/logs.php");
     require_once("$racine/modele/logsManager.php");
+    require_once("$racine/modele/logsMdp.php");
+    require_once("$racine/modele/logsMdpManager.php");
     require_once("$racine/modele/typeAbonnement.php");
     require_once("$racine/modele/typeAbonnementManager.php");
     require_once("$racine/modele/rechercheAvancee.php");
