@@ -20,6 +20,7 @@ function controleurPrincipal($action) {
     $lesActions["inscription"] = "c_inscription.php";
     $lesActions["accueil"] = $lesActions["rechercheSimple"] ;
     $lesActions["historiqueRechercheAvancee"] = "c_historiqueRechercheAvancee.php" ;
+    $lesActions["mesFrais"] = "c_mesFrais.php";
     
     if (array_key_exists($action, $lesActions)) {
         return $lesActions[$action];
