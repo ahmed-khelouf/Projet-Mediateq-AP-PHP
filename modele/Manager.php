@@ -13,6 +13,7 @@ class Manager
         $mdp = "6cjo9y02";
         $bd = "groupe1";
         $serveur = "localhost";
+        
 
         try
         {
