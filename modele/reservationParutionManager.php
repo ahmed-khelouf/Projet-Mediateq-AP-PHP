@@ -42,6 +42,9 @@ class ReservationParutionManager extends Manager
 
         /**
          * Retourne le rang d'une reservation pour une revue selon son numero dans la base de données si elle existe
+         * @param string idRevue
+         * @param int numeroParution
+         * @return int
          */
         function getRang($idRevue, $numeroParution)
         {
@@ -59,12 +62,15 @@ class ReservationParutionManager extends Manager
 
         /**
          * recupere et retourne le rang le plus élevé pour une revue selon son numero reservé
+         * @param string idRevue
+         * @param int numeroParution
+         * @return int
          */
         function recupMaxRang($idRevue, $numeroParution)
         {
                 try {
                         $q = $this->getPDO()->prepare('SELECT MAX(rang) FROM reservationParution  WHERE idRevue = :idRevue AND numeroParution = :numeroParution');
-                        $q->bindParam(':idRevue', $idRevue, PDO::PARAM_INT);
+                        $q->bindParam(':idRevue', $idRevue, PDO::PARAM_STR);
                         $q->bindParam(':numeroParution', $numeroParution, PDO::PARAM_INT);
                         $q->execute();
                         // fetchColumn est utilisé pour récupérer la valeur d'une seule colonne de la première ligne d'un résultat
@@ -76,6 +82,10 @@ class ReservationParutionManager extends Manager
 
         /**
          * modifie le rang (-1) pour les reservations donc le rang est supérieur au rang renseigné selon le numero de la revue 
+         * @param string idRevue
+         * @param int rang
+         * @param int numeroParution
+         * @return void
          */
         function UpdateRang($idRevue, $rang, $numeroParution )
         {
@@ -92,6 +102,10 @@ class ReservationParutionManager extends Manager
 
         /**
          * modifie le statut pour les réservations dont le rang vient tout juste de passer à 1
+         * @param string idRevue
+         * @param int rang
+         * @param int numeroParution
+         * @return void
          */
         function UpdateStatut($idRevue, $rang, $numeroParution)
         {
@@ -110,8 +124,12 @@ class ReservationParutionManager extends Manager
 
         /**
          * insertion d'une reservation dans la base de données
+         * @param string idRevue
+         * @param int idAbonne
+         * @param int rang
+         * @param int numeroParution
          */
-        function addReservation($idRevue, $idAbonne, $rang, $numeroParution)
+        function addReservation($idRevue,  $idAbonne, $rang, $numeroParution) 
         {
                 try {
                         if ($rang > 1) {
@@ -133,6 +151,11 @@ class ReservationParutionManager extends Manager
 
         /**
          * suppression d'une reservation dans la base de données
+         * @param int idR
+         * @param string idRevue
+         * @param int rang
+         * @param int numeroParution
+         * @return void
          */
         function supReservation($idR, $idRevue, $rang, $numeroParution)
         {
@@ -154,6 +177,10 @@ class ReservationParutionManager extends Manager
 
         /**
          * Afficher le bouton seulement si l'abonné n'a pas reservé la parution d'une revue
+         * @param int idAbonne
+         * @param string idRevue
+         * @param int numeroParution
+         * @return void
          */
         function AfficherBouton($idAbonne, $idRevue, $numeroParution)
         {

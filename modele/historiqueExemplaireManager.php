@@ -73,6 +73,10 @@ class HistoriqueExemplaireManager extends Manager
 
     /**
      * insertion historique d'une reservation dans la base de données
+     * @param int idAbonne
+     * @param string idDoc
+     * @param int numeroExemplaire
+     * @return void
      */
     function addHistorique($idAbonne, $idDoc, $numeroExemplaire)
     {

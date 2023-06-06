@@ -70,7 +70,7 @@ class Parution {
         return $this->photo;
     }
 
-                /**
+    /**
      *
      *
      * @return bool
@@ -85,5 +85,6 @@ class Parution {
         }
         return $booleen;
     }
+
+
 }
-?>

@@ -33,4 +33,6 @@ class ParutionManager extends Manager
         }
         return $lesParutions;
     }
+
+    
 }

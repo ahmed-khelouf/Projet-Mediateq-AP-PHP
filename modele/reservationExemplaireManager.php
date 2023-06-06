@@ -32,7 +32,7 @@ class ReservationExemplaireManager extends Manager
                                 $abonne = $abonnes[$uneReservation['idAbonne']];
                                 $statut = $statuts[$uneReservation['idStatut']];
                                 $exemplaire = $exemplaires[$uneReservation['numeroExemplaire']];
-                                $lesReservations[$uneReservation['idR']] = new ReservationExemplaire($uneReservation['idR'], $document, $abonne, $uneReservation['rang'], $statut, $uneReservation['dateReservation'], $exemplaire );
+                                $lesReservations[$uneReservation['idR']] = new ReservationExemplaire($uneReservation['idR'], $document, $abonne, $uneReservation['rang'], $statut, $uneReservation['dateReservation'], $exemplaire);
                         }
                         return $lesReservations;
                 } catch (PDOException $e) {
@@ -70,7 +70,7 @@ class ReservationExemplaireManager extends Manager
                                 $abonne = $abonnes[$uneReservation['idAbonne']];
                                 $statut = $statuts[$uneReservation['idStatut']];
                                 $exemplaire = $exemplaires[$uneReservation['numeroExemplaire']];
-                                $lesReservations[$uneReservation['idR']] = new ReservationExemplaire($uneReservation['idR'], $document, $abonne, $uneReservation['rang'], $statut, $uneReservation['dateReservation'], $exemplaire );
+                                $lesReservations[$uneReservation['idR']] = new ReservationExemplaire($uneReservation['idR'], $document, $abonne, $uneReservation['rang'], $statut, $uneReservation['dateReservation'], $exemplaire);
                         }
                         return $lesReservations;
                 } catch (PDOException $e) {
@@ -80,6 +80,9 @@ class ReservationExemplaireManager extends Manager
 
         /**
          * Retourne le rang d'une reservation pour un document selon l'exemplaire dans la base de données si elle existe
+         * @param string idDoc
+         * @param int numeroExemplaire
+         * @return int
          */
         function getRang($idDoc, $numeroExemplaire)
         {
@@ -97,6 +100,9 @@ class ReservationExemplaireManager extends Manager
 
         /**
          * recupere et retourne le rang le plus élevé pour un document selon l'exemplaire reservé
+         * @param string idDoc
+         * @param int numeroExemplaire
+         * @return int
          */
         function recupMaxRang($idDoc, $numeroExemplaire)
         {
@@ -114,6 +120,10 @@ class ReservationExemplaireManager extends Manager
 
         /**
          * modifie le rang (-1) pour les reservations donc le rang est supérieur au rang renseigné selon l'exemplaire du document 
+         * @param string idDoc
+         * @param int numeroExemplaire
+         * @param int rang
+         * @return void
          */
         function UpdateRang($idDoc, $rang, $numeroExemplaire)
         {
@@ -130,6 +140,10 @@ class ReservationExemplaireManager extends Manager
 
         /**
          * modifie le statut pour les réservations dont le rang vient tout juste de passer à 1
+         * @param string idDoc
+         * @param int numeroExemplaire
+         * @param int rang
+         * @return void
          */
         function UpdateStatut($idDoc, $rang, $numeroExemplaire)
         {
@@ -149,6 +163,11 @@ class ReservationExemplaireManager extends Manager
 
         /**
          * insertion d'une reservation dans la base de données
+         * @param string idDoc
+         * @param int idAbonne
+         * @param int rang
+         * @param int numeroExemplaire
+         * @return void
          */
         function addReservation($idDoc, $idAbonne, $rang, $numeroExemplaire)
         {
@@ -172,6 +191,11 @@ class ReservationExemplaireManager extends Manager
 
         /**
          * suppression d'une reservation dans la base de données
+         * @param int idR
+         * @param string idDoc
+         * @param int rang
+         * @param int numeroExemplaire
+         * @return void
          */
         function supReservation($idR, $idDoc, $rang, $numeroExemplaire)
         {
@@ -193,6 +217,9 @@ class ReservationExemplaireManager extends Manager
 
         /**
          * Afficher le bouton seulement si l'abonné n'a pas reservé un exemplaire du document
+         * @param int idAbonne
+         * @param string idDoc
+         * @return void
          */
         function AfficherBouton($idAbonne, $idDoc)
         {

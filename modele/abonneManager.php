@@ -9,7 +9,7 @@
             *
             * @return abonne
             */
-            public function getUtilisateurByMailU($mailU) : ?Abonne
+            public function getUtilisateurByMailU($mailU) : Abonne
             {
 
                 $typeAbonnementManager = new typeAbonnementManager();

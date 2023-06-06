@@ -4,6 +4,8 @@ class HistoriqueManager extends Manager
 {
         /**
          * retourne le nombre de réservation pour chaque abonne (hisorique)
+         * @param int idAbonne
+         * @return int
          */
         function nombreHistorique($idAbonne)
         {

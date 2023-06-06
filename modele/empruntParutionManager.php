@@ -72,7 +72,7 @@ class EmpruntParutionManager extends Manager
      * 
      * @return void
      */
-    public function updateFraisDeRetard(): void 
+    public function updateFraisDeRetard() 
     {
         $q = $this->getPDO()->prepare('UPDATE emprunt_parution SET frais_retard = CASE WHEN DATEDIFF(NOW(), dateFin) >= 14 THEN 5.0 WHEN DATEDIFF(NOW(), dateFin) >= 7 THEN 2.0 ELSE 0.0 END WHERE archive = 0;');
         $q->execute();
@@ -82,7 +82,7 @@ class EmpruntParutionManager extends Manager
      * Met à jour la valeur 'prolongeable' des emprunts, si leur date de fin d'emprunt est dépassé
      * @return void
      */
-    public function updateProlongeable(): void 
+    public function updateProlongeable() 
     {
         $q = $this->getPDO()->prepare('UPDATE emprunt_parution SET prolongable = CASE WHEN DATEDIFF(NOW(), dateFin) >= 0 THEN 0 ELSE prolongable END WHERE archive = 0;');
         $q->execute();
@@ -92,7 +92,7 @@ class EmpruntParutionManager extends Manager
      * Prolonge l'emprunt passé en paramêtre, d'une semaine.
      * @return void
      */
-    public function prolongerEmprunt($idEmprunt): void
+    public function prolongerEmprunt($idEmprunt)
     {
         $q = $this->getPDO()->prepare('UPDATE emprunt_parution SET dateFin = DATE_ADD(dateFin, INTERVAL 7 DAY), prolongable = 0 WHERE id = :id_emprunt;');
         $q->bindParam(':id_emprunt', $idEmprunt, PDO::PARAM_INT);
@@ -105,7 +105,7 @@ class EmpruntParutionManager extends Manager
      * @param Abonne $abonne
      * @return void
      */
-    public function prolongerToutEmprunt(Abonne $abonne): void
+    public function prolongerToutEmprunt(Abonne $abonne)
     {
         $q = $this->getPDO()->prepare('UPDATE emprunt_parution SET dateFin = DATE_ADD(dateFin, INTERVAL 7 DAY), prolongable = 0 WHERE prolongable = 1 AND archive = 0 AND idParution NOT IN (SELECT numeroParution FROM reservationparution) AND idAbonne = :id_abonne ;');
         $q->bindParam(':id_abonne', $abonne->getId(), PDO::PARAM_INT);

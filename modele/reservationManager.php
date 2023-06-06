@@ -4,6 +4,8 @@ class ReservationManager extends Manager
 {
         /**
          * retourne le nombre de réservation  en cours pour chaque abonne
+         * @param int idAbonne
+         * @return int
          */
         function nombreReservation($idAbonne)
         {
@@ -22,6 +24,8 @@ class ReservationManager extends Manager
 
         /**
          * nb document reservation pour 3 semaine
+         * @param int idAbonne
+         * @return int
          */
         function nombreReservationAutorise($idAbonne)
         {

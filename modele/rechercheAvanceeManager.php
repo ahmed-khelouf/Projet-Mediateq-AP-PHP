@@ -30,6 +30,17 @@ class RechercheAvanceeManager extends Manager
 
         /**
          * insertion historique recherche dans la base de données
+         * @param int nbResultats
+         * @param int idAbonne
+         * @param string type 
+         * @param string texte
+         * @param string connnecteur
+         * @param string type2 
+         * @param string texte2
+         * @param string connnecteur2
+         * @param string type3 
+         * @param string texte3
+         * @return void
          */
         function addHistoriqueRechercheAvancee($nbResultats, $idAbonne, $type, $texte, $connecteur, $type2, $texte2, $connecteur2, $type3, $texte3)
         {
@@ -53,6 +64,8 @@ class RechercheAvanceeManager extends Manager
 
         /**
          * suppression d'une recherche avancée dans la base de données
+         * @param int id
+         * @return void
          */
         function supHistoriqueRechercheAvancee($id)
         {
@@ -67,6 +80,8 @@ class RechercheAvanceeManager extends Manager
 
         /**
          * suppression de l'ensemble des recherches avancées d'un abonné dans la base de données
+         * @param int idAbonne
+         * @return void
          */
         function supHistoriqueRechercheAvanceeAll($idAbonne)
         {
@@ -79,6 +94,11 @@ class RechercheAvanceeManager extends Manager
                 }
         }
 
+        /**
+         * nombre historique avancée pour chaque abonné 
+         * @param int idAbonne
+         * @return int
+         */
         function nbHistoriqueRechercheAvancee($idAbonne)
         {
                 try {

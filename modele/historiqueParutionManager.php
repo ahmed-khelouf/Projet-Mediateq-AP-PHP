@@ -39,6 +39,10 @@ class HistoriqueParutionManager extends Manager
 
     /**
      * insertion historique d'une reservation dans la base de données
+     * @param int idAbonne
+     * @param string idRevue
+     * @param string numeroParution
+     * @return void 
      */
     function addHistorique($idAbonne, $idRevue, $numeroParution)
     {

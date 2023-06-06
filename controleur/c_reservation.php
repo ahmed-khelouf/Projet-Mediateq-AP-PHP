@@ -11,8 +11,6 @@ $reservationsExemplairesDVD = $reservationExemplaireManager->getListDVD();
 $reservationParutionManager = new ReservationParutionManager();
 $reservationsParutions = $reservationParutionManager->getList();
 
-
-
 //Création d'un objet manager de livre
 $livreManager = new LivreManager();
 $livres = $livreManager->getList();
@@ -54,7 +52,7 @@ if (isset($_POST['add'])) {
     $rang = $_POST['rang'];
     $numeroExemplaire = $_POST["numeroExemplaire"];
     $reservationExemplaireManager->addReservation($idDoc, $idAbonne, $rang, $numeroExemplaire);
-    $historiqueExemplaireManager->addHistorique($idAbonne , $idDoc , $numeroExemplaire);
+    $historiqueExemplaireManager->addHistorique($idAbonne, $idDoc, $numeroExemplaire);
     header('location: index.php?action=reservation');
 }
 
@@ -68,14 +66,15 @@ if (isset($_POST['supr'])) {
     header('location: index.php?action=reservation');
 }
 
+
 //Permet d'ajouter une nouvelle réservation de parution
 if (isset($_POST['addRevue'])) {
     $idRevue = $_POST['idRevue'];
     $idAbonne = $_POST['idAbonne'];
     $rang = $_POST['rang'];
     $numeroParution = $_POST["numeroParution"];
-    $reservationParutionManager->addReservation($idRevue, $idAbonne, $rang, $numeroParution);
-    $historiqueParutionManager->addHistorique($idAbonne , $idRevue , $numeroParution);
+    $reservationParutionManager->addReservation($idRevue ,  $idAbonne , $rang , $numeroParution );
+    $historiqueParutionManager->addHistorique($idAbonne, $idRevue, $numeroParution);
     header('location: index.php?action=reservation');
 }
 
