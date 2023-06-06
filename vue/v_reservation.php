@@ -178,7 +178,7 @@ if ($connexionManager->isLoggedOn()) {
                                 <div class="card h-100">
                                     <div class="card-horizontal">
                                         <div class="img-square-wrapper">
-                                            <img class="img-fluid mx-auto d-block" src="images/Dvd/<?= $reservation->getDocument()->getImage() ?>.jpg" alt="Couverture">
+                                            <img class="img-fluid mx-auto d-block" src="images/DVD/<?= $reservation->getDocument()->getImage() ?>.jpg" alt="Couverture">
                                         </div>
                                         <div class="trait-vertical"></div>
                                         <div class="card-body">

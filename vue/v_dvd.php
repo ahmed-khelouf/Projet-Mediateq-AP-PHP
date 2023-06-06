@@ -6,7 +6,7 @@
                 <div class="card h-100">
                     <!-- Section de l'image de couverture et du titre de la revue -->
                     <div class="card-body text-center">
-                        <img class="img-fluid mx-auto d-block" src="images/Dvd/<?= $unDvd->getImage() ?>.jpg" alt="Couverture" width="30%">
+                        <img class="img-fluid mx-auto d-block" src="images/DVD/<?= $unDvd->getImage() ?>.jpg" alt="Couverture" width="30%">
                         <h5 class="card-title"><strong><?= $unDvd->getTitre() ?></strong></h5>
                     </div>
                     <!-- Section des informations du numéro de la revue -->
