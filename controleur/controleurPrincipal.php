@@ -33,25 +33,25 @@ function controleurPrincipal($action) {
 
 function chargerModeles($racine){
     
-    require_once("$racine/modele/Manager.php");
-    require_once("$racine/modele/Document.php");
-    require_once("$racine/modele/DocumentManager.php");
-    require_once("$racine/modele/Livre.php");
-    require_once("$racine/modele/Dvd.php");
-    require_once("$racine/modele/Exemplaire.php");
+    require_once("$racine/modele/manager.php");
+    require_once("$racine/modele/document.php");
+    require_once("$racine/modele/documentManager.php");
+    require_once("$racine/modele/livre.php");
+    require_once("$racine/modele/dvd.php");
+    require_once("$racine/modele/exemplaire.php");
     require_once("$racine/modele/exemplaireManager.php");
-    require_once("$racine/modele/Parution.php");
+    require_once("$racine/modele/parution.php");
     require_once("$racine/modele/parutionManager.php");
-    require_once("$racine/modele/LivreManager.php");
-    require_once("$racine/modele/DvdManager.php");
-    require_once("$racine/modele/Etat.php");
-    require_once("$racine/modele/EtatManager.php");
-    require_once("$racine/modele/Rayon.php");
-    require_once("$racine/modele/RayonManager.php");
-    require_once("$racine/modele/Revue.php");
-    require_once("$racine/modele/RevueManager.php");
-    require_once("$racine/modele/TypePublic.php");
-    require_once("$racine/modele/TypePublicManager.php");
+    require_once("$racine/modele/livreManager.php");
+    require_once("$racine/modele/dvdManager.php");
+    require_once("$racine/modele/etat.php");
+    require_once("$racine/modele/etatManager.php");
+    require_once("$racine/modele/rayon.php");
+    require_once("$racine/modele/rayonManager.php");
+    require_once("$racine/modele/revue.php");
+    require_once("$racine/modele/revueManager.php");
+    require_once("$racine/modele/typePublic.php");
+    require_once("$racine/modele/typePublicManager.php");
     require_once("$racine/modele/reservation.php");
     require_once("$racine/modele/reservationManager.php");
     require_once("$racine/modele/reservationParution.php");

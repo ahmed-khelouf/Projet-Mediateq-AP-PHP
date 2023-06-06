@@ -9,9 +9,9 @@ class Manager
      */
     protected function dbConnect(): PDO
     {
-        $login = "root";
-        $mdp = "";
-        $bd = "mediateq-php";
+        $login = "groupe1";
+        $mdp = "6cjo9y02";
+        $bd = "groupe1";
         $serveur = "localhost";
 
         try
